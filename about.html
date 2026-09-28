@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<meta name="robots" content="index,follow">
+<title>About — WordPress &amp; Elementor Developer, Indore</title>
+<meta name="description" content="Vikas Bhadoriya, independent WordPress and Elementor developer in Indore. Eight years, nineteen projects, nine countries. How I work and what I use.">
+<link rel="canonical" href="https://example.com/about/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="About — Vikas Bhadoriya, WordPress &amp; Elementor Developer">
+<meta property="og:description" content="Eight years of WordPress, mostly for businesses outside India. How I work, what I use, and what working with one person actually means.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+.ilink{display:inline-block;border-bottom:1px solid var(--line-2);padding:2px 0 1px}
+@media(hover:hover){.ilink:hover{border-color:var(--dk)}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ HERO ══ */
+.ahero{padding:calc(var(--navh) + 36px) 0 clamp(48px,8vw,90px)}
+@media(min-width:760px){.ahero{padding-top:calc(var(--navh) + 60px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.ahero__grid{display:grid;gap:36px;align-items:start}
+@media(min-width:1000px){.ahero__grid{grid-template-columns:1.35fr .65fr;gap:64px}}
+.ahero h1{font-family:var(--serif);font-weight:400;font-size:clamp(32px,7.6vw,64px);
+line-height:1.05;letter-spacing:-.018em;max-width:22ch}
+.ahero__body{margin-top:24px;max-width:64ch}
+.ahero__body p{font-size:16px;line-height:1.8;color:var(--text-2)}
+@media(min-width:760px){.ahero__body p{font-size:17.5px}}
+.ahero__body p + p{margin-top:16px}
+.ahero__body strong{color:var(--text);font-weight:500}
+.portrait{border:1px solid var(--line-2);border-radius:16px;overflow:hidden;
+background:linear-gradient(160deg,var(--bg-3),var(--bg-4));
+aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;
+text-align:center;padding:22px;font-family:var(--mono);font-size:10px;
+letter-spacing:.06em;color:var(--text-3);box-shadow:0 20px 50px rgba(0,0,0,.07)}
+@media(min-width:760px){.portrait{border-radius:20px;font-size:10.5px}}
+.pmeta{margin-top:18px;border-top:1px solid var(--line)}
+.pmeta div{display:flex;justify-content:space-between;gap:14px;
+padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.pmeta dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none;padding-top:3px}
+.pmeta dd{text-align:right}
+
+/* ══ SECTIONS ══ */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:48px}}
+
+/* ══ TIMELINE ══ */
+.tl{position:relative;padding-left:26px}
+@media(min-width:760px){.tl{padding-left:32px}}
+.tl::before{content:"";position:absolute;left:3px;top:8px;bottom:8px;
+width:1px;background:var(--line-2)}
+.tl__i{position:relative;padding:0 0 30px}
+.tl__i:last-child{padding-bottom:0}
+.tl__i::before{content:"";position:absolute;left:-26px;top:7px;width:7px;height:7px;
+border-radius:50%;background:var(--bg);border:1px solid var(--line-3)}
+@media(min-width:760px){.tl__i::before{left:-32px}}
+.tl__i--now::before{background:var(--dk);border-color:var(--dk)}
+.tl__y{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--text-3)}
+.tl__t{font-size:19px;font-weight:500;letter-spacing:-.012em;margin:6px 0 8px}
+@media(min-width:760px){.tl__t{font-size:20px}}
+.tl__i p{font-size:15px;line-height:1.75;color:var(--text-2);max-width:56ch}
+
+/* ══ PRINCIPLES ══ */
+.princ{display:grid;gap:16px;counter-reset:pr}
+@media(min-width:900px){.princ{grid-template-columns:repeat(3,1fr);gap:22px}}
+.pr{counter-increment:pr;border:1px solid var(--line-2);border-radius:16px;
+background:var(--bg-3);padding:28px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pr{border-radius:20px;padding:36px 30px}}
+@media(hover:hover){.pr:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pr::after{content:"0" counter(pr);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:48px;color:rgba(0,0,0,.06);line-height:1}
+.pr__t{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;
+margin-bottom:12px;max-width:15ch;position:relative}
+.pr p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* ══ STACK ══ */
+.stack{display:grid;gap:26px}
+@media(min-width:700px){.stack{grid-template-columns:1fr 1fr;gap:32px}}
+@media(min-width:1080px){.stack{grid-template-columns:repeat(3,1fr)}}
+.st h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.st ul{border-top:1px solid var(--line-dk)}
+.st li{padding:10px 0;border-bottom:1px solid var(--line-dk);
+font-size:14.5px;color:var(--on-dk-2)}
+@media(min-width:760px){.st li{font-size:15px}}
+
+/* ══ SOLO ══ */
+.solo__grid{display:grid;gap:32px}
+@media(min-width:960px){.solo__grid{grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}}
+.qa{border-top:1px solid var(--line-2)}
+.qa__i{padding:24px 0;border-bottom:1px solid var(--line-2)}
+.qa__q{font-size:18px;font-weight:500;letter-spacing:-.012em;margin-bottom:10px;line-height:1.3}
+@media(min-width:760px){.qa__q{font-size:19px}}
+.qa__i p{font-size:15px;line-height:1.8;color:var(--text-2);max-width:62ch}
+.qa__i p + p{margin-top:11px}
+.qa__i strong{color:var(--text);font-weight:500}
+
+/* ══ CTA ══ */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,130px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:760px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(33px,8.8vw,72px);line-height:1.04}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:18px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:42px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.cta .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.cta .btn--primary:hover{box-shadow:0 12px 30px rgba(255,255,255,.18)}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/work/">Work</a>
+      <a href="/#elementor">Elementor</a>
+      <a href="/services/">Services</a>
+      <a href="/learn/">Learn</a>
+      <a href="/about/" aria-current="page">About</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="/book/">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/work/">Work</a>
+    <a class="ml" href="/#elementor">Elementor</a>
+    <a class="ml" href="/services/">Services</a>
+    <a class="ml" href="/learn/">Learn</a>
+    <a class="ml" href="/about/">About</a>
+    <a class="ml" href="/for-agencies/">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/book/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="ahero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">About</span>
+    </nav>
+    <div class="ahero__grid">
+      <div>
+        <h1>I'm Vikas — a WordPress and Elementor developer in Indore.</h1>
+        <div class="ahero__body">
+          <p>Eight years, nineteen documented projects, nine countries. Most of it for organisations outside India: a Swiss implant manufacturer, a regulated investment firm in Dubai, a century-old American peace organisation, a whiskey producer in Limerick, a beverage brand in Austria.</p>
+          <p>Almost none of it glamorous. <strong>All of it work where being wrong costs the client money</strong> — a checkout that fails, a compliance page that says the wrong thing, a site nobody internally can update.</p>
+          <p>That's the work I'm good at, and it's a narrower thing than "WordPress developer" suggests. I'm not the person to invent your brand or write your copy. I'm the person who takes a requirement that sounds simple, finds the four things in it that aren't, and tells you about them before you've committed a budget.</p>
+        </div>
+      </div>
+      <div>
+        <div class="portrait">[IMAGE PLACEHOLDER: Professional portrait, three-quarter, light neutral background, 4:5]</div>
+        <dl class="pmeta">
+          <div><dt>Based</dt><dd>Indore, India</dd></div>
+          <div><dt>Overlap</dt><dd>CET · GST · ET</dd></div>
+          <div><dt>Languages</dt><dd>Hindi, English</dd></div>
+          <div><dt>Since</dt><dd>2018</dd></div>
+          <div><dt>Status</dt><dd>Taking projects</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec sec--tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Route here</p>
+        <h2 class="h2">How I got<br>to this.</h2>
+      </div>
+      <p class="lede">Two agencies, then independent. The middle part matters, because it's where the habits came from.</p>
+    </div>
+
+    <div class="tl rise">
+      <div class="tl__i">
+        <p class="tl__y">2014</p>
+        <h3 class="tl__t">BCA, DAVV University</h3>
+        <p>Bachelor of Computer Applications at Rukmadevi Pannalal Laddha Maheshwari College, Indore. Useful mostly for the fundamentals — everything about WordPress came later and came from shipping.</p>
+      </div>
+      <div class="tl__i">
+        <p class="tl__y">2018 – 2022</p>
+        <h3 class="tl__t">WordPress developer, Indore agency</h3>
+        <p>Four years of whatever came through the door: custom themes, plugins, migrations, and a great deal of fixing sites other people had built. This is where I learned server work — Linux via SSH, Apache and Nginx, SSL, DNS — because there was nobody else to ask.</p>
+      </div>
+      <div class="tl__i">
+        <p class="tl__y">2022 – [CONFIRM]</p>
+        <h3 class="tl__t">Senior developer &amp; technical lead, Ahmedabad</h3>
+        <p>Larger builds for international clients, and the first time I was regularly responsible for infrastructure as well as development — AWS Lightsail, deployments, performance work. Also the first time I led delivery rather than just doing it.</p>
+      </div>
+      <div class="tl__i tl__i--now">
+        <p class="tl__y">[CONFIRM] – now</p>
+        <h3 class="tl__t">Independent</h3>
+        <p>On agency work I rarely spoke to the person whose business the site was actually for. Requirements arrived filtered through an account manager, and the questions that matter most — what happens when this checkout breaks, who edits this page next year — tended to get lost on the way.</p>
+        <p style="margin-top:11px">Working directly, I get to ask them myself. That's the whole reason.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">How I work</p>
+        <h2 class="h2">Three things<br>I hold to.</h2>
+      </div>
+      <p class="lede">Not values on a wall. These are the three rules that decide how a project actually runs, and the ones a client will notice within the first week.</p>
+    </div>
+    <div class="princ">
+      <div class="pr rise">
+        <h3 class="pr__t">Say the constraint first</h3>
+        <p>If the deadline can't be met properly, if the requirement will cause a problem in year two, if the budget doesn't cover what's been described — you hear it on the first call. Not at handover, and not in an invoice.</p>
+        <p style="margin-top:11px">This loses me some work. It's the reason the projects I do take tend to finish.</p>
+      </div>
+      <div class="pr rise">
+        <h3 class="pr__t">The build follows the maintainer</h3>
+        <p>Elementor or a custom theme isn't a matter of taste — it depends entirely on who edits the site after I'm gone. If your marketing person needs to rearrange a page, that decides the build. If nobody will ever touch the layout, that decides it differently.</p>
+      </div>
+      <div class="pr rise">
+        <h3 class="pr__t">Everything in writing</h3>
+        <p>Scope with a fixed price and dated milestones. A written update every Friday whether or not there's good news. Handover documentation and a recorded walkthrough. If it wasn't written down, it wasn't agreed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Tools</p>
+        <h2 class="h2">What I<br>actually use.</h2>
+      </div>
+      <p class="lede">Listed honestly, including the parts I'm ordinary at. If something you need isn't here, it's worth asking rather than assuming.</p>
+    </div>
+    <div class="stack rise">
+      <div class="st">
+        <h3>Build</h3>
+        <ul>
+          <li>WordPress</li>
+          <li>Elementor (primary)</li>
+          <li>ACF Pro</li>
+          <li>Custom PHP 7 / 8</li>
+          <li>Gutenberg blocks</li>
+          <li>Polylang, WPML</li>
+        </ul>
+      </div>
+      <div class="st">
+        <h3>Commerce</h3>
+        <ul>
+          <li>WooCommerce</li>
+          <li>Subscriptions &amp; memberships</li>
+          <li>Payment gateway integration</li>
+          <li>Identity &amp; age verification</li>
+          <li>VAT / multi-currency setup</li>
+          <li>Digital delivery</li>
+        </ul>
+      </div>
+      <div class="st">
+        <h3>Frontend</h3>
+        <ul>
+          <li>HTML5, CSS3, SASS</li>
+          <li>JavaScript (ES6+)</li>
+          <li>jQuery</li>
+          <li>Bootstrap, Tailwind</li>
+          <li>REST API, AJAX</li>
+          <li>React — working knowledge, improving</li>
+        </ul>
+      </div>
+      <div class="st">
+        <h3>Infrastructure</h3>
+        <ul>
+          <li>AWS Lightsail</li>
+          <li>Nginx, Apache</li>
+          <li>SSH, Putty, Bash</li>
+          <li>cPanel, WHM, Cloudflare</li>
+          <li>SSL/TLS, DNS, email records</li>
+          <li>Zero-downtime migration</li>
+        </ul>
+      </div>
+      <div class="st">
+        <h3>Data</h3>
+        <ul>
+          <li>MySQL, MariaDB</li>
+          <li>Query optimisation</li>
+          <li>Redis object caching</li>
+          <li>Off-server backup &amp; restore</li>
+          <li>Staging environments</li>
+        </ul>
+      </div>
+      <div class="st">
+        <h3>Measuring</h3>
+        <ul>
+          <li>Lighthouse, PageSpeed Insights</li>
+          <li>WebPageTest</li>
+          <li>Chrome DevTools, Query Monitor</li>
+          <li>Search Console</li>
+          <li>Google Tag Manager</li>
+          <li>Uptime monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLO -->
+<section class="sec sec--tint">
+  <div class="wrap solo__grid">
+    <div class="rise">
+      <p class="eyebrow">The obvious concern</p>
+      <h2 class="h2">Hiring one person.</h2>
+      <p class="lede" style="margin-top:20px">You are considering paying a stranger on another continent to build something your business depends on. That deserves a straight answer rather than reassurance.</p>
+      <p class="lede" style="margin-top:14px">Here are the four questions people are usually too polite to ask.</p>
+    </div>
+
+    <div class="qa rise">
+      <div class="qa__i">
+        <h3 class="qa__q">What if you disappear?</h3>
+        <p>It's the right question and the honest answer isn't "I won't." The answer is that <strong>every project is built so someone else could pick it up.</strong> Standard WordPress structure, no proprietary framework, documented custom code, credentials in your name, hosting on your account.</p>
+        <p>If I vanished tomorrow you'd hand another developer the documentation and they'd be productive in a day. That's not a promise about me; it's a property of how the work is built.</p>
+      </div>
+      <div class="qa__i">
+        <h3 class="qa__q">Can one person handle our project?</h3>
+        <p>Sometimes no. I take on two or three projects at a time, which means occasionally the honest answer is that your timeline needs a team and I'm not it. I'd rather say that than stretch and deliver late.</p>
+        <p>Where one person is an advantage: nothing is lost in translation between the person you brief and the person who writes the code, because they're the same person.</p>
+      </div>
+      <div class="qa__i">
+        <h3 class="qa__q">Are you actually available, or juggling twelve clients?</h3>
+        <p>Two or three at once, deliberately. Current availability is stated on the homepage and kept accurate — if it says Q3, that's real. Response time is one business day, usually the same day.</p>
+      </div>
+      <div class="qa__i">
+        <h3 class="qa__q">What about the time difference?</h3>
+        <p>There's roughly four hours of daily overlap with the UK and Europe, and early-morning overlap with the US East Coast. Most of the work happens asynchronously anyway, with a written update every Friday. Calls get scheduled in your hours, not mine.</p>
+        <p>Nineteen projects across nine countries have run this way. It's a solved problem, not a risk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Still reading?<br><em>Let's talk.</em></h2>
+    <p>Twenty minutes. Tell me what you're dealing with and I'll tell you what it would take, roughly what it would cost, and whether you should be talking to me at all.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/book/">Book a project review <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/work/">See the work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/work/">All projects</a></li>
+        <li><a href="/work/medical-device-manufacturer/">Case study: healthcare</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/for-agencies/">For agencies</a></li>
+        <li><a href="/book/">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/services/figma-to-elementor/">Figma to Elementor</a></li>
+        <li><a href="/services/speed-optimization/">Speed optimisation</a></li>
+        <li><a href="/services/woocommerce-store-development/">WooCommerce</a></li>
+        <li><a href="/services/headless-wordpress/">Headless WordPress</a></li>
+        <li><a href="/services/website-maintenance/">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/for-agencies/">For agencies</a></li>
+        <li><a href="/accessibility/">Accessibility</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"About","item":"https://example.com/about/"}]},
+{"@type":"ProfilePage","url":"https://example.com/about/","mainEntity":{"@id":"https://example.com/#person"}},
+{"@type":"Person","@id":"https://example.com/#person",
+"name":"Vikas Bhadoriya",
+"jobTitle":"WordPress & Elementor Developer",
+"description":"Independent WordPress and Elementor developer based in Indore, India, working with businesses across Europe, the Middle East and North America.",
+"email":"mailto:vikas.bh14@gmail.com",
+"url":"https://example.com/about/",
+"address":{"@type":"PostalAddress","addressLocality":"Indore","addressRegion":"Madhya Pradesh","addressCountry":"IN"},
+"alumniOf":{"@type":"CollegeOrUniversity","name":"Devi Ahilya Vishwavidyalaya (DAVV)","address":{"@type":"PostalAddress","addressLocality":"Indore","addressCountry":"IN"}},
+"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"Bachelor's degree","name":"Bachelor of Computer Applications (BCA)"},
+"knowsAbout":["WordPress","Elementor","WooCommerce","Custom theme development","Plugin development","Gutenberg block development","Advanced Custom Fields","REST API","Web performance","Core Web Vitals","Headless WordPress","Multilingual WordPress","AWS Lightsail","Nginx","MySQL"],
+"knowsLanguage":[{"@type":"Language","name":"Hindi"},{"@type":"Language","name":"English"}]}
+]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

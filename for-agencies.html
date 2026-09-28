@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<meta name="robots" content="index,follow">
+<title>White Label WordPress Development for Agencies</title>
+<meta name="description" content="Senior WordPress and Elementor capacity for agencies. NDA as standard, no client contact, delivered under your brand. Rates and terms published.">
+<link rel="canonical" href="https://example.com/for-agencies/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="White Label WordPress Development for Agencies">
+<meta property="og:description" content="Senior WordPress capacity that stays invisible. NDA as standard, no client contact, work delivered under your brand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+.ilink{display:inline-block;border-bottom:1px solid var(--line-2);padding:2px 0 1px}
+@media(hover:hover){.ilink:hover{border-color:var(--dk)}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ HERO ══ */
+.ahero{padding:calc(var(--navh) + 36px) 0 clamp(40px,7vw,72px)}
+@media(min-width:760px){.ahero{padding-top:calc(var(--navh) + 60px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.tagpill{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);
+border:1px solid var(--line-2);border-radius:100px;padding:8px 15px;margin-bottom:22px;
+background:var(--bg-3);max-width:100%}
+@media(min-width:760px){.tagpill{font-size:11.5px;padding:9px 18px;margin-bottom:28px}}
+.ahero h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8.2vw,74px);
+line-height:1.02;letter-spacing:-.018em;max-width:19ch}
+.ahero__lede{margin-top:22px;max-width:62ch;font-size:16px;line-height:1.75;color:var(--text-2)}
+@media(min-width:760px){.ahero__lede{margin-top:28px;font-size:18px}}
+.ahero__lede + .ahero__lede{margin-top:14px}
+.ahero__cta{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:540px){.ahero__cta{flex-direction:row;flex-wrap:wrap;gap:16px;margin-top:38px}}
+
+/* ══ CAPACITY ══ */
+.cap{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:38px}
+@media(min-width:880px){.cap{grid-template-columns:repeat(4,1fr);border-radius:18px}}
+.cap div{background:var(--bg-3);padding:22px 16px}
+@media(min-width:760px){.cap div{padding:30px 26px}}
+.cap b{display:block;font-family:var(--sans);font-weight:500;font-size:24px;
+letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.15}
+@media(min-width:760px){.cap b{font-size:28px}}
+.cap span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);margin-top:10px;line-height:1.5}
+
+/* ══ SECTIONS ══ */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* ══ GUARANTEES ══ */
+.gt{border-top:1px solid var(--line-dk);counter-reset:g}
+.gt li{counter-increment:g;position:relative;padding:20px 0 20px 42px;
+border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.gt li{padding:24px 0 24px 52px}}
+.gt li::before{content:"0" counter(g);position:absolute;left:0;top:22px;
+font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--on-dk-3)}
+@media(min-width:760px){.gt li::before{top:26px}}
+.gt__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.gt__t{font-size:18.5px}}
+.gt p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:58ch}
+@media(min-width:760px){.gt p{font-size:15px}}
+
+/* ══ RATES ══ */
+.rates{display:grid;gap:16px}
+@media(min-width:640px){.rates{grid-template-columns:1fr 1fr;gap:20px}}
+@media(min-width:1080px){.rates{grid-template-columns:repeat(4,1fr)}}
+.rate{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rate{border-radius:20px;padding:32px 26px}}
+@media(hover:hover){.rate:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.rate__k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+text-transform:uppercase;color:var(--text-3)}
+.rate__n{font-size:clamp(26px,5.4vw,34px);margin:12px 0 4px;
+display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px}
+.rate__n small{font-size:13px;color:var(--text-3);font-weight:400;letter-spacing:0}
+.rate p{font-size:14px;line-height:1.7;color:var(--text-2);margin-top:8px}
+.rate__note{margin-top:auto;padding-top:14px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+
+/* ══ FIT LIST ══ */
+.fit{display:grid;gap:26px}
+@media(min-width:820px){.fit{grid-template-columns:1fr 1fr;gap:44px}}
+.fit h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+color:var(--text-3);font-weight:400;margin-bottom:14px}
+.fit ul{border-top:1px solid var(--line-2)}
+.fit li{position:relative;padding:13px 0 13px 26px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.65;color:var(--text-2)}
+@media(min-width:760px){.fit li{font-size:15.5px;padding-left:28px}}
+.fit li::before{position:absolute;left:0;top:13px;font-size:13px;line-height:1.7}
+.fit--yes li::before{content:"✓";color:var(--dk);font-weight:500}
+.fit--no li::before{content:"✕";color:var(--text-3)}
+.fit b{color:var(--text);font-weight:500}
+
+/* ══ QA ══ */
+.qa{border-top:1px solid var(--line-2)}
+.qa__i{padding:24px 0;border-bottom:1px solid var(--line-2)}
+.qa__q{font-size:18px;font-weight:500;letter-spacing:-.012em;margin-bottom:10px;line-height:1.3}
+@media(min-width:760px){.qa__q{font-size:19px}}
+.qa__i p{font-size:15px;line-height:1.8;color:var(--text-2);max-width:64ch}
+.qa__i p + p{margin-top:11px}
+.qa__i strong{color:var(--text);font-weight:500}
+.qa__grid{display:grid;gap:32px}
+@media(min-width:960px){.qa__grid{grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}}
+
+/* ══ CTA ══ */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,130px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:760px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(33px,8.8vw,72px);line-height:1.04}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:54ch}
+@media(min-width:760px){.cta p{font-size:18px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:42px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.cta .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.cta .btn--primary:hover{box-shadow:0 12px 30px rgba(255,255,255,.18)}}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:44px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="ahero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">For agencies</span>
+    </nav>
+    <span class="tagpill"><span class="dot" aria-hidden="true"></span>White label · capacity available Q3</span>
+    <h1>Senior WordPress capacity that stays invisible.</h1>
+    <p class="ahero__lede">NDA as standard. No contact with your client, ever. Work delivered under your brand, in your repository, invoiced to you.</p>
+    <p class="ahero__lede">Eight of my nine years were agency delivery — building for other people's clients, under someone else's name, without speaking to the end client. This isn't a new arrangement for me. It's how I learned to work.</p>
+    <div class="ahero__cta">
+      <a class="btn btn--primary" href="#deck">Request capability deck <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="#rates">See rates</a>
+    </div>
+
+    <div class="cap">
+      <div><b>2–3</b><span>Projects at once</span></div>
+      <div><b>~35 h</b><span>Available per week</span></div>
+      <div><b>1 day</b><span>Response time</span></div>
+      <div><b>4 h</b><span>Overlap UK · EU · US</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEES -->
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">The arrangement</p>
+        <h2 class="h2">Your client<br>never knows<br>I exist.</h2>
+      </div>
+      <p class="lede">Seven commitments, all of them in the contract rather than just on this page. If any of them is a dealbreaker in reverse — say you'd rather I joined client calls — that's negotiable too.</p>
+    </div>
+    <ul class="gt rise">
+      <li>
+        <p class="gt__t">NDA before the first call</p>
+        <p>Signed before you tell me anything about the project, not after. Send yours or use mine.</p>
+      </li>
+      <li>
+        <p class="gt__t">I never contact your client</p>
+        <p>Not for clarification, not for assets, not after launch. Everything routes through you. If you'd rather I joined calls as a member of your team under your domain email, that works too — your choice, not mine.</p>
+      </li>
+      <li>
+        <p class="gt__t">No credit, no branding, no portfolio use</p>
+        <p>Nothing in the footer, no comment in the source, nothing on this site. Portfolio use only with your written permission, and only in the anonymised form used everywhere else here.</p>
+      </li>
+      <li>
+        <p class="gt__t">Your accounts, your infrastructure</p>
+        <p>Your repository, your hosting, your staging environment, your project management tool. I work inside your setup rather than asking you to adopt mine.</p>
+      </li>
+      <li>
+        <p class="gt__t">Non-solicit, in writing</p>
+        <p>I will not approach your client during the project or after it. This is the fear nobody says out loud, so it goes in the contract as a clause rather than a promise.</p>
+      </li>
+      <li>
+        <p class="gt__t">You are not managing me</p>
+        <p>Written scope, a staging link from day one, and an update every Friday whether or not there's good news. If you want daily standups I'll attend. If you want silence until Friday, that's the default.</p>
+      </li>
+      <li>
+        <p class="gt__t">Handover so anyone can take over</p>
+        <p>Standard WordPress structure, no proprietary framework, documented custom code. If I became unavailable mid-project your next developer picks it up from the documentation, not from a phone call.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- RATES -->
+<section class="sec" id="rates">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Rates</p>
+        <h2 class="h2">Four ways<br>to buy time.</h2>
+      </div>
+      <p class="lede">Published so you can price a proposal without waiting on me. All figures in USD, excluding taxes. Fixed-scope work is quoted against a written spec.</p>
+    </div>
+    <div class="rates">
+      <div class="rate rise">
+        <p class="rate__k">Hourly</p>
+        <p class="rate__n num">$35 <small>/ hour</small></p>
+        <p>For small changes, second-opinion reviews and overflow work. Billed in 30-minute increments.</p>
+        <p class="rate__note">Four-hour minimum</p>
+      </div>
+      <div class="rate rise">
+        <p class="rate__k">Weekly sprint</p>
+        <p class="rate__n num">$1,200 <small>/ week</small></p>
+        <p>Roughly 35 hours of dedicated time. Best when scope is still moving and you need progress rather than a fixed deliverable.</p>
+        <p class="rate__note">One week minimum</p>
+      </div>
+      <div class="rate rise">
+        <p class="rate__k">Monthly retainer</p>
+        <p class="rate__n num">from $1,800 <small>/ month</small></p>
+        <p>Sixty hours a month at a reduced rate, reserved for you. Unused hours roll over once.</p>
+        <p class="rate__note">Three-month term</p>
+      </div>
+      <div class="rate rise">
+        <p class="rate__k">Fixed scope</p>
+        <p class="rate__n num">from $1,200</p>
+        <p>Quoted against a written spec with dated milestones. The right model when you've already sold the project and need a firm cost.</p>
+        <p class="rate__note">50% on start</p>
+      </div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:62ch">
+      Rates assume you handle design, copy and client management. If you need me to spec the work as well, that's quoted separately.
+    </p>
+  </div>
+</section>
+
+<!-- FIT -->
+<section class="sec sec--tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Fit</p>
+        <h2 class="h2">Worth a call,<br>or not.</h2>
+      </div>
+      <p class="lede">Being specific about both halves saves us a discovery call that goes nowhere. If you're on the right of this list I'll usually know someone who is a better fit.</p>
+    </div>
+    <div class="fit rise">
+      <div>
+        <h3>Send me this</h3>
+        <ul class="fit--yes">
+          <li><b>Elementor builds from a Figma, XD or PSD file</b> — rebuilt to spec, not approximated</li>
+          <li><b>WooCommerce with awkward requirements</b> — verification steps, subscriptions, digital delivery, multi-currency</li>
+          <li><b>Performance rescue</b> on a build that's failing Core Web Vitals before a client sees the report</li>
+          <li><b>Custom plugins and PHP</b> where your team stops and the requirement doesn't</li>
+          <li><b>Migrations</b> — host moves, domain changes, DNS and redirects, no downtime</li>
+          <li><b>Overflow capacity</b> when you've sold more than you can staff this month</li>
+          <li><b>Multilingual builds</b> for DACH, French or pan-European clients</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Send this elsewhere</h3>
+        <ul class="fit--no">
+          <li><b>Shopify, Webflow, Wix, Squarespace</b> — WordPress only, and I'd rather say so than learn on your budget</li>
+          <li><b>Design work</b> — I build what your designer specifies, I don't originate it</li>
+          <li><b>Copywriting</b> — I'll tell you what each section needs, not write it</li>
+          <li><b>Full-time embedded resource</b> — I run 2–3 projects at a time, not one client exclusively</li>
+          <li><b>A deadline that's already impossible</b> — you'll hear that on the first call, not in week four</li>
+          <li><b>Frontend-heavy React or Next.js builds</b> — I'll do the WordPress and API side, your team owns the frontend</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QA -->
+<section class="sec">
+  <div class="wrap qa__grid">
+    <div class="rise">
+      <p class="eyebrow">Straight answers</p>
+      <h2 class="h2">The awkward<br>questions.</h2>
+      <p class="lede" style="margin-top:20px">You're considering putting your reputation in the hands of someone you've never met. These are the four things you'd want to ask and probably won't.</p>
+    </div>
+    <div class="qa rise">
+      <div class="qa__i">
+        <h3 class="qa__q">Will you poach our client?</h3>
+        <p>No, and there's a non-solicit clause rather than just my word. But the commercial reason is more convincing than the legal one: <strong>agency work is a standing share of my income, and doing this once would end all of it.</strong> My direct pipeline comes from search and writing, not from other people's client lists.</p>
+      </div>
+      <div class="qa__i">
+        <h3 class="qa__q">What if you disappear mid-project?</h3>
+        <p>Work lives in your repository on your infrastructure, using standard WordPress structure and no proprietary framework, with custom code documented as it's written. There's no point at which the project only exists on my machine.</p>
+        <p>That isn't a promise about my reliability — it's a property of how the work is set up, which is the only kind of answer worth anything here.</p>
+      </div>
+      <div class="qa__i">
+        <h3 class="qa__q">Will the quality embarrass us?</h3>
+        <p>Judge it before committing. <a class="ilink" href="/work/">Nineteen live projects are documented here</a>, several for clients in regulated sectors where the work was reviewed by people whose job is finding faults. Or start with a four-hour paid task and see.</p>
+        <p>I'd rather you tested me on something small than took a reference's word for it.</p>
+      </div>
+      <div class="qa__i">
+        <h3 class="qa__q">How much of our time will this cost?</h3>
+        <p>Less than a junior in-house developer. You get a written scope before work starts, a staging link from day one, and a Friday update. What I need from you is decisions and assets on the dates in the scope — everything else is mine.</p>
+        <p>The projects that go wrong go wrong because feedback stalls, so the scope names who owes what and when.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="deck">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Capability deck,<br><em>or just talk.</em></h2>
+    <p>The deck covers rates, capacity, the white-label terms and four project walkthroughs in detail — send it round internally before you commit to a call. Or skip it and book twenty minutes.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/contact/?type=agency">Request the deck <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/book/">Book a call instead</a>
+    </div>
+    <div class="assure">
+      <span>NDA before the first call</span>
+      <span>No client contact</span>
+      <span>Non-solicit in writing</span>
+      <span>Your repo, your hosting</span>
+      <span>Invoiced to you</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"For agencies","item":"https://example.com/for-agencies/"}]},
+{"@type":"Service","name":"White label WordPress development for agencies",
+"serviceType":"White label WordPress and Elementor development",
+"url":"https://example.com/for-agencies/",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"audience":{"@type":"BusinessAudience","name":"Digital agencies and design studios"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"Switzerland"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Ireland"}],
+"offers":[
+{"@type":"Offer","name":"Hourly","priceSpecification":{"@type":"UnitPriceSpecification","price":"35","priceCurrency":"USD","unitText":"HOUR"}},
+{"@type":"Offer","name":"Weekly sprint","priceSpecification":{"@type":"UnitPriceSpecification","price":"1200","priceCurrency":"USD","unitText":"WEEK"}},
+{"@type":"Offer","name":"Monthly retainer","priceSpecification":{"@type":"UnitPriceSpecification","price":"1800","priceCurrency":"USD","unitText":"MONTH"}},
+{"@type":"Offer","name":"Fixed scope","priceSpecification":{"@type":"PriceSpecification","minPrice":"1200","priceCurrency":"USD"}}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Will you approach our client?","acceptedAnswer":{"@type":"Answer","text":"No. A non-solicit clause is included in the contract. Agency work is a standing share of income, so soliciting a client would end that channel entirely."}},
+{"@type":"Question","name":"What happens if you become unavailable mid-project?","acceptedAnswer":{"@type":"Answer","text":"Work lives in your repository on your infrastructure, using standard WordPress structure with no proprietary framework and documented custom code, so another developer can take over from the documentation."}},
+{"@type":"Question","name":"How do you protect white-label confidentiality?","acceptedAnswer":{"@type":"Answer","text":"NDA signed before the first call, no contact with the end client, no credit or branding in the footer or source, no portfolio use without written permission, and invoices issued to the agency rather than the client."}},
+{"@type":"Question","name":"How much agency management time does this need?","acceptedAnswer":{"@type":"Answer","text":"A written scope before work starts, a staging link from day one, and a written update every Friday. The agency supplies decisions and assets on the dates named in the scope."}}]}
+]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

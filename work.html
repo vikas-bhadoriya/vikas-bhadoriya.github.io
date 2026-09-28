@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<meta name="robots" content="index,follow">
+<title>WordPress &amp; Elementor Portfolio | Vikas Bhadoriya</title>
+<meta name="description" content="Nineteen WordPress and Elementor projects across nine countries — healthcare, finance, e-commerce and nonprofit. Filter by industry, country or tech.">
+<link rel="canonical" href="https://example.com/work/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WordPress &amp; Elementor Portfolio | Vikas Bhadoriya">
+<meta property="og:description" content="Nineteen WordPress and Elementor projects across nine countries. Filter by industry, country or technology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════ TOKENS (shared with home) ══════════ */
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 14px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.sec--dark :focus-visible,.foot :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:28px}
+.eyebrow::before{width:28px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,60px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.7;color:var(--text-2);max-width:58ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* ══════════ NAV ══════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══════════ PAGE HEAD ══════════ */
+.phead{padding:calc(var(--navh) + 40px) 0 0;position:relative}
+@media(min-width:760px){.phead{padding-top:calc(var(--navh) + 72px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.phead h1{font-family:var(--serif);font-weight:400;font-size:clamp(36px,9vw,84px);
+line-height:1.02;letter-spacing:-.018em}
+.phead h1 br{display:none}
+@media(min-width:720px){.phead h1 br{display:inline}}
+.phead__lede{margin-top:22px;max-width:62ch;font-size:16px;line-height:1.75;color:var(--text-2)}
+@media(min-width:760px){.phead__lede{margin-top:30px;font-size:18px}}
+.phead__lede + .phead__lede{margin-top:14px}
+.pstats{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:30px;
+font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.pstats{font-size:11.5px;gap:12px 36px;margin-top:40px}}
+.pstats b{font-family:var(--sans);font-weight:500;font-size:15px;letter-spacing:-.02em;
+color:var(--text);margin-right:7px;text-transform:none}
+
+/* ══════════ FILTERS ══════════ */
+.filters{position:sticky;top:var(--navh);z-index:40;
+background:rgba(250,250,250,.94);backdrop-filter:blur(14px);
+border-block:1px solid var(--line);margin-top:38px;padding-block:14px}
+@media(min-width:760px){.filters{margin-top:56px;padding-block:18px}}
+.filters__in{display:grid;gap:12px}
+@media(min-width:1000px){.filters__in{grid-template-columns:1fr auto;align-items:center;gap:24px}}
+.fgroup{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.fgroup__lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+color:var(--text-3);margin-right:4px;flex:none}
+@media(max-width:759px){.fgroup{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.fgroup::-webkit-scrollbar{display:none}
+.fgroup > *{flex:none}}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+border:1px solid var(--line-2);border-radius:100px;padding:0 14px;color:var(--text-2);
+min-height:36px;display:inline-flex;align-items:center;white-space:nowrap;
+transition:background .2s,color .2s,border-color .2s}
+@media(min-width:760px){.chip{font-size:11px;padding:0 16px;min-height:38px}}
+.chip[aria-pressed="true"]{background:var(--dk);color:#FFF;border-color:var(--dk)}
+@media(hover:hover){.chip:hover{border-color:var(--dk);color:var(--text)}
+.chip[aria-pressed="true"]:hover{color:#FFF}}
+.fsel{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fsel select{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+border:1px solid var(--line-2);border-radius:100px;padding:0 32px 0 14px;min-height:36px;
+color:var(--text-2);background:var(--bg-3) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23767676' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 13px center;
+-webkit-appearance:none;appearance:none;cursor:pointer;max-width:100%}
+@media(min-width:760px){.fsel select{font-size:11px;min-height:38px}}
+.fmeta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+text-transform:uppercase;color:var(--text-3)}
+.fmeta b{color:var(--text);font-family:var(--sans);font-weight:500;
+font-size:14px;letter-spacing:-.02em;text-transform:none}
+.fclear{border-bottom:1px solid var(--line-2);padding-bottom:2px;color:var(--text-2)}
+.fclear[hidden]{display:none}
+@media(hover:hover){.fclear:hover{border-color:var(--dk);color:var(--text)}}
+
+/* ══════════ GRID ══════════ */
+.grid{display:grid;gap:18px;padding-block:clamp(32px,6vw,64px)}
+@media(min-width:620px){.grid{grid-template-columns:repeat(2,1fr);gap:22px}}
+@media(min-width:1080px){.grid{grid-template-columns:repeat(3,1fr);gap:28px}}
+.card{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+overflow:hidden;display:flex;flex-direction:column;
+transition:transform .35s var(--spring),border-color .3s var(--ease),box-shadow .35s var(--ease)}
+@media(min-width:760px){.card{border-radius:18px}}
+@media(hover:hover){.card:hover{transform:translateY(-6px);border-color:var(--line-3);
+box-shadow:0 24px 56px rgba(0,0,0,.11)}
+.card:hover .card__go{color:var(--dk)}}
+.card[hidden]{display:none}
+.card__shot{aspect-ratio:16/10;background:
+linear-gradient(150deg,var(--bg-4),var(--bg-2)),
+repeating-linear-gradient(45deg,transparent 0 14px,rgba(0,0,0,.014) 14px 28px);
+display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;
+font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--text-3);
+border-bottom:1px solid var(--line)}
+.card__body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:11px;flex:1}
+@media(min-width:760px){.card__body{padding:24px 24px 26px;gap:12px}}
+.card__tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+@media(min-width:760px){.tag{font-size:10px;padding:4px 11px}}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.card__t{font-size:19px}
+@media(min-width:760px){.card__t{font-size:21px}}
+.card__d{color:var(--text-2);font-size:14px;line-height:1.7}
+@media(min-width:760px){.card__d{font-size:14.5px}}
+.card__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:10px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+.empty{padding:60px 0;text-align:center;color:var(--text-2)}
+.empty[hidden]{display:none}
+.empty p{font-family:var(--serif);font-size:26px;color:var(--text);margin-bottom:10px}
+
+/* ══════════ SEO BLOCK ══════════ */
+.seo{border-top:1px solid var(--line);padding-block:clamp(48px,8vw,90px)}
+.seo__grid{display:grid;gap:32px}
+@media(min-width:900px){.seo__grid{grid-template-columns:1fr 1fr;gap:64px}}
+.seo h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,5vw,38px);
+line-height:1.1;margin-bottom:16px}
+.seo p{color:var(--text-2);font-size:15px;line-height:1.75;max-width:60ch}
+.seo p + p{margin-top:14px}
+.slinks{display:grid;gap:0;margin-top:8px}
+@media(min-width:520px){.slinks{grid-template-columns:1fr 1fr;column-gap:28px}}
+.slinks a{display:flex;justify-content:space-between;align-items:center;gap:12px;
+padding:12px 2px;font-size:15px;border-bottom:1px solid var(--line);min-height:46px;
+transition:padding-left .25s var(--ease)}
+.slinks a::after{content:"→";color:var(--text-3);flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover){.slinks a:hover{padding-left:8px}
+.slinks a:hover::after{transform:translateX(3px);color:var(--dk)}}
+
+/* ══════════ CTA ══════════ */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,130px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:760px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(33px,8.8vw,72px);line-height:1.04}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:18px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:42px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.cta .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.cta .btn--ghost:hover{border-color:#FFF}
+.cta .btn--primary:hover{box-shadow:0 12px 30px rgba(255,255,255,.18)}}
+
+/* ══════════ FOOTER ══════════ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+@media(min-width:760px){.foot h2{font-size:10.5px;letter-spacing:.18em;margin-bottom:16px}}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot li{padding:0}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+<main id="main">
+
+<!-- PAGE HEAD -->
+<section class="phead">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Work</span>
+    </nav>
+    <h1>Nineteen projects,<br>nine countries.</h1>
+    <p class="phead__lede">Every project here is a live WordPress build delivered for a working business — implant manufacturers, regulated investment firms, direct-to-consumer brands, nonprofits and agencies.</p>
+    <p class="phead__lede">Client names are withheld by default. What's here instead is the part that helps you judge the work: what the business does, where it operates, what the site had to handle, and what it was built with.</p>
+    <div class="pstats">
+      <span><b>9</b>Countries</span>
+      <span><b>9</b>Sectors</span>
+      <span><b>4</b>Regulatory environments</span>
+      <span><b>3</b>Languages</span>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="wrap filters__in">
+    <div class="fgroup" role="group" aria-label="Filter by industry">
+      <span class="fgroup__lbl" aria-hidden="true">Industry</span>
+      <button class="chip" data-f="industry" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="industry" data-v="healthcare" aria-pressed="false">Healthcare</button>
+      <button class="chip" data-f="industry" data-v="finance" aria-pressed="false">Finance</button>
+      <button class="chip" data-f="industry" data-v="ecommerce" aria-pressed="false">E-commerce</button>
+      <button class="chip" data-f="industry" data-v="nonprofit" aria-pressed="false">Nonprofit</button>
+      <button class="chip" data-f="industry" data-v="manufacturing" aria-pressed="false">Manufacturing</button>
+      <button class="chip" data-f="industry" data-v="agency" aria-pressed="false">Agency</button>
+      <button class="chip" data-f="industry" data-v="professional" aria-pressed="false">Professional</button>
+      <button class="chip" data-f="industry" data-v="technology" aria-pressed="false">Technology</button>
+      <button class="chip" data-f="industry" data-v="events" aria-pressed="false">Events</button>
+    </div>
+    <div class="fmeta">
+      <div class="fsel">
+        <label class="vh" for="fcountry">Filter by country</label>
+        <select id="fcountry" data-f="country">
+          <option value="all">All countries</option>
+          <option value="switzerland">Switzerland</option>
+          <option value="uae">UAE</option>
+          <option value="uk">United Kingdom</option>
+          <option value="us">United States</option>
+          <option value="germany">Germany</option>
+          <option value="austria">Austria</option>
+          <option value="ireland">Ireland</option>
+          <option value="france">France</option>
+          <option value="europe">Europe</option>
+          <option value="global">Global</option>
+        </select>
+        <label class="vh" for="ftech">Filter by technology</label>
+        <select id="ftech" data-f="tech">
+          <option value="all">All tech</option>
+          <option value="elementor">Elementor</option>
+          <option value="woocommerce">WooCommerce</option>
+          <option value="customtheme">Custom theme</option>
+          <option value="multilingual">Multilingual</option>
+          <option value="performance">Performance</option>
+          <option value="memberships">Memberships</option>
+        </select>
+      </div>
+      <span aria-hidden="true"><b id="count">19</b>shown</span>
+      <button class="fclear" id="clear" hidden>Clear</button>
+    </div>
+  </div>
+</div>
+<p class="vh" role="status" aria-live="polite" id="live">19 projects shown</p>
+
+<!-- GRID -->
+<section class="wrap">
+  <div class="grid" id="grid">
+
+    <a class="card rise" href="/work/medical-device-manufacturer/" data-industry="healthcare" data-country="switzerland" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Medical device manufacturer — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Healthcare</span><span class="tag">Switzerland</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">Medical device manufacturer</h2>
+        <p class="card__d">A Swiss maker of orthopaedic, trauma and spinal implants needed one site to serve surgical teams and contract manufacturing clients — two audiences that want opposite things from a homepage. Product and compliance content stays editable by non-technical staff.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/regulated-investment-firm/" data-industry="finance" data-country="uae" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Investment firm — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Finance</span><span class="tag">UAE</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">Regulated investment firm</h2>
+        <p class="card__d">An investment firm operating out of the Dubai International Financial Centre, whose material is intended for professional clients only. Regulatory disclaimers are built into the templates rather than bolted on afterwards.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/irish-whiskey-producer/" data-industry="ecommerce" data-country="ireland" data-tech="woocommerce">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Whiskey e-commerce — product page screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Ireland</span><span class="tag">WooCommerce</span></div>
+        <h2 class="card__t t-md">Irish whiskey producer</h2>
+        <p class="card__d">Age verification runs before anyone reaches a product page, and a cask reservation programme sits alongside ordinary bottle sales without confusing either. One WooCommerce install a small team runs without a developer on call.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/interfaith-peace-nonprofit/" data-industry="nonprofit" data-country="us" data-tech="woocommerce memberships">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Nonprofit — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Nonprofit</span><span class="tag">United States</span><span class="tag">Memberships</span></div>
+        <h2 class="card__t t-md">Interfaith peace nonprofit</h2>
+        <p class="card__d">A century-old organisation with a national office and roughly 125 local affiliates was treating donations, memberships, events and merchandise as four separate problems. Now one system a small staff operates day to day.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/medical-ultrasound-supplier/" data-industry="healthcare" data-country="uk" data-tech="woocommerce">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Ultrasound supplier — product page screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Healthcare</span><span class="tag">United Kingdom</span><span class="tag">WooCommerce</span></div>
+        <h2 class="card__t t-md">Medical ultrasound supplier</h2>
+        <p class="card__d">Portable ultrasound and handheld bladder scanners sold to NHS teams, care homes and private clinics — buyers who need clinical reassurance and a purchase order, not a shopping experience. Training and implementation sit alongside the products.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/watersports-equipment-brand/" data-industry="ecommerce" data-country="global" data-tech="woocommerce elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Product configurator screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Global</span><span class="tag">WooCommerce</span></div>
+        <h2 class="card__t t-md">Watersports equipment brand</h2>
+        <p class="card__d">Modular beach dollies for moving jet skis and kayaks across sand — a base frame, detachable wheel modules, retrofit motor units and a long tail of spare parts. The store is built so the configuration decision happens clearly before checkout.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/trade-show-exhibit-agency/" data-industry="agency" data-country="us" data-tech="performance">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Exhibit portfolio gallery screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Agency</span><span class="tag">United States</span><span class="tag">WordPress</span></div>
+        <h2 class="card__t t-md">Trade show exhibit agency</h2>
+        <p class="card__d">Three decades of exhibit work for several household-name brands, where the portfolio is the sale and the portfolio is intensely visual. Built to let large-format photography carry the pitch without becoming slow.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/performance-drinks-brand/" data-industry="ecommerce" data-country="austria" data-tech="customtheme woocommerce performance">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Performance drinks — product page screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Austria</span><span class="tag">Custom theme</span></div>
+        <h2 class="card__t t-md">Performance drinks brand</h2>
+        <p class="card__d">A concentrated performance syrup where the customer sets both flavour strength and caffeine dose by how much they pour — the entire pitch, and a hard thing to explain on a product page. Tuned to hold up when a stream sends thousands of people at once.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/group-commerce-platform/" data-industry="ecommerce" data-country="france" data-tech="woocommerce customtheme">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Checkout and verification flow]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">E-commerce</span><span class="tag">France</span><span class="tag">WooCommerce</span></div>
+        <h2 class="card__t t-md">Group commerce platform</h2>
+        <p class="card__d">E-commerce combined with paid access to private messaging groups — a model that only works if participants are verified. Identity checking is wired into the purchase flow rather than handled afterwards.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/landscaping-flooring-supplier/" data-industry="manufacturing" data-country="uae" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Product catalogue screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Manufacturing</span><span class="tag">UAE</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">Landscaping &amp; flooring supplier</h2>
+        <p class="card__d">Artificial grass, flooring and decorative surfacing sold to homeowners fitting a villa terrace and to contractors specifying sports courts and hospital vinyl. A browsable catalogue with quote requests rather than a checkout.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/european-youth-initiative/" data-industry="nonprofit" data-country="europe" data-tech="multilingual woocommerce">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Events page with language switcher]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Nonprofit</span><span class="tag">Europe</span><span class="tag">Multilingual</span></div>
+        <h2 class="card__t t-md">European youth initiative</h2>
+        <p class="card__d">A volunteer-run organisation operating across several European countries, needing one site in multiple languages without doubling the workload of the volunteers maintaining it. Events, recruitment and donations in one place.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/recruitment-consultancy/" data-industry="professional" data-country="uk" data-tech="elementor performance">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Recruitment site — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Professional</span><span class="tag">United Kingdom</span><span class="tag">Performance</span></div>
+        <h2 class="card__t t-md">Recruitment consultancy</h2>
+        <p class="card__d">Two audiences whose interests are opposed: employers paying for a shortlist, and candidates deciding whether to trust the firm with their CV. Confidentiality and data-handling commitments are given real weight on the candidate side.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/ai-search-platform/" data-industry="technology" data-country="europe" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: SaaS feature page screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Technology</span><span class="tag">Europe</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">AI search &amp; automation platform</h2>
+        <p class="card__d">AI-powered search and retrieval sold to technical buyers evaluating capability and executives approving the spend. Technical depth and the business case are separated rather than averaged into vague copy.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/regional-advertising-agency/" data-industry="agency" data-country="germany" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: German agency — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Agency</span><span class="tag">Germany</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">Regional advertising agency</h2>
+        <p class="card__d">Regionally targeted online advertising sold to small businesses at a fixed monthly price, in a market still buying print. Tiered packages with visible pricing and results shown as monthly impression figures, built in German.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/youth-sports-platform/" data-industry="technology" data-country="us" data-tech="customtheme">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Athlete profile and search interface]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Technology</span><span class="tag">United States</span><span class="tag">Custom theme</span></div>
+        <h2 class="card__t t-md">Youth sports recruiting platform</h2>
+        <p class="card__d">Athletes publish highlight reels and scouts search for players — simple enough for a fifteen-year-old on a phone, precise enough for a coach filtering by birth year, position and jersey number. Separate portals per sport.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/residential-architecture-firm/" data-industry="professional" data-country="us" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Architecture portfolio gallery]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Professional</span><span class="tag">United States</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">Residential architecture firm</h2>
+        <p class="card__d">Floor plans, 3D renderings and permit-ready drawings handed to a contractor the homeowner chooses — an unusual model that needs explaining before anyone will enquire. An education section absorbs the permit questions.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/svg-asset-marketplace/" data-industry="ecommerce" data-country="global" data-tech="woocommerce performance">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Search results grid screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Global</span><span class="tag">Performance</span></div>
+        <h2 class="card__t t-md">SVG asset marketplace</h2>
+        <p class="card__d">Customers scan hundreds of thumbnails before buying anything, so page speed is the product. Fast search and rapid browsing prioritised over visual flourish, with digital delivery the moment payment clears.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/digital-marketing-agency/" data-industry="agency" data-country="uk" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Marketing agency — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Agency</span><span class="tag">United Kingdom</span><span class="tag">WordPress</span></div>
+        <h2 class="card__t t-md">Digital marketing agency</h2>
+        <p class="card__d">A small South Wales agency competing against much larger firms for the same clients, where the real advantage is senior people doing the work rather than account managers. Built to make that difference legible.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+    <a class="card rise" href="/work/wedding-event-dj-service/" data-industry="events" data-country="us" data-tech="elementor">
+      <div class="card__shot">[IMAGE PLACEHOLDER: Event site — homepage screenshot]</div>
+      <div class="card__body">
+        <div class="card__tags"><span class="tag tag--solid">Events</span><span class="tag">United States</span><span class="tag">Elementor</span></div>
+        <h2 class="card__t t-md">Wedding &amp; event DJ service</h2>
+        <p class="card__d">Couples comparing three or four vendors and deciding largely on whether the pair feels trustworthy. An online planner lets them choose songs and build their reception timeline instead of doing it over email.</p>
+        <span class="card__go">View project →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="empty" id="empty" hidden>
+    <p>No projects match that combination.</p>
+    <p style="font-family:inherit;font-size:15px">Try widening the filter, or tell me what you're looking for.</p>
+  </div>
+</section>
+
+<!-- SEO CONTENT -->
+<section class="seo">
+  <div class="wrap seo__grid">
+    <div>
+      <h2>Building for markets that ask harder questions</h2>
+      <p>Roughly two thirds of this work was delivered for businesses outside India, across nine countries and four regulatory environments. That shapes how a site gets built long before design begins.</p>
+      <p>A Swiss medical device manufacturer has content that must survive review. A DIFC-regulated investment firm operates under communication rules that determine page structure, not just wording. A German agency needs consent handling that satisfies a market with particular expectations. An alcohol retailer needs age verification that doesn't destroy conversion.</p>
+      <p>These are not plugin decisions. They are architecture decisions, and getting them wrong is expensive in ways a redesign cannot fix.</p>
+    </div>
+    <div>
+      <h2>Start with the closest fit</h2>
+      <p style="margin-bottom:18px">Six projects that each carried an unusual constraint. If one is close to your situation, start there.</p>
+      <div class="slinks">
+        <a href="/work/medical-device-manufacturer/">Medical devices, Switzerland</a>
+        <a href="/work/regulated-investment-firm/">Regulated finance, UAE</a>
+        <a href="/work/irish-whiskey-producer/">Age-gated commerce, Ireland</a>
+        <a href="/work/interfaith-peace-nonprofit/">Nonprofit systems, US</a>
+        <a href="/work/european-youth-initiative/">Multilingual, Europe</a>
+        <a href="/work/regional-advertising-agency/">German market, Germany</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>See something<br><em>close to yours?</em></h2>
+    <p>Twenty minutes on a call. Tell me what you're dealing with and I'll tell you what it would take, roughly what it would cost, and whether you should be talking to me at all.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/book/">Book a project review <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/contact/">Send a message instead</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Work","item":"https://example.com/work/"}]},
+{"@type":"CollectionPage","name":"WordPress & Elementor Portfolio","url":"https://example.com/work/",
+"description":"Nineteen WordPress and Elementor projects across nine countries.",
+"about":["WordPress development","Elementor","WooCommerce"],
+"mainEntity":{"@type":"ItemList","numberOfItems":19,"itemListOrder":"Unordered"}}
+]}
+</script>
+
+<script>
+(function(){
+  /* mobile nav */
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+
+  /* filtering */
+  var cards=[].slice.call(document.querySelectorAll('.card')),
+      chips=[].slice.call(document.querySelectorAll('.chip')),
+      sels=[].slice.call(document.querySelectorAll('.fsel select')),
+      count=document.getElementById('count'),
+      live=document.getElementById('live'),
+      empty=document.getElementById('empty'),
+      clear=document.getElementById('clear'),
+      state={industry:'all',country:'all',tech:'all'};
+
+  function match(c){
+    return ['industry','country','tech'].every(function(k){
+      if(state[k]==='all') return true;
+      return (c.dataset[k]||'').split(' ').indexOf(state[k])>-1;
+    });
+  }
+  function apply(){
+    var n=0;
+    cards.forEach(function(c){
+      var ok=match(c);
+      c.hidden=!ok;
+      if(ok){n++;c.classList.add('in');}
+    });
+    count.textContent=n;
+    live.textContent=n+(n===1?' project':' projects')+' shown';
+    empty.hidden=n>0;
+    var active=state.industry!=='all'||state.country!=='all'||state.tech!=='all';
+    clear.hidden=!active;
+  }
+  chips.forEach(function(ch){
+    ch.addEventListener('click',function(){
+      state.industry=ch.dataset.v;
+      chips.forEach(function(o){o.setAttribute('aria-pressed',String(o===ch));});
+      apply();
+    });
+  });
+  sels.forEach(function(s){
+    s.addEventListener('change',function(){state[s.dataset.f]=s.value;apply();});
+  });
+  clear.addEventListener('click',function(){
+    state={industry:'all',country:'all',tech:'all'};
+    chips.forEach(function(o){o.setAttribute('aria-pressed',String(o.dataset.v==='all'));});
+    sels.forEach(function(s){s.value='all';});
+    apply();
+  });
+
+  /* reveal */
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<title>Headless WordPress &amp; REST API Development</title>
+<meta name="description" content="The WordPress side of decoupled builds: content modelling, ACF, custom REST and GraphQL endpoints, authentication, preview and webhooks. From $900.">
+<link rel="canonical" href="https://example.com/services/headless-wordpress/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Headless WordPress &amp; REST API Development">
+<meta property="og:description" content="WordPress as a content backend. Content model, API layer and editor experience built properly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+
+/* ══ SERVICE DETAIL ══ */
+.shd{padding:calc(var(--navh) + 32px) 0 0}
+@media(min-width:760px){.shd{padding-top:calc(var(--navh) + 52px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.shd__grid{display:grid;gap:32px;align-items:start}
+@media(min-width:1020px){.shd__grid{grid-template-columns:1.25fr .75fr;gap:64px}}
+.shd h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8vw,68px);
+line-height:1.03;letter-spacing:-.018em;max-width:15ch}
+.shd__lede{margin-top:20px;font-size:16.5px;line-height:1.75;color:var(--text-2);max-width:56ch}
+@media(min-width:760px){.shd__lede{margin-top:26px;font-size:18.5px}}
+.shd__lede + .shd__lede{margin-top:13px}
+.shd__cta{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media(min-width:540px){.shd__cta{flex-direction:row;flex-wrap:wrap;gap:14px;margin-top:34px}}
+
+/* quick facts card */
+.qf{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);padding:24px 22px}
+@media(min-width:760px){.qf{border-radius:20px;padding:28px 26px}}
+.qf__h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.qf dl{border-top:1px solid var(--line)}
+.qf dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+padding:12px 0;border-bottom:1px solid var(--line)}
+.qf dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none}
+.qf dd{font-size:14.5px;text-align:right;font-weight:500}
+
+/* sections */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* problem cards */
+.probs{display:grid;gap:16px;counter-reset:p}
+@media(min-width:820px){.probs{grid-template-columns:repeat(3,1fr);gap:20px}}
+.pb{counter-increment:p;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pb{border-radius:20px;padding:32px 28px}}
+@media(hover:hover){.pb:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pb::after{content:"0" counter(p);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:46px;color:rgba(0,0,0,.06);line-height:1}
+.pb__t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;
+margin-bottom:11px;max-width:16ch;position:relative}
+.pb p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* deliverables list */
+.dlv{border-top:1px solid var(--line-dk)}
+.dlv li{position:relative;padding:20px 0 20px 30px;border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.dlv li{padding:22px 0 22px 34px}}
+.dlv li::before{content:"✓";position:absolute;left:0;top:21px;color:var(--on-dk);font-size:14px}
+@media(min-width:760px){.dlv li::before{top:23px}}
+.dlv__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.dlv__t{font-size:18.5px}}
+.dlv p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:60ch}
+@media(min-width:760px){.dlv p{font-size:15px}}
+
+.tlink{display:inline-block;color:inherit;border-bottom:1px solid var(--line-2);
+padding:3px 0 2px;min-height:24px}
+@media(hover:hover){.tlink:hover{border-color:var(--dk)}}
+
+/* not-included */
+.nots{border-top:1px solid var(--line-2)}
+.nots li{position:relative;padding:15px 0 15px 28px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
+.nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
+.nots b{color:var(--text);font-weight:500}
+
+/* process steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+.st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
+@media(hover:hover){.st:hover{transform:translateY(-4px);border-color:var(--line-3);
+box-shadow:0 18px 42px rgba(0,0,0,.08)}}
+.st__n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text-3);margin-bottom:11px}
+.st__t{font-size:16.5px;margin-bottom:7px}
+.st p{font-size:13.5px;line-height:1.7;color:var(--text-2)}
+
+/* pricing rows */
+.prc{border-top:1px solid var(--line-2)}
+.prc > div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){.prc > div{grid-template-columns:minmax(0,1fr) 150px 130px;
+gap:28px;align-items:baseline}}
+.prc__t{font-size:16.5px;font-weight:500;letter-spacing:-.012em}
+.prc__d{font-size:14px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.prc__d{grid-column:1}}
+.prc__p{font-family:var(--sans);font-weight:500;font-size:19px;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.prc__w{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.prc__p,.prc__w{text-align:right}}
+
+/* related work */
+.rel{display:grid;gap:16px}
+@media(min-width:760px){.rel{grid-template-columns:repeat(3,1fr);gap:22px}}
+.rc{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);overflow:hidden;
+display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rc{border-radius:18px}}
+@media(hover:hover){.rc:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.rc:hover .rc__go{color:var(--dk)}}
+.rc__shot{aspect-ratio:16/10;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));
+display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;
+font-family:var(--mono);font-size:9.5px;color:var(--text-3);border-bottom:1px solid var(--line)}
+.rc__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.rc__t{font-size:17.5px}
+.rc__d{font-size:13.5px;line-height:1.65;color:var(--text-2)}
+.rc__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+
+/* faq */
+.faq{border-top:1px solid var(--line-2)}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+justify-content:space-between;gap:18px;padding:20px 0;min-height:48px;
+font-size:16.5px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+@media(min-width:760px){.faq summary{font-size:18.5px;padding:23px 0}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:19px;font-weight:400;
+color:var(--text-3);flex:none;line-height:1.2;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+@media(hover:hover){.faq summary:hover::after{color:var(--dk)}}
+.faq__a{padding:0 0 22px;max-width:66ch}
+.faq__a p{font-size:15px;line-height:1.8;color:var(--text-2)}
+.faq__a p + p{margin-top:11px}
+.faq__a a{border-bottom:1px solid var(--line-2);display:inline-block;padding:2px 0 1px}
+@media(hover:hover){.faq__a a:hover{border-color:var(--dk)}}
+
+/* cta */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,120px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:720px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,8vw,64px);line-height:1.05}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:17.5px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:42px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+
+<main id="main">
+
+<section class="shd">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Headless WordPress &amp; APIs</span>
+    </nav>
+    <div class="shd__grid">
+      <div>
+        <h1>WordPress as a content backend, not a website.</h1>
+        <p class="shd__lede">Your team already knows the WordPress editor. Your frontend team wants React, Next.js, or a mobile app. Headless keeps both — WordPress manages the content, something else renders it.</p>
+        <p class="shd__lede">I build the WordPress half properly: the content model, the custom fields, the API layer and an editing experience that doesn't fall apart the moment the frontend stops being a WordPress theme.</p>
+        <div class="shd__cta">
+          <a class="btn btn--primary" href="/book/">Talk through the architecture <span class="ar">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">See pricing</a>
+        </div>
+      </div>
+      <aside class="qf">
+        <p class="qf__h">At a glance</p>
+        <dl>
+          <div><dt>Content model</dt><dd>from $900</dd></div>
+          <div><dt>API layer</dt><dd>from $1.2k</dd></div>
+          <div><dt>Full backend</dt><dd>$3k – $8k</dd></div>
+          <div><dt>Timeline</dt><dd>2–8 weeks</dd></div>
+          <div><dt>My scope</dt><dd>WordPress side</dd></div>
+          <div><dt>Your frontend</dt><dd>Your team's</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Read this first</p>
+        <h2 class="h2">When headless<br>is a mistake.</h2>
+      </div>
+      <p class="lede">Headless is oversold, and it is the wrong answer more often than the people selling it admit. Three cases where a normal WordPress site is genuinely better, and I'd rather say so before you commit a budget.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">Nobody owns the frontend</p>
+        <p>Headless means two codebases and two deployment pipelines. Without a frontend developer on your side or on retainer, you've turned a site anyone can maintain into one only a specialist can touch.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">You want it for speed</p>
+        <p>A well-built WordPress site with proper caching is fast. Headless can be faster, but the gap is smaller than the pitch suggests and the cost is roughly double. Fix the build first — see <a class="tlink" href="/services/speed-optimization/">speed optimisation</a>.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Your editors need to see the page</p>
+        <p>Live preview across a decoupled frontend is solvable but genuinely fiddly. If your team relies on seeing changes before publishing, that friction shows up every single day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">When it's right</p>
+        <h2 class="h2">Six things<br>the WordPress side<br>has to get right.</h2>
+      </div>
+      <p class="lede">Where the case does hold, the WordPress half is what makes it work or fail. Most failed headless projects failed here rather than in the frontend.</p>
+    </div>
+    <ul class="dlv rise">
+      <li>
+        <p class="dlv__t">A content model designed for consumption, not display</p>
+        <p>In a theme you can paper over a weak structure in the template. Through an API you can't — the frontend receives exactly what the model gives it. Content types, fields and relationships are designed as data first.</p>
+      </li>
+      <li>
+        <p class="dlv__t">A deliberate API surface</p>
+        <p>The default REST output is verbose and leaks internals. Custom endpoints or a shaped GraphQL schema return what the frontend needs and nothing else, with sensible pagination and consistent field naming.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Advanced Custom Fields, exposed properly</p>
+        <p>ACF is the backbone of most headless builds. Field groups modelled for the frontend, exposed to REST or GraphQL, with flexible content and repeaters that serialise into something predictable rather than a nested mess.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Authentication that's actually secure</p>
+        <p>Application passwords, JWT or OAuth depending on the consumer. Capability checks on every endpoint, rate limiting, and no write endpoint exposed that shouldn't be. Public read APIs are the common place this goes wrong.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Preview and revalidation that work</p>
+        <p>Draft preview against the decoupled frontend, and webhooks to trigger rebuilds or cache invalidation on publish. This is the part most headless builds skip, and the part editors complain about within a fortnight.</p>
+      </li>
+      <li>
+        <p class="dlv__t">An editing experience that survives decoupling</p>
+        <p>Editors lose the visual context a theme gave them. That's replaced with clear field labels, helper text, image guidance and validation, so publishing doesn't become guesswork.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Also available separately</p>
+        <h2 class="h2">Three pieces<br>of the same work.</h2>
+      </div>
+      <p class="lede">These come together on a full headless build, but any one of them is a reasonable standalone project — including on a completely conventional WordPress site.</p>
+    </div>
+    <div class="steps rise" style="grid-template-columns:none">
+      <div class="st">
+        <p class="st__n">PIECE 01</p>
+        <h3 class="st__t t-md">Content modelling &amp; ACF</h3>
+        <p>Custom post types, taxonomies and field groups shaped around your data. Useful whether or not anything is decoupled — a bad content model is the most expensive mistake on any WordPress project, and the hardest to change later.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">PIECE 02</p>
+        <h3 class="st__t t-md">REST API development</h3>
+        <p>Custom endpoints for a mobile app, another internal system, or a frontend you already have. Authentication, pagination, caching, error handling and documentation your developers can work from.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">PIECE 03</p>
+        <h3 class="st__t t-md">Integration work</h3>
+        <p>WordPress talking to a CRM, an ERP, a booking system or a payment provider — in either direction, with retry logic and failure handling rather than a fire-and-forget POST.</p>
+      </div>
+    </div>
+
+    <div class="shead rise" style="margin-top:56px">
+      <div>
+        <p class="eyebrow">Scope</p>
+        <h2 class="h2">Where my part<br>stops.</h2>
+      </div>
+      <p class="lede">Being precise about this matters more here than anywhere else, because a decoupled project has two halves and an unclear boundary is where they fail.</p>
+    </div>
+    <ul class="nots rise">
+      <li><b>I don't build the frontend.</b> React and Next.js are your team's or another contractor's. I've worked alongside both and will spec the API to whatever they need.</li>
+      <li><b>Not frontend performance or SEO.</b> Server rendering, metadata and Core Web Vitals on a decoupled frontend belong to whoever owns it.</li>
+      <li><b>Not hosting the frontend.</b> Vercel, Netlify or your own infrastructure — configured by your team.</li>
+      <li><b>Not a migration to a different CMS.</b> If the conclusion is that WordPress isn't right, I'll say so, but moving you to Contentful isn't my work.</li>
+      <li><b>Not GraphQL server development from scratch.</b> WPGraphQL where GraphQL is wanted; a bespoke server is a different project.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec--tint" id="pricing">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">By piece,<br>or as a backend.</h2>
+      </div>
+      <p class="lede">Most projects start with one piece and add the others. Quoted against a written spec after an architecture conversation, because the wrong assumption here is expensive.</p>
+    </div>
+    <div class="prc rise">
+      <div><div><p class="prc__t">Content model &amp; ACF setup</p><p class="prc__d">Post types, taxonomies, field groups and relationships, with an editing experience built for non-technical staff.</p></div><p class="prc__p">from $900</p><p class="prc__w">1–2 weeks</p></div>
+      <div><div><p class="prc__t">REST API layer</p><p class="prc__d">Custom endpoints, authentication, pagination, caching and documentation for your frontend developers.</p></div><p class="prc__p">from $1.2k</p><p class="prc__w">1–3 weeks</p></div>
+      <div><div><p class="prc__t">Full headless backend</p><p class="prc__d">Content model, API layer, preview, webhooks and editor experience. Everything on the WordPress side of a decoupled build.</p></div><p class="prc__p">$3k – $8k</p><p class="prc__w">4–8 weeks</p></div>
+      <div><div><p class="prc__t">Third-party integration</p><p class="prc__d">Connecting WordPress to a CRM, ERP or external service in either direction, with retry and failure handling.</p></div><p class="prc__p">from $1.2k</p><p class="prc__w">1–3 weeks</p></div>
+      <div><div><p class="prc__t">Architecture review</p><p class="prc__d">A written assessment of whether headless is right for you, and what it would actually involve. Credited against the build.</p></div><p class="prc__p">$400</p><p class="prc__w">3 days</p></div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
+      The architecture review is the honest starting point if you're not certain headless is right — about a third of them conclude it isn't. Agencies: <a class="tlink" href="/for-agencies/">white-label terms</a>.
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">Asked before<br>committing.</h2>
+      </div>
+      <p class="lede">Headless decisions are hard to reverse, so these are worth resolving before anyone writes code.</p>
+    </div>
+    <div class="faq rise">
+      <details>
+        <summary>Do we actually need headless?</summary>
+        <div class="faq__a"><p>Probably not, and I'd rather say that than take the project. It's genuinely right when you have a frontend team who want their own stack, when the same content feeds several destinations — site, app, kiosk, partner — or when you're integrating WordPress into an existing application.</p><p>It's usually wrong when the reason is "headless is faster" or "headless is modern". Both are half-true and neither justifies doubling the maintenance surface.</p></div>
+      </details>
+      <details>
+        <summary>Can you build the React or Next.js frontend too?</summary>
+        <div class="faq__a"><p>No, and I'd rather be straight about that than take work I'd be second-best at. My React is working knowledge, not specialism.</p><p>What I do well is the WordPress half — content model, API design, authentication, preview and the editing experience. I've worked alongside frontend teams on decoupled builds and will spec the API to whatever shape they want.</p></div>
+      </details>
+      <details>
+        <summary>REST or GraphQL?</summary>
+        <div class="faq__a"><p>Depends on the frontend team's preference and how varied the queries are. REST is simpler, cacheable at the edge, and fine when the frontend needs a predictable set of things. WPGraphQL is better when the frontend needs to compose queries and you'd otherwise build a dozen bespoke endpoints.</p><p>I'll build either. If your team has no strong preference, REST with well-designed endpoints is usually less to maintain.</p></div>
+      </details>
+      <details>
+        <summary>Will our editors still be able to preview?</summary>
+        <div class="faq__a"><p>Yes, but it's real work rather than a checkbox — draft previews have to be routed to the decoupled frontend with authentication. It's included in a full backend build and quoted explicitly, because the projects that skip it are the ones editors complain about.</p></div>
+      </details>
+      <details>
+        <summary>Is the API secure by default?</summary>
+        <div class="faq__a"><p>No. WordPress exposes a fair amount over REST out of the box, including user data on some configurations. Locking that down — capability checks, disabling unnecessary endpoints, authentication on anything that isn't genuinely public, rate limiting — is part of every API build rather than an extra.</p></div>
+      </details>
+      <details>
+        <summary>Can we go headless later rather than now?</summary>
+        <div class="faq__a"><p>Yes, and it's often the sensible sequence. A clean content model and a solid ACF structure are useful on a conventional WordPress site and are most of the groundwork for decoupling later.</p><p>Build the content model well now, run a normal theme on it, and decouple when there's an actual reason. That's cheaper than committing to two codebases before you need them.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Tell me what's<br><em>consuming the content.</em></h2>
+    <p>A site, an app, several destinations, or an existing application. That answer decides most of the architecture — and sometimes it decides that you don't need any of this.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/book/">Book an architecture call <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/contact/">Send details instead</a>
+    </div>
+    <div class="assure">
+      <span>Honest fit assessment</span>
+      <span>WordPress side only</span>
+      <span>API documented for your team</span>
+      <span>Security not optional</span>
+      <span>You own the code</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
+{"@type":"ListItem","position":3,"name":"Headless WordPress and APIs","item":"https://example.com/services/headless-wordpress/"}]},
+{"@type":"Service","name":"Headless WordPress and API development",
+"serviceType":"Headless WordPress, REST API and content modelling",
+"url":"https://example.com/services/headless-wordpress/",
+"description":"The WordPress side of decoupled builds: content modelling with ACF, custom REST or GraphQL API layers, authentication, preview and webhooks, and integrations with external systems.",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"Switzerland"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Ireland"},
+{"@type":"Country","name":"France"},{"@type":"Country","name":"Austria"},{"@type":"Country","name":"India"}],
+"offers":[
+{"@type":"Offer","name":"Content model and ACF setup","priceSpecification":{"@type":"PriceSpecification","minPrice":"900","priceCurrency":"USD"}},
+{"@type":"Offer","name":"REST API layer","priceSpecification":{"@type":"PriceSpecification","minPrice":"1200","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Full headless backend","priceSpecification":{"@type":"PriceSpecification","minPrice":"3000","maxPrice":"8000","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Architecture review","price":"400","priceCurrency":"USD"}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Do we actually need headless WordPress?","acceptedAnswer":{"@type":"Answer","text":"Often not. Headless suits teams with their own frontend stack, content feeding several destinations, or WordPress integrated into an existing application. Choosing it purely for speed or modernity rarely justifies doubling the maintenance surface."}},
+{"@type":"Question","name":"Can you build the React or Next.js frontend as well?","acceptedAnswer":{"@type":"Answer","text":"No. React is working knowledge rather than a specialism. The work covered is the WordPress side: content model, API design, authentication, preview and editing experience, specified to whatever the frontend team requires."}},
+{"@type":"Question","name":"REST or GraphQL for headless WordPress?","acceptedAnswer":{"@type":"Answer","text":"REST is simpler, edge-cacheable and suits predictable query sets. WPGraphQL suits frontends that compose varied queries and would otherwise need many bespoke endpoints. Without a strong team preference, well-designed REST endpoints are less to maintain."}},
+{"@type":"Question","name":"Can editors preview content on a headless WordPress site?","acceptedAnswer":{"@type":"Answer","text":"Yes, but it requires real work: draft previews routed to the decoupled frontend with authentication. It is included in a full backend build and quoted explicitly, because projects that skip it generate editor complaints."}},
+{"@type":"Question","name":"Is the WordPress REST API secure by default?","acceptedAnswer":{"@type":"Answer","text":"No. WordPress exposes a significant amount over REST out of the box, including user data in some configurations. Capability checks, disabling unnecessary endpoints, authentication and rate limiting are part of every API build."}},
+{"@type":"Question","name":"Can we move to headless WordPress later instead of now?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it is often the sensible sequence. A clean content model and solid ACF structure benefit a conventional WordPress site and form most of the groundwork for decoupling when there is a concrete reason."}}]}]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

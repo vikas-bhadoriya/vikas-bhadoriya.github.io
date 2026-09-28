@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<title>WooCommerce Development | Complex Stores Built Properly</title>
+<meta name="description" content="WooCommerce stores for configurable products, age and identity verification, multi-market VAT and custom checkouts. From $3,500, built across four countries.">
+<link rel="canonical" href="https://example.com/services/woocommerce-store-development/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WooCommerce Development | Complex Stores Built Properly">
+<meta property="og:description" content="Stores for products that don't fit the box — configurable systems, verification steps, multi-market tax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+
+/* ══ SERVICE DETAIL ══ */
+.shd{padding:calc(var(--navh) + 32px) 0 0}
+@media(min-width:760px){.shd{padding-top:calc(var(--navh) + 52px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.shd__grid{display:grid;gap:32px;align-items:start}
+@media(min-width:1020px){.shd__grid{grid-template-columns:1.25fr .75fr;gap:64px}}
+.shd h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8vw,68px);
+line-height:1.03;letter-spacing:-.018em;max-width:15ch}
+.shd__lede{margin-top:20px;font-size:16.5px;line-height:1.75;color:var(--text-2);max-width:56ch}
+@media(min-width:760px){.shd__lede{margin-top:26px;font-size:18.5px}}
+.shd__lede + .shd__lede{margin-top:13px}
+.shd__cta{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media(min-width:540px){.shd__cta{flex-direction:row;flex-wrap:wrap;gap:14px;margin-top:34px}}
+
+/* quick facts card */
+.qf{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);padding:24px 22px}
+@media(min-width:760px){.qf{border-radius:20px;padding:28px 26px}}
+.qf__h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.qf dl{border-top:1px solid var(--line)}
+.qf dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+padding:12px 0;border-bottom:1px solid var(--line)}
+.qf dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none}
+.qf dd{font-size:14.5px;text-align:right;font-weight:500}
+
+/* sections */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* problem cards */
+.probs{display:grid;gap:16px;counter-reset:p}
+@media(min-width:820px){.probs{grid-template-columns:repeat(3,1fr);gap:20px}}
+.pb{counter-increment:p;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pb{border-radius:20px;padding:32px 28px}}
+@media(hover:hover){.pb:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pb::after{content:"0" counter(p);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:46px;color:rgba(0,0,0,.06);line-height:1}
+.pb__t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;
+margin-bottom:11px;max-width:16ch;position:relative}
+.pb p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* deliverables list */
+.dlv{border-top:1px solid var(--line-dk)}
+.dlv li{position:relative;padding:20px 0 20px 30px;border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.dlv li{padding:22px 0 22px 34px}}
+.dlv li::before{content:"✓";position:absolute;left:0;top:21px;color:var(--on-dk);font-size:14px}
+@media(min-width:760px){.dlv li::before{top:23px}}
+.dlv__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.dlv__t{font-size:18.5px}}
+.dlv p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:60ch}
+@media(min-width:760px){.dlv p{font-size:15px}}
+
+.tlink{display:inline-block;color:inherit;border-bottom:1px solid var(--line-2);
+padding:3px 0 2px;min-height:24px}
+@media(hover:hover){.tlink:hover{border-color:var(--dk)}}
+
+/* not-included */
+.nots{border-top:1px solid var(--line-2)}
+.nots li{position:relative;padding:15px 0 15px 28px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
+.nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
+.nots b{color:var(--text);font-weight:500}
+
+/* process steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+.st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
+@media(hover:hover){.st:hover{transform:translateY(-4px);border-color:var(--line-3);
+box-shadow:0 18px 42px rgba(0,0,0,.08)}}
+.st__n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text-3);margin-bottom:11px}
+.st__t{font-size:16.5px;margin-bottom:7px}
+.st p{font-size:13.5px;line-height:1.7;color:var(--text-2)}
+
+/* pricing rows */
+.prc{border-top:1px solid var(--line-2)}
+.prc > div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){.prc > div{grid-template-columns:minmax(0,1fr) 150px 130px;
+gap:28px;align-items:baseline}}
+.prc__t{font-size:16.5px;font-weight:500;letter-spacing:-.012em}
+.prc__d{font-size:14px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.prc__d{grid-column:1}}
+.prc__p{font-family:var(--sans);font-weight:500;font-size:19px;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.prc__w{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.prc__p,.prc__w{text-align:right}}
+
+/* related work */
+.rel{display:grid;gap:16px}
+@media(min-width:760px){.rel{grid-template-columns:repeat(3,1fr);gap:22px}}
+.rc{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);overflow:hidden;
+display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rc{border-radius:18px}}
+@media(hover:hover){.rc:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.rc:hover .rc__go{color:var(--dk)}}
+.rc__shot{aspect-ratio:16/10;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));
+display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;
+font-family:var(--mono);font-size:9.5px;color:var(--text-3);border-bottom:1px solid var(--line)}
+.rc__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.rc__t{font-size:17.5px}
+.rc__d{font-size:13.5px;line-height:1.65;color:var(--text-2)}
+.rc__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+
+/* faq */
+.faq{border-top:1px solid var(--line-2)}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+justify-content:space-between;gap:18px;padding:20px 0;min-height:48px;
+font-size:16.5px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+@media(min-width:760px){.faq summary{font-size:18.5px;padding:23px 0}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:19px;font-weight:400;
+color:var(--text-3);flex:none;line-height:1.2;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+@media(hover:hover){.faq summary:hover::after{color:var(--dk)}}
+.faq__a{padding:0 0 22px;max-width:66ch}
+.faq__a p{font-size:15px;line-height:1.8;color:var(--text-2)}
+.faq__a p + p{margin-top:11px}
+.faq__a a{border-bottom:1px solid var(--line-2);display:inline-block;padding:2px 0 1px}
+@media(hover:hover){.faq__a a:hover{border-color:var(--dk)}}
+
+/* cta */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,120px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:720px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,8vw,64px);line-height:1.05}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:17.5px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:42px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+
+<main id="main">
+
+<section class="shd">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <span aria-current="page">WooCommerce development</span>
+    </nav>
+    <div class="shd__grid">
+      <div>
+        <h1>WooCommerce for products that don't fit the box.</h1>
+        <p class="shd__lede">Anyone can install WooCommerce and add products. The work starts when the product is configurable, the buyer has to be verified, the tax rules differ by market, or the checkout has to do something the defaults never anticipated.</p>
+        <p class="shd__lede">Age-gated alcohol with a cask reservation programme. Modular hardware with retrofit parts. Identity verification wired into the purchase flow. Those are the builds in the portfolio.</p>
+        <div class="shd__cta">
+          <a class="btn btn--primary" href="/book/">Talk through your store <span class="ar">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">See pricing</a>
+        </div>
+      </div>
+      <aside class="qf">
+        <p class="qf__h">At a glance</p>
+        <dl>
+          <div><dt>New store</dt><dd>$3.5k – $12k</dd></div>
+          <div><dt>Customisation</dt><dd>from $900</dd></div>
+          <div><dt>Timeline</dt><dd>6–12 weeks</dd></div>
+          <div><dt>Markets</dt><dd>Multi-currency, VAT</dd></div>
+          <div><dt>Built</dt><dd>5 stores, 4 countries</dd></div>
+          <div><dt>White label</dt><dd>Yes</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Where stores break</p>
+        <h2 class="h2">Three problems<br>plugins don't solve.</h2>
+      </div>
+      <p class="lede">Most WooCommerce trouble isn't the platform. It's a product or a market that doesn't match the assumptions the defaults were built on — and no combination of plugins reconciles that.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">The product is configurable</p>
+        <p>A base unit, optional modules, retrofit parts and spares. Variations don't model it, and a customer who orders the wrong combination becomes a refund and a support call.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Something must happen before the sale</p>
+        <p>Age verification, identity checks, trade-account approval, licence validation. Bolted on afterwards it's a leak; wired into the flow it just works.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Six plugins are fighting</p>
+        <p>Each one solved a problem, and together they've made a checkout nobody understands. Every update is a risk, and the store slows down a little more each month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">What gets built</p>
+        <h2 class="h2">Seven areas,<br>most builds.</h2>
+      </div>
+      <p class="lede">Which of these you need depends on the product. The scope names them explicitly, so nothing arrives as an unexpected line item.</p>
+    </div>
+    <ul class="dlv rise">
+      <li>
+        <p class="dlv__t">A product model that matches reality</p>
+        <p>Before any design work, how your catalogue is actually structured — variations, bundles, configurable systems, spares. Getting this wrong is the mistake that costs most later, because everything else is built on top of it.</p>
+      </li>
+      <li>
+        <p class="dlv__t">A checkout built for your sale</p>
+        <p>Fields your business needs and none it doesn't, verification steps in the right order, and a flow tested on a phone. Every extra field costs conversion, so each one has to justify itself.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Payments and tax for the markets you serve</p>
+        <p>Gateway integration, multi-currency, and VAT or sales-tax handling that reflects where you actually ship — including EU VAT rules and reverse charge where they apply.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Verification and compliance steps</p>
+        <p>Age gating, identity verification, trade-account approval. Built into the purchase flow rather than as a modal that a determined visitor can dismiss.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Fulfilment that fits your operation</p>
+        <p>Shipping rules, zones and rates, digital delivery, subscription renewals, and export to whatever your warehouse or accounts team already uses.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Performance, because stores are heavy</p>
+        <p>Catalogue query optimisation, cart fragment handling, and image work. A slow store loses sales in a way a slow brochure site doesn't — the cost is directly measurable.</p>
+      </li>
+      <li>
+        <p class="dlv__t">An admin your team can run</p>
+        <p>Order management, stock, and content editing that doesn't require a developer. Plus documentation for the three things that will inevitably go wrong at 6pm on a Friday.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Scope</p>
+        <h2 class="h2">What's not<br>included.</h2>
+      </div>
+      <p class="lede">Available, but quoted separately rather than assumed into the price.</p>
+    </div>
+    <ul class="nots rise">
+      <li><b>Product photography and copy.</b> I build the system; the catalogue content is yours.</li>
+      <li><b>Bulk product import.</b> Loading 5,000 SKUs is separate work — though I'll build the import structure.</li>
+      <li><b>Marketplace integrations</b> with Amazon, eBay or Etsy. Possible, quoted individually.</li>
+      <li><b>Ongoing order support.</b> I build the store; running it day to day is yours or a <a class="tlink" href="/services/website-maintenance/">care plan</a>.</li>
+      <li><b>Shopify migration to or from.</b> A different service with different problems.</li>
+      <li><b>PCI compliance certification.</b> Payments go through a compliant gateway so card data never touches your server, but certification is a formal process I can't grant.</li>
+    </ul>
+
+    <div class="shead rise" style="margin-top:56px">
+      <div>
+        <p class="eyebrow">How it runs</p>
+        <h2 class="h2">Five stages.</h2>
+      </div>
+      <p class="lede">Longer than a brochure site because there's more that can go wrong, and because testing a checkout properly takes time nobody enjoys budgeting for.</p>
+    </div>
+    <div class="steps rise">
+      <div class="st"><p class="st__n">STAGE 01</p><h3 class="st__t t-md">Product modelling</h3><p>How the catalogue is structured, before any visual work. The decision everything else depends on.</p></div>
+      <div class="st"><p class="st__n">STAGE 02</p><h3 class="st__t t-md">Scope &amp; quote</h3><p>Fixed price against a written spec naming every integration and exclusion.</p></div>
+      <div class="st"><p class="st__n">STAGE 03</p><h3 class="st__t t-md">Build</h3><p>Catalogue, checkout, payments and fulfilment on staging, visible from day one.</p></div>
+      <div class="st"><p class="st__n">STAGE 04</p><h3 class="st__t t-md">Transaction testing</h3><p>Real test orders through every path — including refunds, failures and edge cases.</p></div>
+      <div class="st"><p class="st__n">STAGE 05</p><h3 class="st__t t-md">Launch &amp; handover</h3><p>Go live, monitor the first orders closely, then documentation and a recorded walkthrough.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tint" id="pricing">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">What stores<br>typically cost.</h2>
+      </div>
+      <p class="lede">Complexity drives this far more than product count. A hundred simple products is easier than five configurable ones.</p>
+    </div>
+    <div class="prc rise">
+      <div><div><p class="prc__t">Straightforward store</p><p class="prc__d">Simple or variable products, standard checkout, one market, one currency.</p></div><p class="prc__p">$3.5k – $5k</p><p class="prc__w">6 weeks</p></div>
+      <div><div><p class="prc__t">Complex store</p><p class="prc__d">Configurable products, custom checkout logic, verification steps or multi-market tax.</p></div><p class="prc__p">$5k – $12k</p><p class="prc__w">8–12 weeks</p></div>
+      <div><div><p class="prc__t">Customisation</p><p class="prc__d">Changing how an existing store behaves — product structure, pricing rules, checkout fields, VAT.</p></div><p class="prc__p">from $900</p><p class="prc__w">1–3 weeks</p></div>
+      <div><div><p class="prc__t">Plugin consolidation</p><p class="prc__d">Replacing a stack of conflicting plugins with one documented custom plugin.</p></div><p class="prc__p">from $1.5k</p><p class="prc__w">2–3 weeks</p></div>
+      <div><div><p class="prc__t">Store performance</p><p class="prc__d">Catalogue queries, cart fragments, checkout profiling. See <a class="tlink" href="/services/speed-optimization/">speed optimisation</a>.</p></div><p class="prc__p">from $1.5k</p><p class="prc__w">2–3 weeks</p></div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
+      Payment gateway, plugin licence and hosting costs are yours directly rather than marked up through me. Agencies: <a class="tlink" href="/for-agencies/">white-label terms</a>.
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Built this way</p>
+        <h2 class="h2">Recent stores.</h2>
+      </div>
+      <a class="btn btn--ghost" href="/work/">All projects <span class="ar">→</span></a>
+    </div>
+    <div class="rel">
+      <a class="rc rise" href="/work/irish-whiskey-producer/">
+        <div class="rc__shot">[IMAGE PLACEHOLDER: Whiskey store]</div>
+        <div class="rc__body">
+          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Ireland</span></div>
+          <h3 class="rc__t t-md">Irish whiskey producer</h3>
+          <p class="rc__d">Age verification before any product page, plus a cask reservation programme running alongside ordinary bottle sales.</p>
+          <span class="rc__go">View project →</span>
+        </div>
+      </a>
+      <a class="rc rise" href="/work/watersports-equipment-brand/">
+        <div class="rc__shot">[IMAGE PLACEHOLDER: Watersports store]</div>
+        <div class="rc__body">
+          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Global</span></div>
+          <h3 class="rc__t t-md">Watersports equipment brand</h3>
+          <p class="rc__d">Modular dollies with detachable wheels, retrofit motors and a long tail of spares — configuration made clear before checkout.</p>
+          <span class="rc__go">View project →</span>
+        </div>
+      </a>
+      <a class="rc rise" href="/work/group-commerce-platform/">
+        <div class="rc__shot">[IMAGE PLACEHOLDER: Group commerce platform]</div>
+        <div class="rc__body">
+          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">France</span></div>
+          <h3 class="rc__t t-md">Group commerce platform</h3>
+          <p class="rc__d">Identity verification wired directly into the purchase flow, connecting payment and group provisioning in one uninterrupted checkout.</p>
+          <span class="rc__go">View project →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">Asked before<br>every store.</h2>
+      </div>
+      <p class="lede">If yours isn't here, twenty minutes on a call will usually settle it.</p>
+    </div>
+    <div class="faq rise">
+      <details>
+        <summary>WooCommerce or Shopify?</summary>
+        <div class="faq__a"><p>Shopify if you want a standard store running quickly and are happy inside its rules. It's genuinely good at that, and I'd say so rather than talk you out of it.</p><p>WooCommerce when the product or the flow doesn't fit those rules — configurable products, verification steps, unusual tax, or logic Shopify charges an app subscription for and still doesn't quite do. You also own it outright, with no transaction fee and no platform deciding what your checkout may contain.</p></div>
+      </details>
+      <details>
+        <summary>Can you handle EU VAT and multi-currency?</summary>
+        <div class="faq__a"><p>Yes — it's a routine requirement for the European clients in the portfolio. Destination-based VAT, reverse charge for B2B, VAT number validation, and prices displayed inclusive or exclusive depending on the market's convention.</p><p>Worth saying plainly: I set the system up correctly, but I'm not a tax adviser. Your accountant confirms the rates and the rules; I make the store apply them.</p></div>
+      </details>
+      <details>
+        <summary>How many plugins will the store need?</summary>
+        <div class="faq__a"><p>Fewer than most. Where a well-maintained plugin does the job, I use it. Where the choice is between four plugins fighting each other and one purpose-built custom plugin, custom wins — it's cheaper over three years and far less likely to break on update.</p></div>
+      </details>
+      <details>
+        <summary>Can you migrate our existing store?</summary>
+        <div class="faq__a"><p>Yes, including products, customers, order history and URL structure with redirects. Migrations from Shopify, Magento or an older WooCommerce install are all workable — quoted separately since the effort depends entirely on the data quality on the way out.</p></div>
+      </details>
+      <details>
+        <summary>Will our team be able to manage it?</summary>
+        <div class="faq__a"><p>That's a build requirement, not an afterthought. Adding products, editing content, processing orders and managing stock are all designed for non-technical staff, with documentation and a recorded walkthrough at handover.</p></div>
+      </details>
+      <details>
+        <summary>What about payment security and PCI?</summary>
+        <div class="faq__a"><p>Card data goes directly to a compliant gateway and never touches your server, which keeps you in the simplest PCI category. I build to that model, keep the store on HTTPS with current software, and document the setup — but formal certification is a process your payment provider handles, not something I can grant.</p></div>
+      </details>
+      <details>
+        <summary>Can you add subscriptions or memberships?</summary>
+        <div class="faq__a"><p>Yes — recurring billing, renewal handling, failed-payment recovery and member-only content. It's a meaningful addition to scope rather than a checkbox, so it gets quoted explicitly.</p></div>
+      </details>
+      <details>
+        <summary>What happens after launch?</summary>
+        <div class="faq__a"><p>I watch the first days of real orders closely, because that's when edge cases surface. Bugs in what I built are fixed at no charge. Beyond that, stores benefit more than most sites from a <a class="tlink" href="/services/website-maintenance/">care plan</a> — a broken checkout costs money by the hour.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Describe the product.<br><em>I'll tell you the hard part.</em></h2>
+    <p>Most stores have one requirement that makes them awkward. Twenty minutes and I'll tell you what yours is, roughly what it costs, and whether WooCommerce is even the right answer.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/book/">Book a project review <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/contact/">Send details instead</a>
+    </div>
+    <div class="assure">
+      <span>Fixed scope, fixed price</span>
+      <span>Test orders through every path</span>
+      <span>You own the store</span>
+      <span>No transaction fees</span>
+      <span>NDA on request</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
+{"@type":"ListItem","position":3,"name":"WooCommerce development","item":"https://example.com/services/woocommerce-store-development/"}]},
+{"@type":"Service","name":"WooCommerce store development",
+"serviceType":"WooCommerce development and customisation",
+"url":"https://example.com/services/woocommerce-store-development/",
+"description":"WooCommerce stores for configurable products, verification steps, multi-market tax and checkouts the defaults do not handle.",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Ireland"},
+{"@type":"Country","name":"France"},{"@type":"Country","name":"Austria"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Switzerland"},{"@type":"Country","name":"India"}],
+"offers":[
+{"@type":"Offer","name":"Straightforward store","priceSpecification":{"@type":"PriceSpecification","minPrice":"3500","maxPrice":"5000","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Complex store","priceSpecification":{"@type":"PriceSpecification","minPrice":"5000","maxPrice":"12000","priceCurrency":"USD"}},
+{"@type":"Offer","name":"WooCommerce customisation","priceSpecification":{"@type":"PriceSpecification","minPrice":"900","priceCurrency":"USD"}}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"WooCommerce or Shopify?","acceptedAnswer":{"@type":"Answer","text":"Shopify suits a standard store that needs to launch quickly within its rules. WooCommerce suits configurable products, verification steps, unusual tax handling or custom checkout logic, and gives outright ownership with no transaction fees."}},
+{"@type":"Question","name":"Can WooCommerce handle EU VAT and multiple currencies?","acceptedAnswer":{"@type":"Answer","text":"Yes. Destination-based VAT, reverse charge for B2B, VAT number validation and market-appropriate inclusive or exclusive pricing. Rates and rules should be confirmed by an accountant; the store applies them."}},
+{"@type":"Question","name":"How many plugins does a WooCommerce store need?","acceptedAnswer":{"@type":"Answer","text":"Fewer than most. Well-maintained plugins are used where they fit. Where several plugins would conflict, one purpose-built custom plugin is cheaper over three years and less likely to break on update."}},
+{"@type":"Question","name":"Can you migrate an existing store to WooCommerce?","acceptedAnswer":{"@type":"Answer","text":"Yes, including products, customers, order history and URL structure with redirects. Migrations from Shopify, Magento or older WooCommerce installs are quoted separately based on data quality."}},
+{"@type":"Question","name":"Will our team be able to manage the store?","acceptedAnswer":{"@type":"Answer","text":"Yes. Adding products, editing content, processing orders and managing stock are designed for non-technical staff, with documentation and a recorded walkthrough at handover."}},
+{"@type":"Question","name":"How is payment security and PCI compliance handled?","acceptedAnswer":{"@type":"Answer","text":"Card data goes directly to a compliant gateway and never touches the store's server, keeping the merchant in the simplest PCI category. Formal certification is handled by the payment provider."}},
+{"@type":"Question","name":"Can you add subscriptions or memberships to WooCommerce?","acceptedAnswer":{"@type":"Answer","text":"Yes, including recurring billing, renewal handling, failed payment recovery and member-only content. It is quoted explicitly as an addition to scope."}},
+{"@type":"Question","name":"What support is available after a store launches?","acceptedAnswer":{"@type":"Answer","text":"The first days of real orders are monitored closely and bugs in the delivered build are fixed at no charge. Ongoing cover is available through a care plan, which stores benefit from more than most sites."}}]}]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

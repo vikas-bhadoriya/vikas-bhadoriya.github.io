@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<title>Custom Elementor Widget Development | From $250</title>
+<meta name="description" content="Custom Elementor widgets in PHP instead of 300KB addon packs. Native editor controls, loads only where used, delivered as a plugin you own. From $250.">
+<link rel="canonical" href="https://example.com/services/custom-elementor-widgets/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Custom Elementor Widget Development | From $250">
+<meta property="og:description" content="One widget in PHP, not a 300KB bundle for a single element. Loads only where it's used.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+
+/* ══ SERVICE DETAIL ══ */
+.shd{padding:calc(var(--navh) + 32px) 0 0}
+@media(min-width:760px){.shd{padding-top:calc(var(--navh) + 52px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.shd__grid{display:grid;gap:32px;align-items:start}
+@media(min-width:1020px){.shd__grid{grid-template-columns:1.25fr .75fr;gap:64px}}
+.shd h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8vw,68px);
+line-height:1.03;letter-spacing:-.018em;max-width:15ch}
+.shd__lede{margin-top:20px;font-size:16.5px;line-height:1.75;color:var(--text-2);max-width:56ch}
+@media(min-width:760px){.shd__lede{margin-top:26px;font-size:18.5px}}
+.shd__lede + .shd__lede{margin-top:13px}
+.shd__cta{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media(min-width:540px){.shd__cta{flex-direction:row;flex-wrap:wrap;gap:14px;margin-top:34px}}
+
+/* quick facts card */
+.qf{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);padding:24px 22px}
+@media(min-width:760px){.qf{border-radius:20px;padding:28px 26px}}
+.qf__h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.qf dl{border-top:1px solid var(--line)}
+.qf dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+padding:12px 0;border-bottom:1px solid var(--line)}
+.qf dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none}
+.qf dd{font-size:14.5px;text-align:right;font-weight:500}
+
+/* sections */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* problem cards */
+.probs{display:grid;gap:16px;counter-reset:p}
+@media(min-width:820px){.probs{grid-template-columns:repeat(3,1fr);gap:20px}}
+.pb{counter-increment:p;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pb{border-radius:20px;padding:32px 28px}}
+@media(hover:hover){.pb:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pb::after{content:"0" counter(p);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:46px;color:rgba(0,0,0,.06);line-height:1}
+.pb__t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;
+margin-bottom:11px;max-width:16ch;position:relative}
+.pb p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* deliverables list */
+.dlv{border-top:1px solid var(--line-dk)}
+.dlv li{position:relative;padding:20px 0 20px 30px;border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.dlv li{padding:22px 0 22px 34px}}
+.dlv li::before{content:"✓";position:absolute;left:0;top:21px;color:var(--on-dk);font-size:14px}
+@media(min-width:760px){.dlv li::before{top:23px}}
+.dlv__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.dlv__t{font-size:18.5px}}
+.dlv p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:60ch}
+@media(min-width:760px){.dlv p{font-size:15px}}
+
+.tlink{display:inline-block;color:inherit;border-bottom:1px solid var(--line-2);
+padding:3px 0 2px;min-height:24px}
+@media(hover:hover){.tlink:hover{border-color:var(--dk)}}
+
+/* not-included */
+.nots{border-top:1px solid var(--line-2)}
+.nots li{position:relative;padding:15px 0 15px 28px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
+.nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
+.nots b{color:var(--text);font-weight:500}
+
+/* process steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+.st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
+@media(hover:hover){.st:hover{transform:translateY(-4px);border-color:var(--line-3);
+box-shadow:0 18px 42px rgba(0,0,0,.08)}}
+.st__n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text-3);margin-bottom:11px}
+.st__t{font-size:16.5px;margin-bottom:7px}
+.st p{font-size:13.5px;line-height:1.7;color:var(--text-2)}
+
+/* pricing rows */
+.prc{border-top:1px solid var(--line-2)}
+.prc > div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){.prc > div{grid-template-columns:minmax(0,1fr) 150px 130px;
+gap:28px;align-items:baseline}}
+.prc__t{font-size:16.5px;font-weight:500;letter-spacing:-.012em}
+.prc__d{font-size:14px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.prc__d{grid-column:1}}
+.prc__p{font-family:var(--sans);font-weight:500;font-size:19px;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.prc__w{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.prc__p,.prc__w{text-align:right}}
+
+/* related work */
+.rel{display:grid;gap:16px}
+@media(min-width:760px){.rel{grid-template-columns:repeat(3,1fr);gap:22px}}
+.rc{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);overflow:hidden;
+display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rc{border-radius:18px}}
+@media(hover:hover){.rc:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.rc:hover .rc__go{color:var(--dk)}}
+.rc__shot{aspect-ratio:16/10;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));
+display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;
+font-family:var(--mono);font-size:9.5px;color:var(--text-3);border-bottom:1px solid var(--line)}
+.rc__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.rc__t{font-size:17.5px}
+.rc__d{font-size:13.5px;line-height:1.65;color:var(--text-2)}
+.rc__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+
+/* faq */
+.faq{border-top:1px solid var(--line-2)}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+justify-content:space-between;gap:18px;padding:20px 0;min-height:48px;
+font-size:16.5px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+@media(min-width:760px){.faq summary{font-size:18.5px;padding:23px 0}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:19px;font-weight:400;
+color:var(--text-3);flex:none;line-height:1.2;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+@media(hover:hover){.faq summary:hover::after{color:var(--dk)}}
+.faq__a{padding:0 0 22px;max-width:66ch}
+.faq__a p{font-size:15px;line-height:1.8;color:var(--text-2)}
+.faq__a p + p{margin-top:11px}
+.faq__a a{border-bottom:1px solid var(--line-2);display:inline-block;padding:2px 0 1px}
+@media(hover:hover){.faq__a a:hover{border-color:var(--dk)}}
+
+/* cta */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,120px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:720px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,8vw,64px);line-height:1.05}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:17.5px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:42px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+
+<main id="main">
+
+<section class="shd">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Custom Elementor widgets</span>
+    </nav>
+    <div class="shd__grid">
+      <div>
+        <h1>One widget in PHP, not a 300KB addon pack.</h1>
+        <p class="shd__lede">The usual route to a missing Elementor feature is installing an addon bundle with ninety widgets to get one. Every page then loads its CSS and JavaScript whether or not a single widget from it appears.</p>
+        <p class="shd__lede">A custom widget does exactly the one thing, appears natively in the editor, and loads only where it's used. Usually a few kilobytes instead of a few hundred.</p>
+        <div class="shd__cta">
+          <a class="btn btn--primary" href="/contact/">Describe the widget <span class="ar">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">See pricing</a>
+        </div>
+      </div>
+      <aside class="qf">
+        <p class="qf__h">At a glance</p>
+        <dl>
+          <div><dt>From</dt><dd>$250</dd></div>
+          <div><dt>Typical</dt><dd>$250 – $900</dd></div>
+          <div><dt>Timeline</dt><dd>1–5 days</dd></div>
+          <div><dt>Editor</dt><dd>Native Elementor panel</dd></div>
+          <div><dt>Loads</dt><dd>Only where used</dd></div>
+          <div><dt>You own</dt><dd>The code</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">The addon problem</p>
+        <h2 class="h2">What a bundle<br>actually costs.</h2>
+      </div>
+      <p class="lede">Addon packs aren't badly made. They're just built to serve everyone, which means carrying weight your site will never use — and that weight is on every page load, forever.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">Assets on every page</p>
+        <p>Most bundles enqueue their stylesheet and script globally because they can't know which widget you'll use where. Two hundred kilobytes to render one element on one page.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Three bundles, one requirement</p>
+        <p>Each was installed for a single widget nobody else had. Now three packs load together, occasionally conflict, and every update is a small risk to a site that was working.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">It still isn't quite right</p>
+        <p>The widget does eighty per cent of what the design needs. The last twenty is patched with custom CSS that breaks the next time the addon updates its markup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">What you get</p>
+        <h2 class="h2">Six things,<br>every widget.</h2>
+      </div>
+      <p class="lede">Built against Elementor's own widget API, so it behaves like a native control rather than something bolted alongside the editor.</p>
+    </div>
+    <ul class="dlv rise">
+      <li>
+        <p class="dlv__t">A native editor experience</p>
+        <p>Appears in the widget panel with your icon and category. Full Content, Style and Advanced tabs, live preview while editing, and responsive controls per breakpoint. Your team won't know it wasn't built in.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Conditional asset loading</p>
+        <p>The widget's CSS and JavaScript load only on pages where the widget is actually placed. This is the whole point, and it's the thing addon bundles structurally cannot do.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Controls that match your design system</p>
+        <p>Colour, typography and spacing pickers wired to your global settings rather than hard-coded values, so a brand change updates the widget along with everything else.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Dynamic content support</p>
+        <p>Where useful, the widget pulls from ACF fields, custom post types or WooCommerce data rather than requiring content to be re-typed into the widget itself.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Accessible and semantic output</p>
+        <p>Proper markup, keyboard operability, ARIA only where genuinely needed, visible focus. Interactive widgets — accordions, tabs, sliders — are where accessibility most often gets skipped.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Delivered as a plugin, owned by you</p>
+        <p>Packaged as a standalone plugin so it survives theme changes, documented, in Git. No licence, no per-site fee, and reusable across as many of your sites as you like.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Common requests</p>
+        <h2 class="h2">What people<br>usually need.</h2>
+      </div>
+      <p class="lede">Roughly in order of how often they come up. If yours isn't here it's probably still straightforward — most widgets are a day or two.</p>
+    </div>
+    <ul class="nots rise" style="border-top-color:var(--line-2)">
+      <li style="padding-left:0"><b>A filtered post or product loop</b> — pulling custom post types with taxonomy filters, which the native loop widget doesn't quite reach.</li>
+      <li style="padding-left:0"><b>A pricing or comparison table</b> driven by fields rather than typed into the page and re-typed on every edit.</li>
+      <li style="padding-left:0"><b>An interactive element from the design</b> — a tabbed panel, an accordion, a step process — built to spec rather than approximated.</li>
+      <li style="padding-left:0"><b>A third-party data display</b> — reviews, availability, stock, an external API's output rendered inside the editor.</li>
+      <li style="padding-left:0"><b>A form with logic</b> the standard form widget can't express — conditional fields, calculations, a multi-step flow.</li>
+      <li style="padding-left:0"><b>A replacement for one addon bundle</b> you installed for a single widget and would like to remove.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec--tint" id="pricing">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">Per widget,<br>quoted up front.</h2>
+      </div>
+      <p class="lede">Small enough that most are quoted the same day you describe them. Complexity comes from data sources and interaction, not from how it looks.</p>
+    </div>
+    <div class="prc rise">
+      <div><div><p class="prc__t">Simple widget</p><p class="prc__d">Static content with styling controls. A custom card, a badge, a formatted callout, a bespoke button pattern.</p></div><p class="prc__p">$250</p><p class="prc__w">1 day</p></div>
+      <div><div><p class="prc__t">Dynamic widget</p><p class="prc__d">Pulls from post types, ACF fields or WooCommerce data. Filtered loops, related content, field-driven tables.</p></div><p class="prc__p">$450</p><p class="prc__w">2 days</p></div>
+      <div><div><p class="prc__t">Interactive widget</p><p class="prc__d">JavaScript behaviour — tabs, accordions, sliders, filters — built accessibly rather than as a library drop-in.</p></div><p class="prc__p">$600</p><p class="prc__w">2–3 days</p></div>
+      <div><div><p class="prc__t">API-connected widget</p><p class="prc__d">Fetches and renders external data, with caching, error states and a sensible fallback when the API is down.</p></div><p class="prc__p">from $900</p><p class="prc__w">3–5 days</p></div>
+      <div><div><p class="prc__t">Widget set</p><p class="prc__d">Three or more widgets packaged as one plugin, sharing controls and assets. Cheaper than pricing each alone.</p></div><p class="prc__p">from $1.2k</p><p class="prc__w">1–2 weeks</p></div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
+      Included at no extra cost within a <a class="tlink" href="/services/figma-to-elementor/">Figma to Elementor</a> build where the design requires it. Agencies: <a class="tlink" href="/for-agencies/">white-label terms</a>.
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">Asked before<br>commissioning.</h2>
+      </div>
+      <p class="lede">Mostly about whether it's worth paying for something an addon pack appears to give away.</p>
+    </div>
+    <div class="faq rise">
+      <details>
+        <summary>Why not just use an addon pack?</summary>
+        <div class="faq__a"><p>If you need eight of its ninety widgets, do — that's what bundles are for and I'd say so.</p><p>The maths changes when you need one. A $59-a-year bundle costs about 200KB on every page load forever, plus an annual renewal and an update risk. A $250 one-off widget loads on the two pages that use it and never renews. It usually pays back inside two years and improves performance immediately.</p></div>
+      </details>
+      <details>
+        <summary>Will it break when Elementor updates?</summary>
+        <div class="faq__a"><p>It shouldn't. Widgets are built against Elementor's documented widget API, which is stable and versioned — that's what it exists for.</p><p>What breaks on update is CSS hacks targeting Elementor's internal class names, which is exactly the patching a custom widget removes the need for.</p></div>
+      </details>
+      <details>
+        <summary>Can our team use it without training?</summary>
+        <div class="faq__a"><p>Yes. It appears in the widget panel like any other, drags onto the page like any other, and its settings sit in the same Content, Style and Advanced tabs your team already uses. Controls are labelled in plain language rather than developer terms.</p></div>
+      </details>
+      <details>
+        <summary>Can we use it on our other sites?</summary>
+        <div class="faq__a"><p>Yes. It's delivered as a standalone plugin, you own the code, and there's no licensing or per-site fee. Agencies commonly commission a widget once and deploy it across several client sites — that's an expected use.</p></div>
+      </details>
+      <details>
+        <summary>Can you replace an addon pack we already have?</summary>
+        <div class="faq__a"><p>Usually. Tell me which widgets from it you actually use — often it's two or three — and I'll quote replacing those. Removing the bundle afterwards typically takes a noticeable amount off every page.</p><p>Existing pages need the old widgets swapped for the new ones, which is included in the quote.</p></div>
+      </details>
+      <details>
+        <summary>Does this work with Elementor Free or does it need Pro?</summary>
+        <div class="faq__a"><p>Both. The widget API is available in the free version, so a custom widget works either way. If your requirement is otherwise only met by a Pro feature, I'll tell you whether upgrading or building is the better value.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Describe it,<br><em>get a price today.</em></h2>
+    <p>Most widgets are small enough to quote the same day. Send a screenshot, a design file section, or just a description of what it should do.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/contact/">Send the details <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/#elementor">How I build in Elementor</a>
+    </div>
+    <div class="assure">
+      <span>Fixed price per widget</span>
+      <span>Loads only where used</span>
+      <span>Native editor controls</span>
+      <span>Delivered as a plugin</span>
+      <span>No licence fee</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
+{"@type":"ListItem","position":3,"name":"Custom Elementor widgets","item":"https://example.com/services/custom-elementor-widgets/"}]},
+{"@type":"Service","name":"Custom Elementor widget development",
+"serviceType":"Elementor widget development",
+"url":"https://example.com/services/custom-elementor-widgets/",
+"description":"Custom Elementor widgets written in PHP against the Elementor widget API, with native editor controls, conditional asset loading and delivery as an owned standalone plugin.",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"Switzerland"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Ireland"},
+{"@type":"Country","name":"France"},{"@type":"Country","name":"Austria"},{"@type":"Country","name":"India"}],
+"offers":[
+{"@type":"Offer","name":"Simple widget","price":"250","priceCurrency":"USD"},
+{"@type":"Offer","name":"Dynamic widget","price":"450","priceCurrency":"USD"},
+{"@type":"Offer","name":"Interactive widget","price":"600","priceCurrency":"USD"},
+{"@type":"Offer","name":"API-connected widget","priceSpecification":{"@type":"PriceSpecification","minPrice":"900","priceCurrency":"USD"}}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why build a custom Elementor widget instead of using an addon pack?","acceptedAnswer":{"@type":"Answer","text":"Addon packs make sense when many of their widgets are used. For a single widget, a bundle typically adds around 200KB to every page load plus an annual renewal, while a one-off custom widget loads only where used and does not renew."}},
+{"@type":"Question","name":"Will a custom Elementor widget break when Elementor updates?","acceptedAnswer":{"@type":"Answer","text":"It should not, because widgets are built against Elementor's documented and versioned widget API. What typically breaks on update is CSS targeting Elementor's internal class names, which a custom widget removes the need for."}},
+{"@type":"Question","name":"Can a non-technical team use a custom Elementor widget?","acceptedAnswer":{"@type":"Answer","text":"Yes. It appears in the widget panel like any native widget, with settings in the standard Content, Style and Advanced tabs and controls labelled in plain language."}},
+{"@type":"Question","name":"Can a custom Elementor widget be used on multiple sites?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is delivered as a standalone plugin with full code ownership and no per-site licensing, so agencies can deploy one widget across several client sites."}},
+{"@type":"Question","name":"Can you replace an existing Elementor addon pack with custom widgets?","acceptedAnswer":{"@type":"Answer","text":"Usually. Most sites only use two or three widgets from a bundle. Those can be rebuilt and the bundle removed, typically reducing page weight noticeably. Swapping widgets on existing pages is included."}},
+{"@type":"Question","name":"Do custom widgets require Elementor Pro?","acceptedAnswer":{"@type":"Answer","text":"No. The widget API is available in the free version, so custom widgets work with either. Where a requirement is otherwise met only by a Pro feature, the better value option is advised."}}]}]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

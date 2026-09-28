@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<title>WordPress Rescue Audit | Abandoned or Broken Sites</title>
+<meta name="description" content="Developer disappeared? A written five-day audit: what you own, what's broken, and two costed routes forward. From $400, credited against repairs.">
+<link rel="canonical" href="https://example.com/services/rescue-audit/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WordPress Rescue Audit | Abandoned or Broken Sites">
+<meta property="og:description" content="Find out what you actually own before spending anything else. Written audit in five working days, from $400.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+
+/* ══ SERVICE DETAIL ══ */
+.shd{padding:calc(var(--navh) + 32px) 0 0}
+@media(min-width:760px){.shd{padding-top:calc(var(--navh) + 52px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.shd__grid{display:grid;gap:32px;align-items:start}
+@media(min-width:1020px){.shd__grid{grid-template-columns:1.25fr .75fr;gap:64px}}
+.shd h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8vw,68px);
+line-height:1.03;letter-spacing:-.018em;max-width:15ch}
+.shd__lede{margin-top:20px;font-size:16.5px;line-height:1.75;color:var(--text-2);max-width:56ch}
+@media(min-width:760px){.shd__lede{margin-top:26px;font-size:18.5px}}
+.shd__lede + .shd__lede{margin-top:13px}
+.shd__cta{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media(min-width:540px){.shd__cta{flex-direction:row;flex-wrap:wrap;gap:14px;margin-top:34px}}
+
+/* quick facts card */
+.qf{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);padding:24px 22px}
+@media(min-width:760px){.qf{border-radius:20px;padding:28px 26px}}
+.qf__h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.qf dl{border-top:1px solid var(--line)}
+.qf dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+padding:12px 0;border-bottom:1px solid var(--line)}
+.qf dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none}
+.qf dd{font-size:14.5px;text-align:right;font-weight:500}
+
+/* sections */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* problem cards */
+.probs{display:grid;gap:16px;counter-reset:p}
+@media(min-width:820px){.probs{grid-template-columns:repeat(3,1fr);gap:20px}}
+.pb{counter-increment:p;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pb{border-radius:20px;padding:32px 28px}}
+@media(hover:hover){.pb:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pb::after{content:"0" counter(p);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:46px;color:rgba(0,0,0,.06);line-height:1}
+.pb__t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;
+margin-bottom:11px;max-width:16ch;position:relative}
+.pb p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* deliverables list */
+.dlv{border-top:1px solid var(--line-dk)}
+.dlv li{position:relative;padding:20px 0 20px 30px;border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.dlv li{padding:22px 0 22px 34px}}
+.dlv li::before{content:"✓";position:absolute;left:0;top:21px;color:var(--on-dk);font-size:14px}
+@media(min-width:760px){.dlv li::before{top:23px}}
+.dlv__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.dlv__t{font-size:18.5px}}
+.dlv p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:60ch}
+@media(min-width:760px){.dlv p{font-size:15px}}
+
+.tlink{display:inline-block;color:inherit;border-bottom:1px solid var(--line-2);
+padding:3px 0 2px;min-height:24px}
+@media(hover:hover){.tlink:hover{border-color:var(--dk)}}
+
+/* not-included */
+.nots{border-top:1px solid var(--line-2)}
+.nots li{position:relative;padding:15px 0 15px 28px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
+.nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
+.nots b{color:var(--text);font-weight:500}
+
+/* process steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+.st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
+@media(hover:hover){.st:hover{transform:translateY(-4px);border-color:var(--line-3);
+box-shadow:0 18px 42px rgba(0,0,0,.08)}}
+.st__n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text-3);margin-bottom:11px}
+.st__t{font-size:16.5px;margin-bottom:7px}
+.st p{font-size:13.5px;line-height:1.7;color:var(--text-2)}
+
+/* pricing rows */
+.prc{border-top:1px solid var(--line-2)}
+.prc > div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){.prc > div{grid-template-columns:minmax(0,1fr) 150px 130px;
+gap:28px;align-items:baseline}}
+.prc__t{font-size:16.5px;font-weight:500;letter-spacing:-.012em}
+.prc__d{font-size:14px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.prc__d{grid-column:1}}
+.prc__p{font-family:var(--sans);font-weight:500;font-size:19px;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.prc__w{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.prc__p,.prc__w{text-align:right}}
+
+/* related work */
+.rel{display:grid;gap:16px}
+@media(min-width:760px){.rel{grid-template-columns:repeat(3,1fr);gap:22px}}
+.rc{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);overflow:hidden;
+display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rc{border-radius:18px}}
+@media(hover:hover){.rc:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.rc:hover .rc__go{color:var(--dk)}}
+.rc__shot{aspect-ratio:16/10;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));
+display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;
+font-family:var(--mono);font-size:9.5px;color:var(--text-3);border-bottom:1px solid var(--line)}
+.rc__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.rc__t{font-size:17.5px}
+.rc__d{font-size:13.5px;line-height:1.65;color:var(--text-2)}
+.rc__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+
+/* faq */
+.faq{border-top:1px solid var(--line-2)}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+justify-content:space-between;gap:18px;padding:20px 0;min-height:48px;
+font-size:16.5px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+@media(min-width:760px){.faq summary{font-size:18.5px;padding:23px 0}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:19px;font-weight:400;
+color:var(--text-3);flex:none;line-height:1.2;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+@media(hover:hover){.faq summary:hover::after{color:var(--dk)}}
+.faq__a{padding:0 0 22px;max-width:66ch}
+.faq__a p{font-size:15px;line-height:1.8;color:var(--text-2)}
+.faq__a p + p{margin-top:11px}
+.faq__a a{border-bottom:1px solid var(--line-2);display:inline-block;padding:2px 0 1px}
+@media(hover:hover){.faq__a a:hover{border-color:var(--dk)}}
+
+/* cta */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,120px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:720px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,8vw,64px);line-height:1.05}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:17.5px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:42px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+
+<main id="main">
+
+<section class="shd">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Rescue audit</span>
+    </nav>
+    <div class="shd__grid">
+      <div>
+        <h1>Your developer stopped replying.</h1>
+        <p class="shd__lede">A half-finished site, no documentation, and credentials you're not sure you have. Before you spend anything else, find out exactly what you own and what it would take to finish it.</p>
+        <p class="shd__lede">A written assessment in five working days. No obligation to hire me afterwards — the report is yours to take to whoever you like.</p>
+        <div class="shd__cta">
+          <a class="btn btn--primary" href="/contact/">Start an audit <span class="ar">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">What it costs</a>
+        </div>
+      </div>
+      <aside class="qf">
+        <p class="qf__h">At a glance</p>
+        <dl>
+          <div><dt>Cost</dt><dd>$400 – $900</dd></div>
+          <div><dt>Turnaround</dt><dd>5 working days</dd></div>
+          <div><dt>Urgent</dt><dd>48 hours, +50%</dd></div>
+          <div><dt>Deliverable</dt><dd>Written report</dd></div>
+          <div><dt>Obligation</dt><dd>None</dd></div>
+          <div><dt>Credited</dt><dd>Against repair work</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- SITUATIONS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Why people call</p>
+        <h2 class="h2">Three versions<br>of the same call.</h2>
+      </div>
+      <p class="lede">Almost every rescue starts one of these three ways. What they share is that nobody can tell you the real state of the thing you've already paid for — and until someone can, every quote you get is guesswork.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">They vanished mid-build</p>
+        <p>Payments made, work part-delivered, messages unanswered for weeks. You don't know how much is done, whether what exists is any good, or whether you can legally use it.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">It's live but breaking</p>
+        <p>The site works until it doesn't. Something goes wrong every few weeks, nobody knows why, and each fix seems to cause the next problem. Nobody has ever looked at the whole picture.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">You've inherited it</p>
+        <p>New role, new agency, or the person who built it left. There's no documentation, the plugin list is a mystery, and you've been asked to make changes to something nobody understands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S CHECKED -->
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">What gets checked</p>
+        <h2 class="h2">Eight areas,<br>every audit.</h2>
+      </div>
+      <p class="lede">The same checklist regardless of what you think the problem is — because the reported symptom and the actual cause are usually in different places.</p>
+    </div>
+    <ul class="dlv rise">
+      <li>
+        <p class="dlv__t">What you actually own</p>
+        <p>Domain registrar, hosting account, WordPress admin, repository, licences for premium themes and plugins. Who each is registered to, and what's missing. This is first because it's the thing that most often turns out to be wrong.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Security state</p>
+        <p>Known vulnerabilities in current versions, malware and injected-code scan, file permissions, user accounts that shouldn't exist, SSL configuration, and whether anything has already been compromised.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Code quality and custom work</p>
+        <p>What's custom versus off the shelf, whether custom code was written into the theme in a way updates will destroy, and whether anyone else could reasonably take it over.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Performance, with causes</p>
+        <p>Core Web Vitals measured on real mobile hardware, then the actual reasons — render-blocking assets, unoptimised images, database queries, server response time. Not a score, a cause list.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Plugin and theme inventory</p>
+        <p>Everything installed, its update status, whether it's still maintained, whether two plugins are doing the same job, and which ones are quietly costing you a second of load time.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Hosting and infrastructure</p>
+        <p>Whether the plan matches the traffic, PHP and database versions, backup arrangement and — the part people assume — whether a restore has ever actually been tested.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Completion state</p>
+        <p>For abandoned builds: what's finished, what's half-built, what was never started. Measured against your original brief where you have one.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Editability and handover risk</p>
+        <p>Whether your team can maintain it without a developer, what's undocumented, and what would break if a specific person disappeared tomorrow.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- DELIVERABLE + NOT INCLUDED -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">The deliverable</p>
+        <h2 class="h2">What you<br>receive.</h2>
+      </div>
+      <p class="lede">A written report you can hand to any developer, plus a call to walk through it. Written for a business owner to act on, with a technical appendix for whoever does the work.</p>
+    </div>
+    <div class="steps rise">
+      <div class="st">
+        <p class="st__n">PART 01</p>
+        <h3 class="st__t t-md">Plain summary</h3>
+        <p>One page. What state the site is in, what the real risks are, and what I'd do first — in language you can forward to a board.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">PART 02</p>
+        <h3 class="st__t t-md">Findings by severity</h3>
+        <p>Every issue, rated critical, important or cosmetic, with what it affects and what it would cost to fix.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">PART 03</p>
+        <h3 class="st__t t-md">Ownership register</h3>
+        <p>Every account, licence and asset, who controls it, and the exact steps to get it into your name.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">PART 04</p>
+        <h3 class="st__t t-md">Two costed routes</h3>
+        <p>Repair what exists, or rebuild. Both priced honestly — including the cases where rebuilding is cheaper.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">PART 05</p>
+        <h3 class="st__t t-md">A 30-minute call</h3>
+        <p>To go through it and answer questions. Recorded, so you can share it with anyone who wasn't on the call.</p>
+      </div>
+    </div>
+
+    <div class="shead rise" style="margin-top:56px">
+      <div>
+        <p class="eyebrow">Scope</p>
+        <h2 class="h2">What an audit<br>isn't.</h2>
+      </div>
+      <p class="lede">This is a diagnosis, not a treatment. Being clear about that is what keeps the price where it is.</p>
+    </div>
+    <ul class="nots rise">
+      <li><b>No fixes are made.</b> Nothing on your site is touched. If something critical is found, you hear immediately rather than at day five.</li>
+      <li><b>Not a legal service.</b> I can tell you what you don't control; recovering a domain from an uncooperative party is a lawyer's job.</li>
+      <li><b>Not a design review.</b> Whether the site looks good isn't a question I'm answering here.</li>
+      <li><b>Not an SEO audit.</b> Technical issues that affect search get flagged, but content and link strategy are outside scope.</li>
+      <li><b>Not a guarantee everything is findable.</b> Without the original developer's cooperation some history is unrecoverable. I'll say what I couldn't determine rather than guess.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec sec--tint" id="pricing">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">Fixed fee,<br>credited back.</h2>
+      </div>
+      <p class="lede">If you go on to have me do the repair work, the audit fee comes off that invoice in full. If you take the report to someone else, that's a fine outcome too — it's written to be useful to any competent developer.</p>
+    </div>
+    <div class="prc rise">
+      <div>
+        <div>
+          <p class="prc__t">Standard audit</p>
+          <p class="prc__d">Brochure or business site, up to around 20 pages, no e-commerce. Covers all eight areas.</p>
+        </div>
+        <p class="prc__p">$400</p>
+        <p class="prc__w">5 days</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">Commerce audit</p>
+          <p class="prc__d">WooCommerce store. Adds checkout, payment, tax, order-flow and customer-data handling.</p>
+        </div>
+        <p class="prc__p">$700</p>
+        <p class="prc__w">5 days</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">Complex or multisite</p>
+          <p class="prc__d">Multilingual, multisite, membership systems, or heavy custom development.</p>
+        </div>
+        <p class="prc__p">$900</p>
+        <p class="prc__w">7 days</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">Urgent turnaround</p>
+          <p class="prc__d">48 hours. For a site actively down, compromised, or with a deadline in the way.</p>
+        </div>
+        <p class="prc__p">+50%</p>
+        <p class="prc__w">48 hours</p>
+      </div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
+      Paid up front, refunded in full if I can't get sufficient access to complete the audit. Agencies auditing a client's inherited site: see <a class="tlink" href="/for-agencies/">white-label terms</a>.
+    </p>
+  </div>
+</section>
+
+<!-- AFTER -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Afterwards</p>
+        <h2 class="h2">Three ways<br>this ends.</h2>
+      </div>
+      <p class="lede">Roughly a third of audits end with me doing nothing further, and that's a legitimate outcome rather than a failure. The report is the product.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">It's fine, actually</p>
+        <p>Sometimes the site is in better shape than feared and needs two days of work, not a rebuild. You get told that, and you've spent $400 to avoid spending $8,000 you didn't need to.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Repair, not replace</p>
+        <p>Most common outcome. A costed fix list in priority order, which you can hand to me, to your existing team, or to anyone else. The report is written to be portable.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Rebuild is cheaper</p>
+        <p>Occasionally what exists costs more to repair than to replace. When that's true you get told plainly, with both numbers side by side rather than just the one that suits me.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec--tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">What people ask<br>before booking.</h2>
+      </div>
+      <p class="lede">Usually asked in a slightly panicked email. Answered here so you can decide at 11pm without waiting for a reply.</p>
+    </div>
+    <div class="faq rise">
+      <details>
+        <summary>I don't have admin access. Can you still audit it?</summary>
+        <div class="faq__a"><p>Partly. A surprising amount can be assessed from the outside — performance, security headers, the technology in use, what's publicly exposed. But code quality, plugin state and ownership can't be.</p><p>Tell me what access you do have and I'll say honestly what's possible before you pay. If it's too little to be useful, I'll say that instead of taking the fee.</p></div>
+      </details>
+      <details>
+        <summary>What if the previous developer refuses to hand things over?</summary>
+        <div class="faq__a"><p>The audit tells you exactly what they're holding and what it's worth — which is the information you need before deciding whether to negotiate, escalate or walk away and rebuild.</p><p>In practice a lot of "held hostage" situations turn out to be recoverable directly through the registrar or host, because the account is in your company's name even when nobody realised it. That's checked first.</p></div>
+      </details>
+      <details>
+        <summary>Will you tell me my site needs a rebuild so you can sell one?</summary>
+        <div class="faq__a"><p>It's the right thing to be suspicious of. Two structural reasons it doesn't happen: the fee is the same whatever I find, and it's credited against repair work too — so recommending repair costs me nothing.</p><p>The report gives both routes with both numbers. If repair is cheaper, that's what it says, and you're free to have someone else do it.</p></div>
+      </details>
+      <details>
+        <summary>Is my site's data safe during the audit?</summary>
+        <div class="faq__a"><p>Nothing is modified — it's read-only throughout. I work from a staging copy where one exists. Credentials go in a password manager and are deleted at the end unless you ask me to keep them. NDA signed before you send anything, if you'd prefer.</p></div>
+      </details>
+      <details>
+        <summary>My site is down right now. Is this the right thing to buy?</summary>
+        <div class="faq__a"><p>No — get it back up first. <a class="tlink" href="/contact/">Email me</a> with "urgent" in the subject and I'll tell you whether it's something you can fix in ten minutes or something I should look at. Emergency work is billed hourly.</p><p>The audit is for understanding a site's overall state, not for firefighting.</p></div>
+      </details>
+      <details>
+        <summary>Can I use the report to get quotes from other developers?</summary>
+        <div class="faq__a"><p>Yes, and it's written for exactly that. A vague brief gets you wildly varying quotes; a specific findings list gets you comparable ones. Several audits have ended with the client hiring someone local, which is a fine result.</p></div>
+      </details>
+      <details>
+        <summary>We're an agency who inherited a client's site. Does this work for us?</summary>
+        <div class="faq__a"><p>Yes, and it's a common use. White-label as standard — the report can be issued unbranded for you to pass on as your own assessment, with no contact between me and your client. <a class="tlink" href="/for-agencies/">Terms here.</a></p></div>
+      </details>
+      <details>
+        <summary>What if you find something serious on day one?</summary>
+        <div class="faq__a"><p>You hear immediately. Active malware, an exposed database or a site already compromised doesn't wait until the report is finished. I'll tell you what needs doing that day, whether or not I'm the one who does it.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Find out what<br><em>you actually own.</em></h2>
+    <p>Tell me what happened and what access you have. I'll confirm what the audit can cover in your specific case before you pay anything.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/contact/">Start an audit <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/book/">Talk it through first</a>
+    </div>
+    <div class="assure">
+      <span>Fixed fee</span>
+      <span>Credited against repair</span>
+      <span>Read-only, nothing touched</span>
+      <span>Report is yours to keep</span>
+      <span>NDA on request</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
+{"@type":"ListItem","position":3,"name":"Rescue audit","item":"https://example.com/services/rescue-audit/"}]},
+{"@type":"Service","name":"WordPress rescue audit",
+"serviceType":"WordPress site audit and recovery assessment",
+"url":"https://example.com/services/rescue-audit/",
+"description":"A written five-day assessment of an abandoned, broken or inherited WordPress site: ownership, security, code quality, performance and two costed routes forward.",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"Switzerland"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Ireland"},
+{"@type":"Country","name":"France"},{"@type":"Country","name":"Austria"},{"@type":"Country","name":"India"}],
+"offers":[
+{"@type":"Offer","name":"Standard audit","price":"400","priceCurrency":"USD","description":"Brochure or business site up to around 20 pages, five working days."},
+{"@type":"Offer","name":"Commerce audit","price":"700","priceCurrency":"USD","description":"WooCommerce store including checkout, payment, tax and order flow."},
+{"@type":"Offer","name":"Complex or multisite audit","price":"900","priceCurrency":"USD","description":"Multilingual, multisite, membership or heavy custom development."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can you audit a WordPress site without admin access?","acceptedAnswer":{"@type":"Answer","text":"Partly. Performance, security headers, technology in use and public exposure can be assessed externally, but code quality, plugin state and ownership cannot. Available access is reviewed and confirmed before payment."}},
+{"@type":"Question","name":"What if the previous developer refuses to hand over access?","acceptedAnswer":{"@type":"Answer","text":"The audit identifies exactly what is being withheld and its value. Many apparent lock-ins are recoverable directly through the registrar or host because the account is registered to the client's company."}},
+{"@type":"Question","name":"Will an audit just recommend an expensive rebuild?","acceptedAnswer":{"@type":"Answer","text":"The fee is fixed regardless of findings and is credited against repair work as well as rebuilds, so there is no financial incentive to recommend one over the other. The report presents both routes with both costs."}},
+{"@type":"Question","name":"Is site data safe during a rescue audit?","acceptedAnswer":{"@type":"Answer","text":"The audit is read-only and nothing is modified. A staging copy is used where available. Credentials are stored in a password manager and deleted afterwards unless retention is requested. An NDA can be signed first."}},
+{"@type":"Question","name":"My WordPress site is down right now — should I book an audit?","acceptedAnswer":{"@type":"Answer","text":"No. Restoring service comes first and is handled as emergency work billed hourly. The audit is for understanding a site's overall condition rather than firefighting."}},
+{"@type":"Question","name":"Can the audit report be used to get quotes from other developers?","acceptedAnswer":{"@type":"Answer","text":"Yes. The report is written to be portable and includes a costed findings list so quotes from different developers are directly comparable."}},
+{"@type":"Question","name":"Can agencies order a rescue audit for a client site?","acceptedAnswer":{"@type":"Answer","text":"Yes. Reports can be issued unbranded for the agency to pass on as their own assessment, with no contact between the auditor and the end client."}},
+{"@type":"Question","name":"What happens if something critical is found early?","acceptedAnswer":{"@type":"Answer","text":"Critical findings such as active malware, an exposed database or an existing compromise are reported immediately rather than held until the report is delivered."}}]}]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

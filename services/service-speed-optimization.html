@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<title>WordPress Speed Optimisation | Core Web Vitals Fixed</title>
+<meta name="description" content="Diagnosis-first WordPress speed optimisation. Ranked causes measured on real mobile hardware, fixes tested on staging, before-and-after proof. From $250.">
+<link rel="canonical" href="https://example.com/services/speed-optimization/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WordPress Speed Optimisation | Core Web Vitals Fixed">
+<meta property="og:description" content="A caching plugin won't fix it. Diagnosis first, ranked causes, then fixes tested on staging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+
+/* ══ SERVICE DETAIL ══ */
+.shd{padding:calc(var(--navh) + 32px) 0 0}
+@media(min-width:760px){.shd{padding-top:calc(var(--navh) + 52px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.shd__grid{display:grid;gap:32px;align-items:start}
+@media(min-width:1020px){.shd__grid{grid-template-columns:1.25fr .75fr;gap:64px}}
+.shd h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8vw,68px);
+line-height:1.03;letter-spacing:-.018em;max-width:15ch}
+.shd__lede{margin-top:20px;font-size:16.5px;line-height:1.75;color:var(--text-2);max-width:56ch}
+@media(min-width:760px){.shd__lede{margin-top:26px;font-size:18.5px}}
+.shd__lede + .shd__lede{margin-top:13px}
+.shd__cta{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media(min-width:540px){.shd__cta{flex-direction:row;flex-wrap:wrap;gap:14px;margin-top:34px}}
+
+/* quick facts card */
+.qf{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);padding:24px 22px}
+@media(min-width:760px){.qf{border-radius:20px;padding:28px 26px}}
+.qf__h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.qf dl{border-top:1px solid var(--line)}
+.qf dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+padding:12px 0;border-bottom:1px solid var(--line)}
+.qf dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none}
+.qf dd{font-size:14.5px;text-align:right;font-weight:500}
+
+/* sections */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* problem cards */
+.probs{display:grid;gap:16px;counter-reset:p}
+@media(min-width:820px){.probs{grid-template-columns:repeat(3,1fr);gap:20px}}
+.pb{counter-increment:p;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pb{border-radius:20px;padding:32px 28px}}
+@media(hover:hover){.pb:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pb::after{content:"0" counter(p);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:46px;color:rgba(0,0,0,.06);line-height:1}
+.pb__t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;
+margin-bottom:11px;max-width:16ch;position:relative}
+.pb p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* deliverables list */
+.dlv{border-top:1px solid var(--line-dk)}
+.dlv li{position:relative;padding:20px 0 20px 30px;border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.dlv li{padding:22px 0 22px 34px}}
+.dlv li::before{content:"✓";position:absolute;left:0;top:21px;color:var(--on-dk);font-size:14px}
+@media(min-width:760px){.dlv li::before{top:23px}}
+.dlv__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.dlv__t{font-size:18.5px}}
+.dlv p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:60ch}
+@media(min-width:760px){.dlv p{font-size:15px}}
+
+.tlink{display:inline-block;color:inherit;border-bottom:1px solid var(--line-2);
+padding:3px 0 2px;min-height:24px}
+@media(hover:hover){.tlink:hover{border-color:var(--dk)}}
+
+/* not-included */
+.nots{border-top:1px solid var(--line-2)}
+.nots li{position:relative;padding:15px 0 15px 28px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
+.nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
+.nots b{color:var(--text);font-weight:500}
+
+/* process steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+.st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
+@media(hover:hover){.st:hover{transform:translateY(-4px);border-color:var(--line-3);
+box-shadow:0 18px 42px rgba(0,0,0,.08)}}
+.st__n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text-3);margin-bottom:11px}
+.st__t{font-size:16.5px;margin-bottom:7px}
+.st p{font-size:13.5px;line-height:1.7;color:var(--text-2)}
+
+/* pricing rows */
+.prc{border-top:1px solid var(--line-2)}
+.prc > div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){.prc > div{grid-template-columns:minmax(0,1fr) 150px 130px;
+gap:28px;align-items:baseline}}
+.prc__t{font-size:16.5px;font-weight:500;letter-spacing:-.012em}
+.prc__d{font-size:14px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.prc__d{grid-column:1}}
+.prc__p{font-family:var(--sans);font-weight:500;font-size:19px;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.prc__w{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.prc__p,.prc__w{text-align:right}}
+
+/* related work */
+.rel{display:grid;gap:16px}
+@media(min-width:760px){.rel{grid-template-columns:repeat(3,1fr);gap:22px}}
+.rc{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);overflow:hidden;
+display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rc{border-radius:18px}}
+@media(hover:hover){.rc:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.rc:hover .rc__go{color:var(--dk)}}
+.rc__shot{aspect-ratio:16/10;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));
+display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;
+font-family:var(--mono);font-size:9.5px;color:var(--text-3);border-bottom:1px solid var(--line)}
+.rc__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.rc__t{font-size:17.5px}
+.rc__d{font-size:13.5px;line-height:1.65;color:var(--text-2)}
+.rc__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+
+/* faq */
+.faq{border-top:1px solid var(--line-2)}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+justify-content:space-between;gap:18px;padding:20px 0;min-height:48px;
+font-size:16.5px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+@media(min-width:760px){.faq summary{font-size:18.5px;padding:23px 0}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:19px;font-weight:400;
+color:var(--text-3);flex:none;line-height:1.2;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+@media(hover:hover){.faq summary:hover::after{color:var(--dk)}}
+.faq__a{padding:0 0 22px;max-width:66ch}
+.faq__a p{font-size:15px;line-height:1.8;color:var(--text-2)}
+.faq__a p + p{margin-top:11px}
+.faq__a a{border-bottom:1px solid var(--line-2);display:inline-block;padding:2px 0 1px}
+@media(hover:hover){.faq__a a:hover{border-color:var(--dk)}}
+
+/* cta */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,120px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:720px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,8vw,64px);line-height:1.05}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:17.5px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:42px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+
+<main id="main">
+
+<section class="shd">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Speed optimisation</span>
+    </nav>
+    <div class="shd__grid">
+      <div>
+        <h1>Your site is slow. A caching plugin won't fix it.</h1>
+        <p class="shd__lede">Most WordPress speed work is guesswork — install a cache, enable minification, hope the score moves. Sometimes it does. Usually the real cause was somewhere else entirely.</p>
+        <p class="shd__lede">I diagnose first and tell you the actual causes in writing, with what each one costs to fix and what it's worth. You decide what to do with that, including nothing.</p>
+        <div class="shd__cta">
+          <a class="btn btn--primary" href="/contact/">Get a diagnosis <span class="ar">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">What it costs</a>
+        </div>
+      </div>
+      <aside class="qf">
+        <p class="qf__h">At a glance</p>
+        <dl>
+          <div><dt>Diagnosis</dt><dd>$250, 3 days</dd></div>
+          <div><dt>Typical fix</dt><dd>$700 – $2.5k</dd></div>
+          <div><dt>Target</dt><dd>Green CWV on mobile</dd></div>
+          <div><dt>Measured on</dt><dd>Real mobile hardware</dd></div>
+          <div><dt>Proof</dt><dd>Before/after, field data</dd></div>
+          <div><dt>Credited</dt><dd>Against the fix</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- MYTHS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Why the usual advice fails</p>
+        <h2 class="h2">Three things<br>that don't work.</h2>
+      </div>
+      <p class="lede">Almost every slow site I'm sent has already had these tried. They're not wrong exactly — they're just not the reason your particular site is slow, and doing them harder won't change that.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">Installing another cache</p>
+        <p>Caching helps a page that's expensive to build. It does nothing for a page that's cheap to build and heavy to download — and stacking two caching plugins usually makes things worse, not faster.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Chasing the desktop score</p>
+        <p>A green desktop score on a fibre connection tells you almost nothing. Google ranks on mobile field data from real visitors on real networks, which is a different measurement entirely.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Deleting plugins at random</p>
+        <p>Plugin count isn't the metric — impact is. One badly written plugin can cost more than fifteen well-written ones, and removing the wrong fifteen just breaks the site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT ACTUALLY CAUSES IT -->
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Where the time goes</p>
+        <h2 class="h2">Seven causes,<br>in the order<br>they usually matter.</h2>
+      </div>
+      <p class="lede">This is roughly the order I find them in. The first three account for most of the problem on most sites — and none of them are solved by a plugin.</p>
+    </div>
+    <ul class="dlv rise">
+      <li>
+        <p class="dlv__t">Images doing far too much work</p>
+        <p>A 3000px photograph displayed at 600px, served as JPEG, with no dimensions set so the layout jumps while it loads. Usually the single largest win, and usually the least interesting one.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Render-blocking CSS and JavaScript</p>
+        <p>The browser can't paint anything until it has finished downloading and parsing everything in the head. Page builders and addon packs are the common culprits — often loading assets for widgets the page doesn't use.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Third-party scripts</p>
+        <p>Chat widgets, analytics, pixels, review embeds, font services. Each one is somebody else's server deciding how fast your site is. Frequently 40% of total load, and almost always loadable later.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Database queries</p>
+        <p>Unindexed queries, a post-meta table that's grown to hundreds of thousands of rows, an autoloaded options table full of data from plugins deleted two years ago. Slow before a single byte is sent.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Server and PHP configuration</p>
+        <p>An outdated PHP version, no object cache, shared hosting with a neighbour consuming the CPU. Sometimes the honest answer is that the hosting is the problem and $15 a month fixes it.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Fonts</p>
+        <p>Four weights loaded from a third-party service when two self-hosted ones would do, with no fallback strategy — so text is invisible while they download.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Layout instability</p>
+        <p>Not speed exactly, but Google measures it and users hate it. Elements shifting as images, ads and embeds arrive. Almost always fixable with dimensions and reserved space rather than anything clever.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROCESS + NOT INCLUDED -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">How it runs</p>
+        <h2 class="h2">Diagnose first,<br>then fix.</h2>
+      </div>
+      <p class="lede">Two separate stages, deliberately. You can stop after the diagnosis and hand the findings to anyone — several clients have, and that's fine.</p>
+    </div>
+    <div class="steps rise">
+      <div class="st">
+        <p class="st__n">STAGE 01</p>
+        <h3 class="st__t t-md">Measure properly</h3>
+        <p>Lab tests on throttled mobile hardware plus your real field data from Search Console, so we're fixing what visitors experience rather than what a desktop test says.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">STAGE 02</p>
+        <h3 class="st__t t-md">Find the causes</h3>
+        <p>Waterfall analysis, query profiling, asset audit, third-party inventory. Not "your site is slow" — a ranked list of what is taking the time.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">STAGE 03</p>
+        <h3 class="st__t t-md">Written report</h3>
+        <p>Each cause with its measured cost in milliseconds, the fix, the effort, and the expected gain. You decide what's worth doing.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">STAGE 04</p>
+        <h3 class="st__t t-md">Fix on staging</h3>
+        <p>Every change made and verified on a staging copy first. Nothing touches your live site until it's proven not to break anything.</p>
+      </div>
+      <div class="st">
+        <p class="st__n">STAGE 05</p>
+        <h3 class="st__t t-md">Prove it</h3>
+        <p>Before and after on the same tests, plus a note on when field data will catch up — because Core Web Vitals lag by 28 days.</p>
+      </div>
+    </div>
+
+    <div class="shead rise" style="margin-top:56px">
+      <div>
+        <p class="eyebrow">Scope</p>
+        <h2 class="h2">What I<br>won't do.</h2>
+      </div>
+      <p class="lede">Mostly things that improve a score without improving the site. A number is not the point; a site that feels fast to a real person is.</p>
+    </div>
+    <ul class="nots rise">
+      <li><b>Chase a score with tricks.</b> Deferring everything until after the test fires makes the number look good and the site feel worse.</li>
+      <li><b>Strip functionality to hit a target.</b> If removing your booking form would help, you'll hear it as a trade-off — not as a decision I make quietly.</li>
+      <li><b>Promise a specific number before diagnosis.</b> Anyone guaranteeing "90+" without seeing the site is guessing, and you should treat that as the warning it is.</li>
+      <li><b>Blame the host by default.</b> Sometimes it is the host. Usually it isn't, and switching costs you a migration that changes nothing.</li>
+      <li><b>Rebuild the site.</b> That's a different service. If a rebuild is genuinely cheaper than the fix list, the report says so with both numbers.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec sec--tint" id="pricing">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">Diagnosis fixed,<br>fix quoted.</h2>
+      </div>
+      <p class="lede">The diagnosis is a flat fee because it's the same work whatever I find. The fix is quoted against the report, so you're approving a known scope rather than an open-ended hourly commitment.</p>
+    </div>
+    <div class="prc rise">
+      <div>
+        <div>
+          <p class="prc__t">Performance diagnosis</p>
+          <p class="prc__d">Full analysis and written report with ranked causes, costs and expected gains. Credited in full against fix work.</p>
+        </div>
+        <p class="prc__p">$250</p>
+        <p class="prc__w">3 days</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">Standard fix</p>
+          <p class="prc__d">Images, asset loading, fonts, third-party deferral, caching configured properly. Covers most business sites.</p>
+        </div>
+        <p class="prc__p">$700 – $1.2k</p>
+        <p class="prc__w">1 week</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">Deep fix</p>
+          <p class="prc__d">Adds database work, query optimisation, object caching, and rebuilding the parts of the theme causing the problem.</p>
+        </div>
+        <p class="prc__p">$1.2k – $2.5k</p>
+        <p class="prc__w">2 weeks</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">WooCommerce</p>
+          <p class="prc__d">Stores need cart-fragment work, checkout profiling and catalogue query optimisation on top of the above.</p>
+        </div>
+        <p class="prc__p">from $1.5k</p>
+        <p class="prc__w">2–3 weeks</p>
+      </div>
+      <div>
+        <div>
+          <p class="prc__t">Ongoing monitoring</p>
+          <p class="prc__d">Monthly field-data check with a short written note when something regresses. Part of a <a class="tlink" href="/services/website-maintenance/">care plan</a>.</p>
+        </div>
+        <p class="prc__p">from $400/mo</p>
+        <p class="prc__w">Monthly</p>
+      </div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
+      Diagnosis refunded in full if I can't identify actionable causes. Agencies: <a class="tlink" href="/for-agencies/">white-label terms</a> — the report can be issued unbranded.
+    </p>
+  </div>
+</section>
+
+<!-- HONEST EXPECTATIONS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Expectations</p>
+        <h2 class="h2">What you can<br>reasonably expect.</h2>
+      </div>
+      <p class="lede">No guarantees of a specific score, because anyone offering one before seeing your site is selling rather than diagnosing. What I can describe is the shape of a typical outcome.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">Most sites: substantial gain</p>
+        <p>A site that has never had performance work usually has three or four large, unglamorous problems. Fixing those moves it from noticeably slow to comfortably fast without touching the design.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Some sites: a ceiling</p>
+        <p>If the business needs a chat widget, a review embed and three tracking pixels, there's a floor below which load time won't go. I'll tell you where that floor is rather than pretending otherwise.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Field data lags</p>
+        <p>Core Web Vitals in Search Console use a 28-day rolling window. Lab tests improve immediately; the data Google ranks on takes about a month to catch up. Plan launches accordingly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec--tint">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">Asked before<br>every project.</h2>
+      </div>
+      <p class="lede">If yours isn't here, send the URL — I'll usually be able to say something useful about it before you commit to anything.</p>
+    </div>
+    <div class="faq rise">
+      <details>
+        <summary>Can you guarantee a 90+ PageSpeed score?</summary>
+        <div class="faq__a"><p>No, and I'd be careful with anyone who does. The score depends on things outside my control — third-party scripts your business needs, hosting you may not want to change, functionality that costs what it costs.</p><p>What I'll give you after the diagnosis is a realistic target for your specific site, and I'll tell you before any fix work starts if that target is lower than you were hoping.</p></div>
+      </details>
+      <details>
+        <summary>My site is on Elementor. Is that the problem?</summary>
+        <div class="faq__a"><p>Usually it's how it was built rather than the tool itself. Containers nested five deep, six addon packs loaded to render two widgets, assets loading on every page regardless of use — those are build decisions, and most of them are fixable without rebuilding.</p><p>Occasionally the build is so tangled that rebuilding specific templates is cheaper than untangling them. If that's the case the report says so, with both costs. <a class="tlink" href="/#elementor">How I build in Elementor.</a></p></div>
+      </details>
+      <details>
+        <summary>Will this improve my Google rankings?</summary>
+        <div class="faq__a"><p>Core Web Vitals are a confirmed ranking signal, but a modest one — speed alone won't outrank better content. Where it reliably matters is when you're roughly level with competitors on everything else, and on mobile conversion, where slow pages measurably lose sales.</p><p>Treat ranking improvement as a possible side effect and conversion improvement as the actual reason.</p></div>
+      </details>
+      <details>
+        <summary>Why pay for a diagnosis when PageSpeed Insights is free?</summary>
+        <div class="faq__a"><p>PageSpeed tells you what's wrong, not why, and its recommendations are generic. "Reduce unused JavaScript" is accurate and useless — the question is which script, loaded by what, whether it's needed, and what happens if it's deferred.</p><p>The report answers those, with measured costs per issue and a ranked order. It's the difference between a symptom list and a diagnosis.</p></div>
+      </details>
+      <details>
+        <summary>Will you break anything?</summary>
+        <div class="faq__a"><p>Every change is made and tested on a staging copy first, then verified on the live site afterwards. Performance work does carry real risk — aggressive deferral breaks sliders, over-eager minification breaks forms — which is exactly why nothing goes straight to production.</p></div>
+      </details>
+      <details>
+        <summary>Do I need to change hosting?</summary>
+        <div class="faq__a"><p>Sometimes, and I'll say so plainly when server response time is genuinely the bottleneck. More often it's third or fourth on the list and switching would be an expensive distraction. The report tells you where hosting actually ranks among your problems.</p></div>
+      </details>
+      <details>
+        <summary>How long until I see results in Search Console?</summary>
+        <div class="faq__a"><p>Lab tests improve the day the work ships. Search Console uses a 28-day rolling average of real visitor data, so expect roughly a month before the field metrics reflect the change, and slightly longer for a low-traffic site.</p></div>
+      </details>
+      <details>
+        <summary>Will it stay fast?</summary>
+        <div class="faq__a"><p>Not automatically. Performance regresses — someone adds a plugin, uploads a 4MB hero image, or a marketing team installs a tracking script. Every fix includes a short written note on what to avoid, and monthly monitoring is available if you'd rather not think about it.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Send me the URL.<br><em>I'll take a look.</em></h2>
+    <p>Before you commit to anything, I'll run your site and tell you roughly what's going on and whether a paid diagnosis is worth it. Sometimes the answer is that it isn't.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/contact/">Send the URL <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/book/">Book 20 minutes instead</a>
+    </div>
+    <div class="assure">
+      <span>Diagnosis before fixes</span>
+      <span>Measured on real hardware</span>
+      <span>Tested on staging first</span>
+      <span>Before/after proof</span>
+      <span>Report is yours</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
+{"@type":"ListItem","position":3,"name":"Speed optimisation","item":"https://example.com/services/speed-optimization/"}]},
+{"@type":"Service","name":"WordPress speed optimisation",
+"serviceType":"WordPress performance and Core Web Vitals optimisation",
+"url":"https://example.com/services/speed-optimization/",
+"description":"Diagnosis-first WordPress performance work. Ranked causes measured on real mobile hardware, then fixes tested on staging with before and after proof.",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"Switzerland"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Ireland"},
+{"@type":"Country","name":"France"},{"@type":"Country","name":"Austria"},{"@type":"Country","name":"India"}],
+"offers":[
+{"@type":"Offer","name":"Performance diagnosis","price":"250","priceCurrency":"USD","description":"Written report with ranked causes, costs and expected gains. Credited against fix work."},
+{"@type":"Offer","name":"Standard fix","priceSpecification":{"@type":"PriceSpecification","minPrice":"700","maxPrice":"1200","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Deep fix","priceSpecification":{"@type":"PriceSpecification","minPrice":"1200","maxPrice":"2500","priceCurrency":"USD"}},
+{"@type":"Offer","name":"WooCommerce performance","priceSpecification":{"@type":"PriceSpecification","minPrice":"1500","priceCurrency":"USD"}}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can you guarantee a 90+ PageSpeed score?","acceptedAnswer":{"@type":"Answer","text":"No. The score depends on third-party scripts the business needs, hosting, and functionality that has a fixed cost. A realistic target for the specific site is given after diagnosis, before any fix work begins."}},
+{"@type":"Question","name":"Is Elementor the reason my WordPress site is slow?","acceptedAnswer":{"@type":"Answer","text":"Usually it is how the site was built rather than the tool: deeply nested containers, multiple addon packs, and assets loading on every page regardless of use. Most of this is fixable without a rebuild."}},
+{"@type":"Question","name":"Will speed optimisation improve Google rankings?","acceptedAnswer":{"@type":"Answer","text":"Core Web Vitals are a confirmed but modest ranking signal. The reliable benefit is mobile conversion, where slow pages measurably lose sales. Ranking improvement is best treated as a possible side effect."}},
+{"@type":"Question","name":"Why pay for a diagnosis when PageSpeed Insights is free?","acceptedAnswer":{"@type":"Answer","text":"PageSpeed identifies symptoms with generic recommendations. A diagnosis identifies which specific script or query is responsible, what loads it, whether it is needed, and the measured cost of each issue in a ranked order."}},
+{"@type":"Question","name":"Could performance work break my site?","acceptedAnswer":{"@type":"Answer","text":"Every change is made and tested on a staging copy before going live. Aggressive deferral and over-eager minification genuinely can break sliders and forms, which is why nothing is applied directly to production."}},
+{"@type":"Question","name":"Do I need to change hosting to make WordPress faster?","acceptedAnswer":{"@type":"Answer","text":"Sometimes, when server response time is genuinely the bottleneck. More often hosting ranks third or fourth among the causes and switching would be an expensive distraction. The report shows where it actually ranks."}},
+{"@type":"Question","name":"How long until Core Web Vitals improve in Search Console?","acceptedAnswer":{"@type":"Answer","text":"Lab test results improve immediately. Search Console uses a 28-day rolling average of real visitor data, so field metrics typically take about a month to reflect the change, and longer on low-traffic sites."}},
+{"@type":"Question","name":"Will the site stay fast after optimisation?","acceptedAnswer":{"@type":"Answer","text":"Not automatically. Performance regresses when plugins are added, large images uploaded or tracking scripts installed. Each fix includes written guidance, and monthly monitoring is available as part of a care plan."}}]}]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

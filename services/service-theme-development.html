@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAFAFA">
+<title>Custom WordPress Theme Development | Built From Your Design</title>
+<meta name="description" content="Custom WordPress themes built from your design file. Content model matched to your business, editing layer built for your team. From $2,500.">
+<link rel="canonical" href="https://example.com/services/theme-development/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Custom WordPress Theme Development | Built From Your Design">
+<meta property="og:description" content="A theme containing only what your site does. No demo importers, no unused sliders, no options panel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#FAFAFA;--bg-2:#F1F1F1;--bg-3:#FFFFFF;--bg-4:#EAEAEA;
+--dk:#0A0A0A;--dk-2:#141414;--dk-3:#1C1C1C;
+--on-dk:#FFFFFF;--on-dk-2:#E4E4E4;--on-dk-3:#A5A5A5;
+--line:rgba(0,0,0,.09);--line-2:rgba(0,0,0,.16);--line-3:rgba(0,0,0,.36);
+--line-dk:rgba(255,255,255,.12);--line-dk-2:rgba(255,255,255,.24);
+--text:#0A0A0A;--text-2:#545454;--text-3:#767676;
+--serif:"Instrument Serif",Georgia,serif;
+--sans:"Geist","Helvetica Neue",Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SFMono-Regular",monospace;
+--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.4,.4,1);
+--maxw:1360px;--gut:16px;--navh:62px;
+}
+@media(min-width:400px){:root{--gut:20px}}
+@media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
+scroll-padding-top:calc(var(--navh) + 18px)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);
+font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+overflow-x:clip;overflow-wrap:anywhere}
+@media(min-width:760px){body{font-size:17px;overflow-wrap:break-word}}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background-image:linear-gradient(rgba(0,0,0,.026) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,0,0,.026) 1px,transparent 1px);background-size:56px 56px}
+@media(min-width:760px){body::before{background-size:76px 76px}}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--dk);color:#FAFAFA}
+:focus-visible{outline:2px solid var(--dk);outline-offset:2px;border-radius:2px}
+.cta :focus-visible,.foot :focus-visible,.sec--dark :focus-visible{outline-color:#FFF}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+padding-inline:var(--gut);position:relative;z-index:1}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--line-3);flex:none}
+@media(min-width:760px){.eyebrow{font-size:12px;letter-spacing:.22em;gap:12px;margin-bottom:26px}}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(29px,7.2vw,54px);
+line-height:1.08;letter-spacing:-.01em}
+.h2 br{display:none}
+@media(min-width:800px){.h2{line-height:1.04}.h2 br{display:inline}}
+.lede{font-size:16px;line-height:1.75;color:var(--text-2);max-width:60ch}
+@media(min-width:760px){.lede{font-size:18px}}
+.t-md{font-family:var(--sans);font-weight:500;letter-spacing:-.012em;line-height:1.22}
+.num{font-family:var(--sans);font-weight:500;letter-spacing:-.028em;
+font-variant-numeric:tabular-nums;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+font-size:15px;font-weight:500;padding:13px 22px;border-radius:100px;
+border:1px solid transparent;text-align:center;min-height:48px;max-width:100%;
+transition:transform .25s var(--spring),box-shadow .3s var(--ease),background .2s,border-color .2s}
+@media(min-width:760px){.btn{font-size:16px;padding:16px 30px;gap:10px}}
+.btn--primary{background:var(--dk);color:#FAFAFA}
+.btn--ghost{border-color:var(--line-2);color:var(--text)}
+.btn .ar{flex:none;transition:transform .25s var(--spring)}
+@media(hover:hover) and (pointer:fine){
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.btn--ghost:hover{border-color:var(--dk);transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(4px)}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+background:rgba(250,250,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:10px;
+height:var(--navh);max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.nav__mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0;padding-block:9px}
+@media(min-width:760px){.nav__mark{font-size:13px;letter-spacing:.12em;gap:10px}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dk);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav__links{display:none;gap:28px;font-size:15px;color:var(--text-2)}
+.nav__links a{position:relative;padding:4px 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+background:var(--dk);transition:width .3s var(--ease)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{width:100%}
+@media(hover:hover){.nav__links a:hover{color:var(--text)}.nav__links a:hover::after{width:100%}}
+.nav__cta{display:none}
+.nav .btn{padding:10px 18px;font-size:14px;min-height:42px;white-space:nowrap}
+@media(min-width:1020px){.nav__links{display:flex}.nav__cta{display:inline-flex}}
+.burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;
+align-items:center;gap:6px;margin-right:-10px;flex:none}
+.burger span{display:block;width:21px;height:1.5px;background:var(--dk);border-radius:2px;
+transition:transform .3s var(--ease)}
+.burger[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.burger[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+@media(min-width:1020px){.burger{display:none}}
+.mnav{position:fixed;inset:var(--navh) 0 0;z-index:55;background:var(--bg);
+padding:26px var(--gut) 32px;overflow-y:auto;display:flex;flex-direction:column;
+opacity:0;visibility:hidden;transform:translateY(-8px);
+transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+.mnav.open{opacity:1;visibility:visible;transform:none}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;gap:12px;
+padding:16px 0;border-bottom:1px solid var(--line);
+font-family:var(--serif);font-size:27px;line-height:1.15}
+.mnav a.ml::after{content:"→";font-family:var(--sans);font-size:15px;color:var(--text-3);flex:none}
+.mnav .btn{margin-top:26px;width:100%}
+.mnav__foot{margin-top:auto;padding-top:26px;font-family:var(--mono);font-size:10.5px;
+letter-spacing:.06em;color:var(--text-3);line-height:2}
+@media(min-width:1020px){.mnav{display:none}}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dk-2);color:var(--on-dk-2);padding:48px 0 28px;position:relative;z-index:1}
+@media(min-width:760px){.foot{padding:72px 0 40px}}
+.foot__grid{display:grid;gap:30px}
+@media(min-width:580px){.foot__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(min-width:960px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px}}
+.foot__brand{grid-column:1/-1}
+@media(min-width:960px){.foot__brand{grid-column:auto}}
+.foot .nav__mark{color:#FFF}
+.foot .dot{background:#FFF}
+.foot h2{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+color:var(--on-dk-3);font-weight:400;margin-bottom:14px}
+.foot ul{font-size:14px}
+@media(min-width:760px){.foot ul{font-size:14.5px}}
+.foot ul a{color:var(--on-dk-2);display:block;padding:9px 0}
+@media(hover:hover){.foot ul a:hover{color:#FFF}}
+.foot__blurb{font-size:14px;line-height:1.7;max-width:34ch;margin-top:12px}
+.foot__mail{display:inline-block;margin-top:12px;font-size:14px;color:#FFF;
+border-bottom:1px solid var(--line-dk-2);padding:6px 0 4px}
+.foot__base{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dk);
+display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;
+font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--on-dk-3)}
+@media(min-width:760px){.foot__base{margin-top:56px;padding-top:24px;font-size:10.5px}}
+
+.js .rise{opacity:0;transform:translateY(18px);
+transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .rise.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rise{opacity:1;transform:none}}
+
+/* ══ SERVICE DETAIL ══ */
+.shd{padding:calc(var(--navh) + 32px) 0 0}
+@media(min-width:760px){.shd{padding-top:calc(var(--navh) + 52px)}}
+.crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+color:var(--text-3);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crumb a{color:var(--text-3);display:inline-block;padding:6px 0;min-height:24px}
+@media(hover:hover){.crumb a:hover{color:var(--text)}}
+.shd__grid{display:grid;gap:32px;align-items:start}
+@media(min-width:1020px){.shd__grid{grid-template-columns:1.25fr .75fr;gap:64px}}
+.shd h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,8vw,68px);
+line-height:1.03;letter-spacing:-.018em;max-width:15ch}
+.shd__lede{margin-top:20px;font-size:16.5px;line-height:1.75;color:var(--text-2);max-width:56ch}
+@media(min-width:760px){.shd__lede{margin-top:26px;font-size:18.5px}}
+.shd__lede + .shd__lede{margin-top:13px}
+.shd__cta{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media(min-width:540px){.shd__cta{flex-direction:row;flex-wrap:wrap;gap:14px;margin-top:34px}}
+
+/* quick facts card */
+.qf{border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);padding:24px 22px}
+@media(min-width:760px){.qf{border-radius:20px;padding:28px 26px}}
+.qf__h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.qf dl{border-top:1px solid var(--line)}
+.qf dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+padding:12px 0;border-bottom:1px solid var(--line)}
+.qf dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+text-transform:uppercase;color:var(--text-3);flex:none}
+.qf dd{font-size:14.5px;text-align:right;font-weight:500}
+
+/* sections */
+.sec{padding-block:clamp(52px,9vw,110px);position:relative;z-index:1}
+.sec--tint{background:var(--bg-2);border-block:1px solid var(--line)}
+.sec--dark{background:var(--dk);color:var(--on-dk)}
+.sec--dark .eyebrow{color:var(--on-dk-3)}
+.sec--dark .eyebrow::before{background:var(--line-dk-2)}
+.sec--dark .lede{color:var(--on-dk-2)}
+.sec--dark .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
+@media(hover:hover){.sec--dark .btn--ghost:hover{border-color:#FFF}}
+.shead{display:grid;gap:16px;margin-bottom:32px}
+@media(min-width:900px){.shead{grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:44px}}
+
+/* problem cards */
+.probs{display:grid;gap:16px;counter-reset:p}
+@media(min-width:820px){.probs{grid-template-columns:repeat(3,1fr);gap:20px}}
+.pb{counter-increment:p;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-3);
+padding:26px 22px;position:relative;overflow:hidden;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.pb{border-radius:20px;padding:32px 28px}}
+@media(hover:hover){.pb:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.09)}}
+.pb::after{content:"0" counter(p);position:absolute;top:14px;right:20px;
+font-family:var(--serif);font-style:italic;font-size:46px;color:rgba(0,0,0,.06);line-height:1}
+.pb__t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;
+margin-bottom:11px;max-width:16ch;position:relative}
+.pb p{font-size:14.5px;line-height:1.75;color:var(--text-2)}
+
+/* deliverables list */
+.dlv{border-top:1px solid var(--line-dk)}
+.dlv li{position:relative;padding:20px 0 20px 30px;border-bottom:1px solid var(--line-dk)}
+@media(min-width:760px){.dlv li{padding:22px 0 22px 34px}}
+.dlv li::before{content:"✓";position:absolute;left:0;top:21px;color:var(--on-dk);font-size:14px}
+@media(min-width:760px){.dlv li::before{top:23px}}
+.dlv__t{font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--on-dk);margin-bottom:7px}
+@media(min-width:760px){.dlv__t{font-size:18.5px}}
+.dlv p{font-size:14.5px;line-height:1.75;color:var(--on-dk-2);max-width:60ch}
+@media(min-width:760px){.dlv p{font-size:15px}}
+
+.tlink{display:inline-block;color:inherit;border-bottom:1px solid var(--line-2);
+padding:3px 0 2px;min-height:24px}
+@media(hover:hover){.tlink:hover{border-color:var(--dk)}}
+
+/* not-included */
+.nots{border-top:1px solid var(--line-2)}
+.nots li{position:relative;padding:15px 0 15px 28px;border-bottom:1px solid var(--line-2);
+font-size:15px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
+.nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
+.nots b{color:var(--text);font-weight:500}
+
+/* process steps */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+.st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
+padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
+@media(hover:hover){.st:hover{transform:translateY(-4px);border-color:var(--line-3);
+box-shadow:0 18px 42px rgba(0,0,0,.08)}}
+.st__n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--text-3);margin-bottom:11px}
+.st__t{font-size:16.5px;margin-bottom:7px}
+.st p{font-size:13.5px;line-height:1.7;color:var(--text-2)}
+
+/* pricing rows */
+.prc{border-top:1px solid var(--line-2)}
+.prc > div{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){.prc > div{grid-template-columns:minmax(0,1fr) 150px 130px;
+gap:28px;align-items:baseline}}
+.prc__t{font-size:16.5px;font-weight:500;letter-spacing:-.012em}
+.prc__d{font-size:14px;line-height:1.7;color:var(--text-2)}
+@media(min-width:760px){.prc__d{grid-column:1}}
+.prc__p{font-family:var(--sans);font-weight:500;font-size:19px;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.prc__w{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+text-transform:uppercase;color:var(--text-3)}
+@media(min-width:760px){.prc__p,.prc__w{text-align:right}}
+
+/* related work */
+.rel{display:grid;gap:16px}
+@media(min-width:760px){.rel{grid-template-columns:repeat(3,1fr);gap:22px}}
+.rc{border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);overflow:hidden;
+display:flex;flex-direction:column;
+transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
+@media(min-width:760px){.rc{border-radius:18px}}
+@media(hover:hover){.rc:hover{transform:translateY(-5px);border-color:var(--line-3);
+box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.rc:hover .rc__go{color:var(--dk)}}
+.rc__shot{aspect-ratio:16/10;background:linear-gradient(150deg,var(--bg-4),var(--bg-2));
+display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;
+font-family:var(--mono);font-size:9.5px;color:var(--text-3);border-bottom:1px solid var(--line)}
+.rc__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--text-2);background:var(--bg-2);border:1px solid var(--line-2);
+border-radius:100px;padding:4px 10px;white-space:nowrap}
+.tag--solid{color:#FAFAFA;background:var(--dk);border-color:var(--dk)}
+.rc__t{font-size:17.5px}
+.rc__d{font-size:13.5px;line-height:1.65;color:var(--text-2)}
+.rc__go{margin-top:auto;padding-top:6px;font-family:var(--mono);font-size:9.5px;
+letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);transition:color .25s}
+
+/* faq */
+.faq{border-top:1px solid var(--line-2)}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;
+justify-content:space-between;gap:18px;padding:20px 0;min-height:48px;
+font-size:16.5px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+@media(min-width:760px){.faq summary{font-size:18.5px;padding:23px 0}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:19px;font-weight:400;
+color:var(--text-3);flex:none;line-height:1.2;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+@media(hover:hover){.faq summary:hover::after{color:var(--dk)}}
+.faq__a{padding:0 0 22px;max-width:66ch}
+.faq__a p{font-size:15px;line-height:1.8;color:var(--text-2)}
+.faq__a p + p{margin-top:11px}
+.faq__a a{border-bottom:1px solid var(--line-2);display:inline-block;padding:2px 0 1px}
+@media(hover:hover){.faq__a a:hover{border-color:var(--dk)}}
+
+/* cta */
+.cta{background:var(--dk);color:var(--on-dk);position:relative;overflow:hidden;
+padding-block:clamp(58px,11vw,120px)}
+.cta::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:min(880px,160vw);aspect-ratio:1;border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.07),transparent 64%);
+filter:blur(40px);pointer-events:none}
+.cta__in{position:relative;text-align:center;max-width:720px;margin-inline:auto}
+.cta .eyebrow{justify-content:center;color:var(--on-dk-3)}
+.cta .eyebrow::before{background:var(--line-dk-2)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,8vw,64px);line-height:1.05}
+.cta h2 em{font-style:italic;color:var(--on-dk-3)}
+.cta p{margin:20px auto 0;color:var(--on-dk-2);font-size:16px;line-height:1.7;max-width:52ch}
+@media(min-width:760px){.cta p{font-size:17.5px}}
+.cta__btns{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+@media(min-width:580px){.cta__btns{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}}
+.cta .btn--primary{background:#FFF;color:var(--dk)}
+.assure{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+@media(min-width:760px){.assure{gap:12px;margin-top:42px}}
+.assure span{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--on-dk-2);
+border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
+@media(min-width:760px){.assure span{font-size:11px;padding:9px 16px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="/vikas-bhadoriya.github.io/index.html"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/vikas-bhadoriya.github.io/work.html">Work</a>
+      <a href="#elementor">Elementor</a>
+      <a href="/vikas-bhadoriya.github.io/services.html">Services</a>
+      <a href="/vikas-bhadoriya.github.io/about.html">About</a>
+      <a href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact">Book a review</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <nav aria-label="Mobile">
+    <a class="ml" href="/vikas-bhadoriya.github.io/work.html">Work</a>
+    <a class="ml" href="#elementor">Elementor</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/services.html">Services</a>
+    <a class="ml" href="/about.html">About</a>
+    <a class="ml" href="#testimonials">Trust</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/contact.html">Contact</a>
+    <a class="ml" href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a>
+  </nav>
+  <a class="btn btn--primary" href="/vikas-bhadoriya.github.io/book.html/">Book a review →</a>
+  <div class="mnav__foot">vikas.bh14@gmail.com<br>Indore, India · CET · GST · ET overlap</div>
+</div>
+
+
+<main id="main">
+
+<section class="shd">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Custom theme development</span>
+    </nav>
+    <div class="shd__grid">
+      <div>
+        <h1>A theme written for your site, not bent into shape.</h1>
+        <p class="shd__lede">A bought theme arrives with four hundred settings, six demo layouts, three slider libraries and a page builder you didn't choose. You use maybe five per cent of it. The rest loads anyway.</p>
+        <p class="shd__lede">A custom theme contains only what your site does. Nothing to switch off, nothing unexpected on update, and typically a fraction of the weight.</p>
+        <div class="shd__cta">
+          <a class="btn btn--primary" href="/book/">Talk it through <span class="ar">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">See pricing</a>
+        </div>
+      </div>
+      <aside class="qf">
+        <p class="qf__h">At a glance</p>
+        <dl>
+          <div><dt>From</dt><dd>$2.5k</dd></div>
+          <div><dt>Typical</dt><dd>$3.5k – $8k</dd></div>
+          <div><dt>Timeline</dt><dd>4–10 weeks</dd></div>
+          <div><dt>Needs</dt><dd>A design file</dd></div>
+          <div><dt>Delivered</dt><dd>In Git, documented</dd></div>
+          <div><dt>Editing</dt><dd>Gutenberg or ACF</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">The honest version</p>
+        <h2 class="h2">When custom<br>is wrong.</h2>
+      </div>
+      <p class="lede">This is the most oversold service in WordPress. A custom theme is the right answer less often than developers who sell them like to admit, so here's when it isn't.</p>
+    </div>
+    <div class="probs">
+      <div class="pb rise">
+        <p class="pb__t">Your team edits layouts</p>
+        <p>If marketing needs to rearrange a page next quarter without a developer, you want a page builder built well — not a custom theme that requires a ticket for every change. <a class="tlink" href="/services/figma-to-elementor/">Elementor, built properly</a>.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">The budget is under $2,500</p>
+        <p>Below that I can't do the content modelling and testing properly, and a rushed custom theme is worse than a good off-the-shelf one. A well-built Elementor site is the better use of the money.</p>
+      </div>
+      <div class="pb rise">
+        <p class="pb__t">Nothing about the site is unusual</p>
+        <p>A standard business site with standard pages doesn't need bespoke code. Custom earns its cost when the content structure or the performance requirement is genuinely particular.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">When it's right</p>
+        <h2 class="h2">Seven things<br>a custom theme<br>gives you.</h2>
+      </div>
+      <p class="lede">Where the case does hold, these are the reasons — and most of them compound over years rather than showing up on launch day.</p>
+    </div>
+    <ul class="dlv rise">
+      <li>
+        <p class="dlv__t">A content model that matches your business</p>
+        <p>Custom post types and fields shaped around what you actually publish — projects, products, case studies, locations — rather than forcing everything into posts and pages and hoping categories hold it together.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Only the code your site runs</p>
+        <p>No demo importers, no bundled sliders, no options panel with four hundred settings. Typically a fraction of the CSS and JavaScript of a commercial theme, because there's nothing in it you don't use.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Performance as a starting point</p>
+        <p>Assets loaded per template, images handled properly, no render-blocking third-party libraries. Green Core Web Vitals is far easier when nothing unnecessary is in the build to begin with.</p>
+      </li>
+      <li>
+        <p class="dlv__t">An editing experience designed for your team</p>
+        <p>Either custom Gutenberg blocks or ACF field groups, so the edit screen shows the fields your content needs and nothing else. Non-technical staff publish confidently because there's nothing to get wrong.</p>
+      </li>
+      <li>
+        <p class="dlv__t">No third-party dependency</p>
+        <p>No theme author who might abandon it, raise the licence, or ship an update that changes your layout. The code stops changing unless you change it.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Accessibility built into the markup</p>
+        <p>Semantic structure, keyboard operability, proper heading order and labelled controls — decided at template level, which is far cheaper than retrofitting into a purchased theme's output.</p>
+      </li>
+      <li>
+        <p class="dlv__t">Documented for whoever comes next</p>
+        <p>Template structure, hooks, field groups and build process, written down. WordPress coding standards throughout, so another developer recognises the shape immediately.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">How it runs</p>
+        <h2 class="h2">Five stages.</h2>
+      </div>
+      <p class="lede">Content modelling comes before templates, because the structure decides everything after it. Getting that order wrong is the most expensive mistake in a theme build.</p>
+    </div>
+    <div class="steps rise">
+      <div class="st"><p class="st__n">STAGE 01</p><h3 class="st__t t-md">Content model</h3><p>What content types exist, what fields each needs, how they relate. Signed off before any template is written.</p></div>
+      <div class="st"><p class="st__n">STAGE 02</p><h3 class="st__t t-md">Foundation</h3><p>Type scale, colour, spacing and shared components built first, so the last template is as consistent as the first.</p></div>
+      <div class="st"><p class="st__n">STAGE 03</p><h3 class="st__t t-md">Templates</h3><p>Built in agreed order on a staging link you can watch, with real content rather than placeholder text.</p></div>
+      <div class="st"><p class="st__n">STAGE 04</p><h3 class="st__t t-md">Editing layer</h3><p>Blocks or field groups, then your team tries publishing something real before launch — the point at which problems are cheap.</p></div>
+      <div class="st"><p class="st__n">STAGE 05</p><h3 class="st__t t-md">Handover</h3><p>Performance and accessibility tested, repository, documentation, recorded walkthrough. 30 days of fixes.</p></div>
+    </div>
+
+    <div class="shead rise" style="margin-top:56px">
+      <div>
+        <p class="eyebrow">Scope</p>
+        <h2 class="h2">What's not<br>included.</h2>
+      </div>
+      <p class="lede">Available, quoted separately rather than assumed.</p>
+    </div>
+    <ul class="nots rise">
+      <li><b>Design.</b> I need a Figma, XD or PSD file. I build what a designer specifies; I don't originate visual direction.</li>
+      <li><b>Copywriting.</b> Bring final copy or a plan for replacing placeholders.</li>
+      <li><b>Content migration.</b> Moving three hundred posts into the new structure is separate work.</li>
+      <li><b>WooCommerce templating.</b> Store templates are a meaningful addition — see <a class="tlink" href="/services/woocommerce-store-development/">WooCommerce</a>.</li>
+      <li><b>A theme for sale.</b> Building for public distribution means supporting unknown configurations. Different job, different cost.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec--tint" id="pricing">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">Driven by<br>templates, not pages.</h2>
+      </div>
+      <p class="lede">Fifty pages using four templates costs less than eight pages each needing its own. Template count and content complexity are what move the number.</p>
+    </div>
+    <div class="prc rise">
+      <div><div><p class="prc__t">Compact theme</p><p class="prc__d">Four or five templates, one or two custom content types, simple editing layer.</p></div><p class="prc__p">$2.5k – $3.5k</p><p class="prc__w">4–5 weeks</p></div>
+      <div><div><p class="prc__t">Standard theme</p><p class="prc__d">Six to ten templates, several content types with relationships, custom blocks or ACF layouts.</p></div><p class="prc__p">$3.5k – $6k</p><p class="prc__w">6–8 weeks</p></div>
+      <div><div><p class="prc__t">Complex theme</p><p class="prc__d">Multilingual, heavy custom fields, filtered archives, or integration with external systems.</p></div><p class="prc__p">$6k – $12k</p><p class="prc__w">8–12 weeks</p></div>
+      <div><div><p class="prc__t">Block theme</p><p class="prc__d">Full site editing with theme.json, block patterns and template parts. For teams committed to the block editor.</p></div><p class="prc__p">from $4k</p><p class="prc__w">6–10 weeks</p></div>
+      <div><div><p class="prc__t">Child theme or extension</p><p class="prc__d">Extending an existing theme properly rather than editing it, so updates remain safe.</p></div><p class="prc__p">from $900</p><p class="prc__w">1–3 weeks</p></div>
+    </div>
+    <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
+      You own the theme outright — no licence, no per-site fee. Includes 30 days of fixes. Agencies: <a class="tlink" href="/for-agencies/">white-label terms</a>.
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="shead rise">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">Asked before<br>committing.</h2>
+      </div>
+      <p class="lede">A custom theme is a bigger commitment than buying one, and the concerns are usually about what happens in year three.</p>
+    </div>
+    <div class="faq rise">
+      <details>
+        <summary>Custom theme or Elementor?</summary>
+        <div class="faq__a"><p>It depends entirely on who maintains the site. If your team needs to rearrange layouts themselves, Elementor built carefully is the right answer and the performance difference is small. If nobody will ever touch the layout, a custom theme is leaner and cheaper to run.</p><p>The tool follows the maintainer. I'll ask who edits the site before recommending either. <a class="tlink" href="/#elementor">How I build in Elementor.</a></p></div>
+      </details>
+      <details>
+        <summary>Should it be a block theme?</summary>
+        <div class="faq__a"><p>Block themes and full site editing are where WordPress is going, and for a content-led site with a team already comfortable in the block editor they're a good choice.</p><p>For a site with complex custom fields and relationships, a classic theme with ACF is still more practical today. I'll say which fits rather than defaulting to whichever is fashionable.</p></div>
+      </details>
+      <details>
+        <summary>What happens when WordPress releases a major update?</summary>
+        <div class="faq__a"><p>Very little, because the theme uses documented template functions and hooks. WordPress takes backwards compatibility seriously, and properly built themes routinely survive a decade of updates.</p><p>What breaks on update is code depending on undocumented internals or a specific plugin's output. Both are avoided.</p></div>
+      </details>
+      <details>
+        <summary>Can our team still edit pages?</summary>
+        <div class="faq__a"><p>Yes — that's a build requirement, not a trade-off. Either custom Gutenberg blocks or ACF field groups, so the edit screen shows exactly the fields the content needs.</p><p>What they can't do is restructure a template's layout. That's the deliberate difference from a page builder, and whether it's a benefit or a limitation is exactly the question in the first FAQ.</p></div>
+      </details>
+      <details>
+        <summary>Why not buy a $60 theme and customise it?</summary>
+        <div class="faq__a"><p>For a straightforward site, genuinely do that — I'd rather tell you than take the money. It's the fastest route to a decent site on a small budget.</p><p>The cost surfaces later: heavy code you can't remove, an update that changes your layout, and customisations that fight the theme's own assumptions. That's when the total exceeds a custom build.</p></div>
+      </details>
+      <details>
+        <summary>Can you rebuild our existing site as a custom theme?</summary>
+        <div class="faq__a"><p>Yes, and content usually transfers cleanly since it lives in the database rather than the theme. The work is mapping existing content into a better structure — often the most valuable part, because the original structure is usually the real problem.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta__in">
+    <p class="eyebrow">Next step</p>
+    <h2>Tell me who<br><em>edits the site.</em></h2>
+    <p>That one answer usually decides custom theme versus page builder, and it saves both of us a long conversation about the wrong thing. Twenty minutes, and I'll say plainly which you need.</p>
+    <div class="cta__btns">
+      <a class="btn btn--primary" href="/book/">Book a review <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/work/">See the work</a>
+    </div>
+    <div class="assure">
+      <span>Fixed price, written scope</span>
+      <span>You own the theme</span>
+      <span>No licence or per-site fee</span>
+      <span>Delivered in Git</span>
+      <span>30 days of fixes</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="nav__mark"><span class="dot" aria-hidden="true"></span>Vikas Bhadoriya</p>
+        <p class="foot__blurb">Independent WordPress and Elementor developer. Building for businesses across Europe, the Middle East and North America.</p>
+        <a class="foot__mail" href="mailto:vikas.bh14@gmail.com">vikas.bh14@gmail.com</a>
+      </div>
+      <div><h2>Work</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/work.html">All projects</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services.html">Services</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/book.html">Book a review</a></li>
+      </ul></div>
+      <div><h2>Services</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-figma-to-elementor.html">Figma to Elementor</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-speed-optimization.html">Speed optimisation</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-woocommerce-store-development.html">WooCommerce</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-headless-wordpress.html">Headless WordPress</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/services/service-website-maintenance.html">Maintenance</a></li>
+      </ul></div>
+      <div><h2>More</h2><ul>
+        <li><a href="/vikas-bhadoriya.github.io/about.html">About</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/contact.html">Contact</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/for-agencies.html">For agencies</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/accessibility.html">Accessibility</a></li>
+        <li><a href="/vikas-bhadoriya.github.io/privacy.html">Privacy</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__base">
+      <span>Indore, Madhya Pradesh, India</span>
+      <span>9 countries · 4 regulatory environments · 8 years</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
+{"@type":"ListItem","position":3,"name":"Custom theme development","item":"https://example.com/services/theme-development/"}]},
+{"@type":"Service","name":"Custom WordPress theme development",
+"serviceType":"WordPress theme development",
+"url":"https://example.com/services/theme-development/",
+"description":"Custom WordPress themes built from a design file with a content model matched to the business, a tailored editing layer, and performance and accessibility built in.",
+"provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
+"areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
+{"@type":"Country","name":"Germany"},{"@type":"Country","name":"Switzerland"},
+{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"Ireland"},
+{"@type":"Country","name":"France"},{"@type":"Country","name":"Austria"},{"@type":"Country","name":"India"}],
+"offers":[
+{"@type":"Offer","name":"Compact theme","priceSpecification":{"@type":"PriceSpecification","minPrice":"2500","maxPrice":"3500","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Standard theme","priceSpecification":{"@type":"PriceSpecification","minPrice":"3500","maxPrice":"6000","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Complex theme","priceSpecification":{"@type":"PriceSpecification","minPrice":"6000","maxPrice":"12000","priceCurrency":"USD"}},
+{"@type":"Offer","name":"Block theme","priceSpecification":{"@type":"PriceSpecification","minPrice":"4000","priceCurrency":"USD"}}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Custom WordPress theme or Elementor?","acceptedAnswer":{"@type":"Answer","text":"It depends on who maintains the site. Elementor built carefully suits teams that rearrange layouts themselves. A custom theme is leaner and cheaper to run when nobody will change the layout."}},
+{"@type":"Question","name":"Should we use a block theme with full site editing?","acceptedAnswer":{"@type":"Answer","text":"Block themes suit content-led sites with teams already comfortable in the block editor. Sites with complex custom fields and relationships are still more practical with a classic theme and ACF."}},
+{"@type":"Question","name":"Will a custom theme break when WordPress updates?","acceptedAnswer":{"@type":"Answer","text":"Rarely, because it uses documented template functions and hooks. Properly built themes routinely survive years of updates. Breakage usually comes from depending on undocumented internals or a specific plugin's output."}},
+{"@type":"Question","name":"Can our team still edit pages with a custom theme?","acceptedAnswer":{"@type":"Answer","text":"Yes, through custom Gutenberg blocks or ACF field groups showing exactly the fields the content needs. They cannot restructure a template's layout, which is the deliberate difference from a page builder."}},
+{"@type":"Question","name":"Why not buy a commercial theme and customise it?","acceptedAnswer":{"@type":"Answer","text":"For a straightforward site that is often the right choice. The cost surfaces later through heavy unused code, updates that change the layout, and customisations fighting the theme's assumptions."}},
+{"@type":"Question","name":"Can an existing WordPress site be rebuilt as a custom theme?","acceptedAnswer":{"@type":"Answer","text":"Yes. Content usually transfers cleanly because it lives in the database rather than the theme. The main work is mapping existing content into a better structure."}}]}]}
+</script>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),p=document.getElementById('mnav');
+  function nclose(){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');
+    p.classList.remove('open');document.body.classList.remove('lock');}
+  function nopen(){b.setAttribute('aria-expanded','true');b.setAttribute('aria-label','Close menu');
+    p.classList.add('open');document.body.classList.add('lock');}
+  b.addEventListener('click',function(){
+    b.getAttribute('aria-expanded')==='true'?nclose():nopen();});
+  p.addEventListener('click',function(e){if(e.target.closest('a'))nclose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nclose();});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)nclose();});
+  var m=window.matchMedia('(prefers-reduced-motion: reduce)'),
+      els=document.querySelectorAll('.rise');
+  if(m.matches||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+})();
+</script>
+</body>
+</html>

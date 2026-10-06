@@ -5,13 +5,13 @@
 <script>document.documentElement.className+=" js"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FAFAFA">
-<title>Book a 20-Minute Project Review | Vikas Bhadoriya</title>
-<meta name="description" content="Book a free 20-minute WordPress project review. What it would take, roughly what it would cost, and whether I'm the right fit. No pitch, no obligation.">
+<title>Book a 30-Minute Project Review | Vikas Bhadoriya</title>
+<meta name="description" content="Book a free 30-minute WordPress project review. What it would take, roughly what it would cost, and whether I'm the right fit. No pitch, no obligation.">
 <link rel="canonical" href="https://example.com/book/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Book a 20-Minute Project Review">
-<meta property="og:description" content="Twenty minutes, no pitch. What your project would take, roughly what it would cost, and whether I'm the right fit.">
+<meta property="og:title" content="Book a 30-Minute Project Review">
+<meta property="og:description" content="Thirty minutes, no pitch. What your project would take, roughly what it would cost, and whether I'm the right fit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -56,6 +56,14 @@ padding-inline:var(--gut);position:relative;z-index:1}
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:16px;top:12px;z-index:99;background:var(--dk);color:#FAFAFA;padding:10px 14px;border-radius:6px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cal-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 5px;
+}
 
 .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
 color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:18px}
@@ -173,8 +181,9 @@ font-size:10px;letter-spacing:.08em;color:var(--text-2)}
 .cal__embed{min-height:520px;display:flex;align-items:center;justify-content:center;
 padding:36px 22px;text-align:center;
 background:repeating-linear-gradient(45deg,transparent 0 16px,rgba(0,0,0,.012) 16px 32px)}
-@media(min-width:760px){.cal__embed{min-height:640px;padding:48px}}
-.cal__ph{max-width:44ch}
+@media(min-width:760px){.cal__embed{min-height:640px;padding:0px;width: 100%;
+        display: inline-block;}}
+.cal__ph{max-width:100%}
 .cal__ph .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
 text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
 .cal__ph h2{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.2;margin-bottom:12px}
@@ -188,6 +197,12 @@ display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-be
 .cal__fb p{font-size:14px;color:var(--text-2)}
 .cal__fb a{font-weight:500;border-bottom:1px solid var(--line-2);padding-bottom:1px}
 @media(hover:hover){.cal__fb a:hover{border-color:var(--dk)}}
+@media(max-width:560px){
+  .cal-wrapper {
+      display: inline-block;
+  }
+}
+
 
 /* ══ PREP ══ */
 .sec{padding-block:clamp(48px,8vw,100px);position:relative;z-index:1}
@@ -315,7 +330,7 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
     <div class="bk__grid">
       <!-- LEFT: context -->
       <div>
-        <h1>Twenty minutes. No pitch.</h1>
+        <h1>Thirty minutes. No pitch.</h1>
         <p class="bk__lede">Tell me what you're dealing with. I'll tell you what it would take, roughly what it would cost, and whether you should be talking to me at all.</p>
 
         <dl class="mstrip">
@@ -339,26 +354,19 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
 
       <!-- RIGHT: calendar -->
       <div>
-        <div class="cal">
-          <div class="cal__bar">
-            <span class="cal__lbl">Pick a time</span>
-            <span class="cal__tz"><span class="dot" aria-hidden="true"></span><span id="tz">Shown in your local time</span></span>
-          </div>
-
-          <div class="cal__embed">
-            <div class="cal__ph">
-              <p class="k">[EMBED SLOT]</p>
-              <h2>Scheduling widget goes here</h2>
-              <p>Replace this block with your Cal.com, Calendly or TidyCal embed. Set availability to your working hours and let the tool convert to the visitor's timezone automatically.</p>
-              <p>Load it lazily — <code>loading="lazy"</code> on the iframe, or inject on first interaction — so a third-party script doesn't cost you the Core Web Vitals score claimed on the homepage.</p>
+        <div class="calendly-wrapper">
+            <div
+              class="calendly-inline-widget"
+              data-url="https://calendly.com/vikas-bh14/30min"
+              data-resize="true"
+              style="min-width:320px;height:750px;">
             </div>
           </div>
 
-          <div class="cal__fb">
+          <div class="cal-wrapper">
             <p>Calendar not loading, or none of the times work?</p>
-            <a href="/contact/">Send a message instead →</a>
+            <a href="/contact.html">Send a message instead →</a>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -372,7 +380,7 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
         <p class="eyebrow">Before the call</p>
         <h2 class="h2">Four things<br>worth having ready.</h2>
       </div>
-      <p class="lede">None of these are required — turn up with nothing and we'll still get somewhere. But having them makes twenty minutes go a great deal further.</p>
+      <p class="lede">None of these are required — turn up with nothing and we'll still get somewhere. But having them makes thirty minutes go a great deal further.</p>
     </div>
     <div class="prep">
       <div class="pc rise">
@@ -420,7 +428,7 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
         <h3>What it isn't</h3>
         <ul class="hon--no">
           <li><b>A sales call.</b> There's no follow-up sequence and no second call to "circle back"</li>
-          <li><b>A free audit.</b> Twenty minutes gets impressions, not a diagnosis — that's the <a class="ilink" href="/services/rescue-audit/" style="color:inherit">rescue audit</a></li>
+          <li><b>A free audit.</b> Thirty minutes gets impressions, not a diagnosis — that's the <a class="ilink" href="/services/rescue-audit/" style="color:inherit">rescue audit</a></li>
           <li><b>A commitment.</b> No obligation on either side afterwards</li>
           <li><b>A design review.</b> I build what a designer specifies; I don't critique brand work</li>
           <li><b>A free consulting hour.</b> If you need detailed technical answers rather than a scoping conversation, that's paid work and I'll say so</li>
@@ -441,19 +449,19 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
       <p class="lede">A call isn't always the right next step. If you'd rather not be on a video call with a stranger yet, any of these works.</p>
     </div>
     <div class="alt">
-      <a class="ac rise" href="/contact/">
+      <a class="ac rise" href="/contact.html">
         <h3 class="ac__t t-md">Send a message</h3>
         <p>Describe the project in writing and get a written reply within one business day. Better than a call if your requirements are already documented.</p>
         <span class="ac__go">Contact form →</span>
       </a>
-      <a class="ac rise" href="/work/">
+      <a class="ac rise" href="/work.html">
         <h3 class="ac__t t-md">Read the work first</h3>
         <p>Eighteen projects across nine countries, with what each business needed and what was built. Find one close to your situation.</p>
         <span class="ac__go">See the portfolio →</span>
       </a>
-      <a class="ac rise" href="/services/#pricing">
+      <a class="ac rise" href="/services.html">
         <h3 class="ac__t t-md">Check the numbers</h3>
-        <p>Published price bands, payment terms and ownership. Rule me in or out before spending twenty minutes on it.</p>
+        <p>Published price bands, payment terms and ownership. Rule me in or out before spending Thirty minutes on it.</p>
         <span class="ac__go">Pricing &amp; terms →</span>
       </a>
     </div>
@@ -503,16 +511,16 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
 {"@type":"BreadcrumbList","itemListElement":[
 {"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
 {"@type":"ListItem","position":2,"name":"Book a review","item":"https://example.com/book/"}]},
-{"@type":"WebPage","name":"Book a 20-minute project review","url":"https://example.com/book/",
-"description":"Book a free 20-minute WordPress project review covering scope, rough cost and fit.",
+{"@type":"WebPage","name":"Book a 30-minute project review","url":"https://example.com/book/",
+"description":"Book a free 30-minute WordPress project review covering scope, rough cost and fit.",
 "potentialAction":{"@type":"ReserveAction","name":"Book a project review",
 "target":{"@type":"EntryPoint","urlTemplate":"https://example.com/book/",
 "actionPlatform":["http://schema.org/DesktopWebPlatform","http://schema.org/MobileWebPlatform"]},
-"result":{"@type":"Reservation","name":"20-minute project review"}}},
+"result":{"@type":"Reservation","name":"30-minute project review"}}},
 {"@type":"Service","name":"Project review call","serviceType":"WordPress consultation",
 "provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD",
-"description":"Free 20-minute project review covering rough scope, cost band and fit."}}
+"description":"Free 30-minute project review covering rough scope, cost band and fit."}}
 ]}
 </script>
 
@@ -546,6 +554,11 @@ transition:opacity .6s var(--ease),transform .6s var(--ease)}
     els.forEach(function(e){io.observe(e);});
   }
 })();
+</script>
+<script
+  type="text/javascript"
+  src="https://assets.calendly.com/assets/external/widget.js"
+  async>
 </script>
 </body>
 </html>

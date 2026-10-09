@@ -31,6 +31,7 @@
 }
 @media(min-width:400px){:root{--gut:20px}}
 @media(min-width:760px){:root{--gut:clamp(28px,4vw,48px);--navh:74px}}
+.cta .btn--ghost{border-color:var(--line-dk-2);color:var(--on-dk)}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;min-width:0}
 html{-webkit-text-size-adjust:100%;overflow-x:clip;scroll-behavior:smooth;
@@ -368,7 +369,7 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/">Home</a><span aria-hidden="true">/</span>
-      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <a href="/services.html">Services</a><span aria-hidden="true">/</span>
       <span aria-current="page">WooCommerce development</span>
     </nav>
     <div class="shd__grid">
@@ -377,16 +378,16 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
         <p class="shd__lede">Anyone can install WooCommerce and add products. The work starts when the product is configurable, the buyer has to be verified, the tax rules differ by market, or the checkout has to do something the defaults never anticipated.</p>
         <p class="shd__lede">Age-gated alcohol with a cask reservation programme. Modular hardware with retrofit parts. Identity verification wired into the purchase flow. Those are the builds in the portfolio.</p>
         <div class="shd__cta">
-          <a class="btn btn--primary" href="/book/">Talk through your store <span class="ar">→</span></a>
+          <a class="btn btn--primary" href="/book.html">Talk through your store <span class="ar">→</span></a>
           <a class="btn btn--ghost" href="#pricing">See pricing</a>
         </div>
       </div>
       <aside class="qf">
         <p class="qf__h">At a glance</p>
         <dl>
-          <div><dt>New store</dt><dd>$3.5k – $12k</dd></div>
-          <div><dt>Customisation</dt><dd>from $900</dd></div>
-          <div><dt>Timeline</dt><dd>6–12 weeks</dd></div>
+          <div><dt>New store</dt><dd>$399 – $5k</dd></div>
+          <div><dt>Customisation</dt><dd>from $199</dd></div>
+          <div><dt>Timeline</dt><dd>3–12 weeks</dd></div>
           <div><dt>Markets</dt><dd>Multi-currency, VAT</dd></div>
           <div><dt>Built</dt><dd>5 stores, 4 countries</dd></div>
           <div><dt>White label</dt><dd>Yes</dd></div>
@@ -509,14 +510,13 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
       <p class="lede">Complexity drives this far more than product count. A hundred simple products is easier than five configurable ones.</p>
     </div>
     <div class="prc rise">
-      <div><div><p class="prc__t">Straightforward store</p><p class="prc__d">Simple or variable products, standard checkout, one market, one currency.</p></div><p class="prc__p">$3.5k – $5k</p><p class="prc__w">6 weeks</p></div>
-      <div><div><p class="prc__t">Complex store</p><p class="prc__d">Configurable products, custom checkout logic, verification steps or multi-market tax.</p></div><p class="prc__p">$5k – $12k</p><p class="prc__w">8–12 weeks</p></div>
-      <div><div><p class="prc__t">Customisation</p><p class="prc__d">Changing how an existing store behaves — product structure, pricing rules, checkout fields, VAT.</p></div><p class="prc__p">from $900</p><p class="prc__w">1–3 weeks</p></div>
-      <div><div><p class="prc__t">Plugin consolidation</p><p class="prc__d">Replacing a stack of conflicting plugins with one documented custom plugin.</p></div><p class="prc__p">from $1.5k</p><p class="prc__w">2–3 weeks</p></div>
-      <div><div><p class="prc__t">Store performance</p><p class="prc__d">Catalogue queries, cart fragments, checkout profiling. See <a class="tlink" href="/services/speed-optimization/">speed optimisation</a>.</p></div><p class="prc__p">from $1.5k</p><p class="prc__w">2–3 weeks</p></div>
+      <div><div><p class="prc__t">Straightforward store</p><p class="prc__d">Simple or variable products, standard checkout, one market, one currency.</p></div><p class="prc__p">$399 – $799</p><p class="prc__w">6 weeks</p></div>
+      <div><div><p class="prc__t">Complex store</p><p class="prc__d">Configurable products, custom checkout logic, verification steps or multi-market tax.</p></div><p class="prc__p">$800-3k+</p><p class="prc__w">8–12 weeks</p></div>
+      <div><div><p class="prc__t">Customisation</p><p class="prc__d">Changing how an existing store behaves — product structure, pricing rules, checkout fields, VAT.</p></div><p class="prc__p">from $199</p><p class="prc__w">1–3 weeks</p></div>
+      
     </div>
     <p class="rise" style="margin-top:22px;font-size:14px;color:var(--text-3);max-width:64ch">
-      Payment gateway, plugin licence and hosting costs are yours directly rather than marked up through me. Agencies: <a class="tlink" href="/for-agencies/">white-label terms</a>.
+      Payment gateway, plugin licence and hosting costs are yours directly rather than marked up through me. Agencies: <a class="tlink" href="/for-agencies.html">white-label terms</a>.
     </p>
   </div>
 </section>
@@ -528,33 +528,36 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
         <p class="eyebrow">Built this way</p>
         <h2 class="h2">Recent stores.</h2>
       </div>
-      <a class="btn btn--ghost" href="/work/">All projects <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/work.html">All projects <span class="ar">→</span></a>
     </div>
     <div class="rel">
-      <a class="rc rise" href="/work/irish-whiskey-producer/">
-        <div class="rc__shot">[IMAGE PLACEHOLDER: Whiskey store]</div>
+
+        <a class="rc rise" href="https://greentouchuae.com/" target="_blank">
+        <div class="rc__shot"><img src="../assets/img/greentouch.png" alt="Landscaping and flooring supplier"></div>
         <div class="rc__body">
-          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Ireland</span></div>
-          <h3 class="rc__t t-md">Irish whiskey producer</h3>
-          <p class="rc__d">Age verification before any product page, plus a cask reservation programme running alongside ordinary bottle sales.</p>
+          <div class="tags"><span class="tag tag--solid">Manufacturing</span><span class="tag">UAE</span><span class="tag">Elementor</span></div>
+          <h3 class="rc__t t-md">Landscaping &amp; flooring supplier</h3>
+          <p class="rc__d">A product catalogue for artificial grass, flooring and decorative surfacing, helping homeowners and contractors explore solutions and request quotes.</p>
           <span class="rc__go">View project →</span>
         </div>
       </a>
-      <a class="rc rise" href="/work/watersports-equipment-brand/">
-        <div class="rc__shot">[IMAGE PLACEHOLDER: Watersports store]</div>
+
+       <a class="rc rise" href="https://torquedolly.com/" target="_blank">
+        <div class="rc__shot"><img src="../assets/img/torquedolly.png" alt="Watersports equipment brand"></div>
         <div class="rc__body">
-          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Global</span></div>
+          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Global</span><span class="tag">WooCommerce</span></div>
           <h3 class="rc__t t-md">Watersports equipment brand</h3>
-          <p class="rc__d">Modular dollies with detachable wheels, retrofit motors and a long tail of spares — configuration made clear before checkout.</p>
+          <p class="rc__d">A WooCommerce store for modular beach dollies, accessories and spare parts, with a clear product configuration journey from selection to checkout.</p>
           <span class="rc__go">View project →</span>
         </div>
       </a>
-      <a class="rc rise" href="/work/group-commerce-platform/">
-        <div class="rc__shot">[IMAGE PLACEHOLDER: Group commerce platform]</div>
+      
+      <a class="rc rise" href="https://picksvg.com/" target="_blank">
+        <div class="rc__shot"><img src="../assets/img/picksvg.png" alt="SVG design downloads store"></div>
         <div class="rc__body">
-          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">France</span></div>
-          <h3 class="rc__t t-md">Group commerce platform</h3>
-          <p class="rc__d">Identity verification wired directly into the purchase flow, connecting payment and group provisioning in one uninterrupted checkout.</p>
+          <div class="tags"><span class="tag tag--solid">E-commerce</span><span class="tag">Global</span><span class="tag">Custom Theme</span></div>
+          <h3 class="rc__t t-md">SVG asset marketplace</h3>
+          <p class="rc__d">A digital download store featuring thousands of SVG designs, with fast product discovery, streamlined browsing and instant delivery after purchase.</p>
           <span class="rc__go">View project →</span>
         </div>
       </a>
@@ -602,7 +605,7 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
       </details>
       <details>
         <summary>What happens after launch?</summary>
-        <div class="faq__a"><p>I watch the first days of real orders closely, because that's when edge cases surface. Bugs in what I built are fixed at no charge. Beyond that, stores benefit more than most sites from a <a class="tlink" href="/services/website-maintenance/">care plan</a> — a broken checkout costs money by the hour.</p></div>
+        <div class="faq__a"><p>I watch the first days of real orders closely, because that's when edge cases surface. Bugs in what I built are fixed at no charge. Beyond that, stores benefit more than most sites from a <a class="tlink" href="/services/service-website-maintenance.html">care plan</a> — a broken checkout costs money by the hour.</p></div>
       </details>
     </div>
   </div>
@@ -614,8 +617,8 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
     <h2>Describe the product.<br><em>I'll tell you the hard part.</em></h2>
     <p>Most stores have one requirement that makes them awkward. Twenty minutes and I'll tell you what yours is, roughly what it costs, and whether WooCommerce is even the right answer.</p>
     <div class="cta__btns">
-      <a class="btn btn--primary" href="/book/">Book a project review <span class="ar">→</span></a>
-      <a class="btn btn--ghost" href="/contact/">Send details instead</a>
+      <a class="btn btn--primary" href="/book.html">Book a project review <span class="ar">→</span></a>
+      <a class="btn btn--ghost" href="/contact.html">Send details instead</a>
     </div>
     <div class="assure">
       <span>Fixed scope, fixed price</span>

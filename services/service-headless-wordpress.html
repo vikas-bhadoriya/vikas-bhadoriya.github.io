@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#FAFAFA">
 <title>Headless WordPress &amp; REST API Development</title>
 <meta name="description" content="The WordPress side of decoupled builds: content modelling, ACF, custom REST and GraphQL endpoints, authentication, preview and webhooks. From $900.">
-<link rel="canonical" href="https://example.com/services/headless-wordpress/">
+<link rel="canonical" href="https://vikas-bhadoriya.github.io/services/headless-wordpress/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Headless WordPress &amp; REST API Development">
@@ -234,11 +234,15 @@ font-size:15px;line-height:1.7;color:var(--text-2)}
 @media(min-width:760px){.nots li{font-size:15.5px;padding-left:30px}}
 .nots li::before{content:"✕";position:absolute;left:0;top:15px;color:var(--text-3);font-size:13px}
 .nots b{color:var(--text);font-weight:500}
+.cta .btn--ghost {
+    border-color: var(--line-dk-2);
+    color: var(--on-dk);
+}
 
 /* process steps */
 .steps{display:grid;gap:14px;counter-reset:s}
 @media(min-width:640px){.steps{grid-template-columns:1fr 1fr;gap:18px}}
-@media(min-width:1140px){.steps{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:1140px){.steps{grid-template-columns:repeat(3,1fr)}}
 .st{counter-increment:s;border:1px solid var(--line-2);border-radius:14px;background:var(--bg-3);
 padding:22px 18px;transition:transform .3s var(--spring),border-color .3s,box-shadow .3s}
 @media(min-width:760px){.st{border-radius:18px;padding:26px 22px}}
@@ -369,7 +373,7 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/">Home</a><span aria-hidden="true">/</span>
-      <a href="/services/">Services</a><span aria-hidden="true">/</span>
+      <a href="/services.html">Services</a><span aria-hidden="true">/</span>
       <span aria-current="page">Headless WordPress &amp; APIs</span>
     </nav>
     <div class="shd__grid">
@@ -378,7 +382,7 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
         <p class="shd__lede">Your team already knows the WordPress editor. Your frontend team wants React, Next.js, or a mobile app. Headless keeps both — WordPress manages the content, something else renders it.</p>
         <p class="shd__lede">I build the WordPress half properly: the content model, the custom fields, the API layer and an editing experience that doesn't fall apart the moment the frontend stops being a WordPress theme.</p>
         <div class="shd__cta">
-          <a class="btn btn--primary" href="/book/">Talk through the architecture <span class="ar">→</span></a>
+          <a class="btn btn--primary" href="/book.html">Talk through the architecture <span class="ar">→</span></a>
           <a class="btn btn--ghost" href="#pricing">See pricing</a>
         </div>
       </div>
@@ -413,7 +417,7 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
       </div>
       <div class="pb rise">
         <p class="pb__t">You want it for speed</p>
-        <p>A well-built WordPress site with proper caching is fast. Headless can be faster, but the gap is smaller than the pitch suggests and the cost is roughly double. Fix the build first — see <a class="tlink" href="/services/speed-optimization/">speed optimisation</a>.</p>
+        <p>A well-built WordPress site with proper caching is fast. Headless can be faster, but the gap is smaller than the pitch suggests and the cost is roughly double. Fix the build first — see <a class="tlink" href="/services/service-speed-optimization.html">speed optimisation</a>.</p>
       </div>
       <div class="pb rise">
         <p class="pb__t">Your editors need to see the page</p>
@@ -470,7 +474,7 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
       </div>
       <p class="lede">These come together on a full headless build, but any one of them is a reasonable standalone project — including on a completely conventional WordPress site.</p>
     </div>
-    <div class="steps rise" style="grid-template-columns:none">
+    <div class="steps rise">
       <div class="st">
         <p class="st__n">PIECE 01</p>
         <h3 class="st__t t-md">Content modelling &amp; ACF</h3>
@@ -625,12 +629,12 @@ border:1px solid var(--line-dk-2);border-radius:100px;padding:7px 12px}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"BreadcrumbList","itemListElement":[
-{"@type":"ListItem","position":1,"name":"Home","item":"https://example.com/"},
-{"@type":"ListItem","position":2,"name":"Services","item":"https://example.com/services/"},
-{"@type":"ListItem","position":3,"name":"Headless WordPress and APIs","item":"https://example.com/services/headless-wordpress/"}]},
+{"@type":"ListItem","position":1,"name":"Home","item":"https://vikas-bhadoriya.github.io/"},
+{"@type":"ListItem","position":2,"name":"Services","item":"https://vikas-bhadoriya.github.io/services.html/"},
+{"@type":"ListItem","position":3,"name":"Headless WordPress and APIs","item":"https://vikas-bhadoriya.github.io/services/headless-wordpress.html"}]},
 {"@type":"Service","name":"Headless WordPress and API development",
 "serviceType":"Headless WordPress, REST API and content modelling",
-"url":"https://example.com/services/headless-wordpress/",
+"url":"https://vikas-bhadoriya.github.io/services/headless-wordpress.html",
 "description":"The WordPress side of decoupled builds: content modelling with ACF, custom REST or GraphQL API layers, authentication, preview and webhooks, and integrations with external systems.",
 "provider":{"@type":"Person","name":"Vikas Bhadoriya","jobTitle":"WordPress & Elementor Developer"},
 "areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"United States"},
